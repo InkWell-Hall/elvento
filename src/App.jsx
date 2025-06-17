@@ -31,9 +31,9 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <div>
+    <div className="flex">
       <Sidebar />
-      <div>
+      <div style={{ flexGrow: 1, padding: "20px", background: "#f3f4f6" }}>
         {" "}
         <RouterProvider router={router} />
       </div>
