@@ -4,7 +4,8 @@ import VendorLogin from "./pages/VendorLogin";
 import Login from "./pages/Login";
 import VendorHome from "./pages/VendorHome";
 import ViewAds from "./pages/ViewAds";
-import Sidebar from "./components/sidebar";
+import VendorDashboard from "./pages/VendorDashboard";
+import AddNewAd from "./pages/AddNewAd";
 
 const router = createBrowserRouter([
   {
@@ -27,16 +28,21 @@ const router = createBrowserRouter([
     path: "/ad/:id",
     element: <ViewAds />,
   },
+  {
+    path: "/vendor-dashboard",
+    element: <VendorDashboard />,
+  },
+  {
+    path: "/add-ad",
+    element: <AddNewAd />,
+  },
 ]);
 
 const App = () => {
   return (
-    <div className="flex">
-      <Sidebar />
-      <div style={{ flexGrow: 1, padding: "20px", background: "#f3f4f6" }}>
-        {" "}
-        <RouterProvider router={router} />
-      </div>
+    <div>
+      {" "}
+      <RouterProvider router={router} />
     </div>
   );
 };

@@ -1,1 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=BIZ+UDPMincho&family=Outfit:wght@100..900&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --font-lead-font: "BIZ UDPMincho";
+  --text-lead-text: 36px;
+}
+.box {
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid black;
+}
+
+.active {
+  border-right: 4px solid orange;
+}
+
+.desk-side {
+  border-radius: 0px 20px 20px 0px;
+}
