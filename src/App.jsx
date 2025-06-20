@@ -6,6 +6,7 @@ import VendorHome from "./pages/VendorHome";
 import ViewAds from "./pages/ViewAds";
 import VendorDashboard from "./pages/VendorDashboard";
 import AddNewAd from "./pages/AddNewAd";
+import Card from "./components/Card";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: "/add-ad",
     element: <AddNewAd />,
+  },
+  {
+    path: "/card",
+    element: <Card />,
   },
 ]);
 

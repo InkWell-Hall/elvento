@@ -18,3 +18,18 @@
 .desk-side {
   border-radius: 0px 20px 20px 0px;
 }
+
+
+@keyframes slideRight {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-700%);
+  }
+}
+
+.slideshow {
+  animation: slideRight 20s linear infinite;
+  white-space: nowrap; /* keep content on a single line */
+}
