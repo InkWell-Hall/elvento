@@ -49,6 +49,7 @@ const App = () => {
       {" "}
       <RouterProvider router={router} />
     </div>
+    
   );
 };
 
