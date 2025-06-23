@@ -78,21 +78,21 @@ const PieChartBox = () => {
             dataKey="uv"
             stackId="1"
             stroke="#8884d8"
-            fill="#8884d8"
+            fill="orange"
           />
           <Area
             type="monotone"
             dataKey="pv"
             stackId="1"
             stroke="#82ca9d"
-            fill="#82ca9d"
+            fill="#424242"
           />
           <Area
             type="monotone"
             dataKey="amt"
             stackId="1"
             stroke="#ffc658"
-            fill="#ffc658"
+            fill="orange"
           />
         </AreaChart>
       </ResponsiveContainer>

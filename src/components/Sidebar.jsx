@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router"; // Make sure you're using react-router-dom
-import { LayoutDashboard, Plus } from "lucide-react";
+import { LayoutDashboard, Plus, Settings, User } from "lucide-react";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,8 +20,18 @@ const Sidebar = () => {
     },
     {
       label: "Orders",
-      href: "",
+      href: "/vendor-orders",
       icon: <LayoutDashboard color="white" />,
+    },
+    {
+      label: "Profile",
+      href: "/vendor-profile",
+      icon: <User color="white" />,
+    },
+    {
+      label: "Settings",
+      href: "/settings",
+      icon: <Settings color="white" />,
     },
   ];
 

@@ -7,6 +7,12 @@ import ViewAds from "./pages/ViewAds";
 import VendorDashboard from "./pages/VendorDashboard";
 import AddNewAd from "./pages/AddNewAd";
 import Card from "./components/Card";
+import Cart from "./pages/Cart";
+import { ToastContainer, toast } from "react-toastify";
+import Orders from "./pages/Orders";
+import PlaceOrder from "./pages/PlaceOrder";
+import Favorites from "./pages/Favorites";
+import NotFound from "./pages/Notfound";
 
 const router = createBrowserRouter([
   {
@@ -41,15 +47,33 @@ const router = createBrowserRouter([
     path: "/card",
     element: <Card />,
   },
+  {
+    path: "/cart",
+    element: <Cart />,
+  },
+  {
+    path: "/orders",
+    element: <Orders />,
+  },
+  {
+    path: "/place-order",
+    element: <PlaceOrder />,
+  },
+  {
+    path: "/favorites",
+    element: <Favorites />,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
+  },
 ]);
 
 const App = () => {
   return (
     <div>
-      {" "}
-      <RouterProvider router={router} />
+      <ToastContainer /> <RouterProvider router={router} />
     </div>
-    
   );
 };
 

@@ -74,7 +74,7 @@ const ChartBox = ({ users }) => {
               <Line
                 type="monotone"
                 dataKey="pv"
-                stroke="#8884d8"
+                stroke="orange"
                 strokeWidth={2}
                 dot={false}
               />

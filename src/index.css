@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=BIZ+UDPMincho&family=Outfit:wght@100..900&display=swap");
 @import "tailwindcss";
 
+html {
+  scrollbar-width: none;
+}
 @theme {
   --font-lead-font: "BIZ UDPMincho";
   --text-lead-text: 36px;
@@ -19,7 +22,6 @@
   border-radius: 0px 20px 20px 0px;
 }
 
-
 @keyframes slideRight {
   0% {
     transform: translateX(0%);
@@ -32,4 +34,33 @@
 .slideshow {
   animation: slideRight 20s linear infinite;
   white-space: nowrap; /* keep content on a single line */
+}
+
+.add {
+  border-radius: 20px 20px 0 0;
+}
+
+.flick {
+  animation: flick 0.95s infinite;
+}
+
+@keyframes flick {
+  0% {
+    color: black;
+  }
+  30% {
+    color: white;
+  }
+  50% {
+    color: black;
+  }
+  70% {
+    color: white;
+  }
+  90% {
+    color: black;
+  }
+  100% {
+    color: white;
+  }
 }

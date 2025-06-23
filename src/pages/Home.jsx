@@ -11,6 +11,8 @@ import asset9 from "../assets/image9.png";
 import asset10 from "../assets/image10.png";
 import Card from "../components/Card";
 import { Sparkle } from "lucide-react";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 // const items = [{ name: "for you", icon:  }, "Item 2", "Item 3"];
 
@@ -19,126 +21,128 @@ const Home = () => {
   const [active, setActive] = useState("");
 
   return (
-    <div className="overflow-x-hidden">
-      <div className="mt-10 cursor-pointer">
-        <video autoPlay loop muted>
-          <source src={Video} type="video/mp4" />
-        </video>
-      </div>
-      <section className="w-[90%] mx-auto">
-        <h1 className="text-2xl font-bold mt-10 ml-15 mb-4">BEST SELLERS</h1>
-        <div className="flex gap-2 slideshow">
-          {[
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-            20, 21, 22, 23, 24, 25,
-          ].map((item, n) => (
-            <img
-              src={n % 3 === 0 ? asset : n % 3 === 1 ? asset2 : asset3}
-              alt=""
-              className="w-80"
-              key={item}
-            />
-          ))}
+    <>
+      <Navbar />
+      <div className="overflow-x-hidden">
+        <div className="mt-10 cursor-pointer">
+          <video autoPlay loop muted>
+            <source src={Video} type="video/mp4" />
+          </video>
         </div>
-        {/* <img src={asset} alt="" className="w-80" /> */}
-      </section>
-      <section>
-        <div className="bg-[url('./assets/image4.png')] w-[100%] h-[900px] bg-cover flex flex-col text-white mt-10">
-          <div className="flex flex-col items-center justify-center h-full">
-            <h1 className="text-6xl font-bold">NEW ARRIVALS</h1>
-            <button className="mt-4 px-2 py-2 bg-blue-500 cursor-pointer text-white">
-              SHOP NOW
-            </button>
+        <section className="w-[90%] mx-auto">
+          <h1 className="text-2xl font-bold mt-10 ml-15 mb-4">BEST SELLERS</h1>
+          <div className="flex gap-2 slideshow">
+            {[
+              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+              20, 21, 22, 23, 24, 25,
+            ].map((item, n) => (
+              <img
+                src={n % 3 === 0 ? asset : n % 3 === 1 ? asset2 : asset3}
+                alt=""
+                className="w-80"
+                key={item}
+              />
+            ))}
           </div>
-        </div>
-      </section>
-      <section className="flex">
-        <div>
-          <h1 className="text-2xl font-bold mt-10 ml-17 mb-4">
-            FEATURED PRODUCTS
-          </h1>
-          <div className="flex w-[90%] mx-auto text-white gap-4">
-            <div className="flex relative">
-              <img src={asset5} alt="" className="w-60 h-65" />
-              <h1 className="absolute text-2xl font-bold cursor-pointer bottom-5 left-20">
-                VENTO<span className="font-light">MEN</span>
-              </h1>
-            </div>
-            <div className="flex relative">
-              <img src={asset6} alt="" className="w-60 h-65" />
-              <h1 className="absolute text-2xl cursor-pointer font-bold bottom-5 left-14">
-                VENTO<span className="font-light">WOMEN</span>
-              </h1>
-            </div>
-            <div className="flex relative">
-              <img src={asset8} alt="" className="w-60 h-65" />
-              <h1 className="absolute text-2xl cursor-pointer font-bold bottom-5 left-22">
-                VENTO<span className="font-light">KIDS</span>
-              </h1>
-            </div>
-            <div className="flex relative">
-              <img src={asset9} alt="" className="w-65 h-65" />
-              <h1 className="absolute text-2xl cursor-pointer font-bold bottom-5 left-16">
-                VENTO<span className="font-light">CURVE</span>
-              </h1>
-            </div>
-            <div className="flex relative">
-              <img src={asset10} alt="" className="w-60 h-65" />
-              <h1 className="absolute cursor-pointer text-2xl font-bold bottom-5 left-14">
-                VENTO<span className="font-light">BEAUTY</span>
-              </h1>
+          {/* <img src={asset} alt="" className="w-80" /> */}
+        </section>
+        <section>
+          <div className="bg-[url('./assets/image4.png')] w-[100%] h-[900px] bg-cover flex flex-col text-white mt-10">
+            <div className="flex flex-col items-center justify-center h-full">
+              <h1 className="text-6xl font-bold">NEW ARRIVALS</h1>
+              <button className="mt-4 px-2 py-2 bg-blue-500 cursor-pointer text-white">
+                SHOP NOW
+              </button>
             </div>
           </div>
-        </div>
-      </section>
-      <section className="bg-black text-white mt-25">
-        <div className="w-[80%] mx-auto text-center  h-[40vh] justify-center items-center">
-          <h1 className="font-bold pt-16 text-6xl">60%-80% OFF SALE</h1>
-          <button className="px-3 py-2 mt-4 border ">SHOP NOW</button>
-        </div>
-      </section>
-      <section className="mt-12 px-8">
-        <div>
-          <div className="flex mb-4">
-            <h1 className="text-2xl font-bold ml-10">SHOP THE LATEST</h1>
+        </section>
+        <section className="flex">
+          <div>
+            <h1 className="text-2xl font-bold mt-10 ml-17 mb-4">
+              FEATURED PRODUCTS
+            </h1>
+            <div className="flex w-[90%] mx-auto text-white gap-4">
+              <div className="flex relative">
+                <img src={asset5} alt="" className="w-60 h-65" />
+                <h1 className="absolute text-2xl font-bold cursor-pointer bottom-5 left-20">
+                  VENTO<span className="font-light">MEN</span>
+                </h1>
+              </div>
+              <div className="flex relative">
+                <img src={asset6} alt="" className="w-60 h-65" />
+                <h1 className="absolute text-2xl cursor-pointer font-bold bottom-5 left-14">
+                  VENTO<span className="font-light">WOMEN</span>
+                </h1>
+              </div>
+              <div className="flex relative">
+                <img src={asset8} alt="" className="w-60 h-65" />
+                <h1 className="absolute text-2xl cursor-pointer font-bold bottom-5 left-22">
+                  VENTO<span className="font-light">KIDS</span>
+                </h1>   
+              </div>
+              <div className="flex relative">
+                <img src={asset9} alt="" className="w-65 h-65" />
+                <h1 className="absolute text-2xl cursor-pointer font-bold bottom-5 left-16">
+                  VENTO<span className="font-light">CURVE</span>
+                </h1>
+              </div>
+              <div className="flex relative">
+                <img src={asset10} alt="" className="w-60 h-65" />
+                <h1 className="absolute cursor-pointer text-2xl font-bold bottom-5 left-14">
+                  VENTO<span className="font-light">BEAUTY</span>
+                </h1>
+              </div>
+            </div>
           </div>
-          <div className="flex gap-2 mb-4 cursor-pointer items-center text-xs font-bold ml-10 ">
-            <button
-              className={
-                active
-                  ? "flex rounded-3xl border px-5 py-3 bg-black text-white"
-                  : "flex rounded-3xl border px-5 py-3"
-              }
-              onClick={() => setActive((prev) => !prev)}
-            >
-              {" "}
-              <Sparkle size={17} />
-              For You
-            </button>
-            <button
-              className={
-                active
-                  ? "flex rounded-3xl border px-5 py-3 bg-black text-white"
-                  : "flex rounded-3xl border px-5 py-3"
-              }
-              onClick={() => setActive((prev) => !prev)}
-            >
-              New In
-            </button>
-            <button className="rounded-3xl border  px-5 py-2 hover:bg-black hover:text-white">
-              Sale
-            </button>
-            <button className="rounded-3xl border  px-5 py-2 hover:bg-black hover:text-white">
-              Jeans
-            </button>
-            <button className="rounded-3xl border  px-5 py-2 hover:bg-black hover:text-white">
-              Dress
-            </button>
+        </section>
+        <section className="bg-black text-white mt-25">
+          <div className="w-[80%] mx-auto text-center  h-[40vh] justify-center items-center">
+            <h1 className="font-bold pt-16 text-6xl flick">60%-80% OFF SALE</h1>
+            <button className="px-3 py-2 mt-4 border ">SHOP NOW</button>
           </div>
-        </div>
+        </section>
+        <section className="mt-12 px-8">
+          <div>
+            <div className="flex mb-4">
+              <h1 className="text-2xl font-bold ml-10">SHOP THE LATEST</h1>
+            </div>
+            <div className="flex gap-2 mb-4 cursor-pointer items-center text-xs font-bold ml-10 ">
+              <button
+                className={
+                  active
+                    ? "flex rounded-3xl border px-5 py-3 bg-black text-white"
+                    : "flex rounded-3xl border px-5 py-3"
+                }
+                onClick={() => setActive((prev) => !prev)}
+              >
+                {" "}
+                <Sparkle size={17} />
+                For You
+              </button>
+              <button
+                className={
+                  active
+                    ? "flex rounded-3xl border px-5 py-3 bg-black text-white"
+                    : "flex rounded-3xl border px-5 py-3"
+                }
+                onClick={() => setActive((prev) => !prev)}
+              >
+                New In
+              </button>
+              <button className="rounded-3xl border  px-5 py-2 hover:bg-black hover:text-white">
+                Sale
+              </button>
+              <button className="rounded-3xl border  px-5 py-2 hover:bg-black hover:text-white">
+                Jeans
+              </button>
+              <button className="rounded-3xl border  px-5 py-2 hover:bg-black hover:text-white">
+                Dress
+              </button>
+            </div>
+          </div>
 
-        <div className="flex">
-          {/* <div
+          <div className="flex">
+            {/* <div
           
             className={
             
@@ -152,104 +156,106 @@ const Home = () => {
               <Sparkle /> For you
             </button>
           </div> */}
-        </div>
-        <div className="flex cursor-pointer gap-4 ml-10">
-        <Card
-          title={"Lola basics-multi colored"}
-          image={asset6}
-          price={23}
-          oldPrice={45}
-          discount={50}
-        />
-        <Card
-          title={"Sena lisa"}
-          image={asset7}
-          price={23}
-          oldPrice={45}
-          discount={50}
-        />
-        <Card
-          title={"Juvit multi-colored"}
-          image={asset8}
-          price={23}
-          oldPrice={45}
-          discount={50}
-        />
-        <Card
-          title={"Silacs rubisx"}
-          image={asset6}
-          price={23}
-          oldPrice={45}
-          discount={50}
-        />
-        </div>
-        <div className="flex gap-4 cursor-pointer ml-10 mt-20">
-          <Card
-          title={"Silacs rubisx"}
-          image={asset6}
-          price={23}
-          oldPrice={45}
-          discount={50}
-        />
-        <Card
-          title={"Silacs rubisx"}
-          image={asset6}
-          price={23}
-          oldPrice={45}
-          discount={50}
-        />
-        <Card
-          title={"Silacs rubisx"}
-          image={asset6}
-          price={23}
-          oldPrice={45}
-          discount={50}
-        />
-        <Card
-          title={"Silacs rubisx"}
-          image={asset6}
-          price={23}
-          oldPrice={45}
-          discount={50}
-        />
-        </div>
-        <div className="flex gap-4 cursor-pointer ml-10 mt-20">
-          <Card
-          title={"Silacs rubisx"}
-          image={asset6}
-          price={23}
-          oldPrice={45}
-          discount={50}
-        />
-        <Card
-          title={"Silacs rubisx"}
-          image={asset6}
-          price={23}
-          oldPrice={45}
-          discount={50}
-        />
-        <Card
-          title={"Silacs rubisx"}
-          image={asset6}
-          price={23}
-          oldPrice={45}
-          discount={50}
-        />
-        <Card
-          title={"Silacs rubisx"}
-          image={asset6}
-          price={23}
-          oldPrice={45}
-          discount={50}
-        />
-        </div>
-        <div className="flex justify-center items-center mt-20">
-          <button className="boader-2 rounded-3xl px-7 py-2 bg-black text-white text-xs font-medium hover:bg-gray-950">
-          Load More
-          </button>
-        </div>
-      </section>
-    </div>
+          </div>
+          <div className="flex cursor-pointer gap-4 w-[80%] mx-auto">
+            <Card
+              title={"Lola basics-multi colored"}
+              image={asset6}
+              price={23}
+              oldPrice={45}
+              discount={50}
+            />
+            <Card
+              title={"Sena lisa"}
+              image={asset7}
+              price={23}
+              oldPrice={45}
+              discount={50}
+            />
+            <Card
+              title={"Juvit multi-colored"}
+              image={asset8}
+              price={23}
+              oldPrice={45}
+              discount={50}
+            />
+            <Card
+              title={"Silacs rubisx"}
+              image={asset6}
+              price={23}
+              oldPrice={45}
+              discount={50}
+            />
+          </div>
+          <div className="flex gap-4 cursor-pointer mt-20 w-[80%] mx-auto">
+            <Card
+              title={"Silacs rubisx"}
+              image={asset6}
+              price={23}
+              oldPrice={45}
+              discount={50}
+            />
+            <Card
+              title={"Silacs rubisx"}
+              image={asset6}
+              price={23}
+              oldPrice={45}
+              discount={50}
+            />
+            <Card
+              title={"Silacs rubisx"}
+              image={asset6}
+              price={23}
+              oldPrice={45}
+              discount={50}
+            />
+            <Card
+              title={"Silacs rubisx"}
+              image={asset6}
+              price={23}
+              oldPrice={45}
+              discount={50}
+            />
+          </div>
+          <div className="flex gap-4 cursor-pointer w-[80%] mx-auto mt-20">
+            <Card
+              title={"Silacs rubisx"}
+              image={asset6}
+              price={23}
+              oldPrice={45}
+              discount={50}
+            />
+            <Card
+              title={"Silacs rubisx"}
+              image={asset6}
+              price={23}
+              oldPrice={45}
+              discount={50}
+            />
+            <Card
+              title={"Silacs rubisx"}
+              image={asset6}
+              price={23}
+              oldPrice={45}
+              discount={50}
+            />
+            <Card
+              title={"Silacs rubisx"}
+              image={asset6}
+              price={23}
+              oldPrice={45}
+              discount={50}
+            />
+          </div>
+          <div className="flex justify-center items-center mt-20">
+            <button className="boader-2 rounded-3xl px-7 py-2 bg-black text-white text-xs font-medium hover:bg-gray-950">
+              Load More
+            </button>
+          </div>
+        </section>
+      </div>
+      <Footer />
+    </>
   );
 };
 

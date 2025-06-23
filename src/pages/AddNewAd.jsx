@@ -20,10 +20,14 @@ const AddNewAd = () => {
 
   return (
     <>
-      <div className="home flex min-h-screen overflow-x-hidden bg-gray-500">
+      <div className="home flex min-h-screen overflow-x-hidden bg-white">
         <Sidebar />
+
         <div className="flex-1 flex justify-center items-center">
-          <form className="p-4 flex flex-col items-center w-full max-w-3xl gap-4 md:ml-50 bg-white rounded-2xl m-4">
+          <form className="p-4 flex flex-col items-center w-full max-w-3xl gap-4 md:ml-50  rounded-2xl m-4">
+            <div className="bg-gray-800 text-white rounded add w-full text-center font-lead-font text-lead-text h-40 flex justify-center items-center">
+              <h1>Post New Ad</h1>
+            </div>
             <div className="flex flex-col items-center w-full gap-3">
               <p className="mb-2 font-lead-font text-[30px]">Upload Image</p>
 
@@ -31,7 +35,7 @@ const AddNewAd = () => {
                 <label htmlFor="image1">
                   <img
                     className="w-20"
-                    src={!image2 ? upload : URL.createObjectURL(image2)}
+                    src={!image1 ? upload : URL.createObjectURL(image1)}
                     alt=""
                   />{" "}
                   <input
@@ -92,7 +96,7 @@ const AddNewAd = () => {
               <input
                 type="text"
                 placeholder="type here"
-                className="w-full max-w-[500px] px-3 py-2  bg-amber-100 rounded-[5px] outline-none"
+                className="w-full max-w-[500px] px-3 py-2 border border-gray-800 rounded-[5px] outline-none"
                 required
                 onChange={(e) => setName(e.target.value)}
                 value={name}
@@ -106,7 +110,7 @@ const AddNewAd = () => {
               <textarea
                 type="text"
                 placeholder="Write description here"
-                className="w-full max-w-[500px] px-3 py-2 bg-amber-100 outline-none"
+                className="w-full max-w-[500px] px-3 py-2 border outline-none resize-none rounded-[5px]"
                 onChange={(e) => setDescription(e.target.value)}
                 value={description}
                 required
@@ -119,7 +123,7 @@ const AddNewAd = () => {
                 </p>
                 <select
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full px-3 py-2 bg-amber-100 p-2 outline-none"
+                  className="w-full px-3 py-2 border p-2 outline-none rounded-[5px]"
                   required
                 >
                   <option value="Men">Men</option>
@@ -131,7 +135,7 @@ const AddNewAd = () => {
               <div>
                 <p className="mb-2 font-lead-font text-[20px]">Sub Category</p>
                 <select
-                  className="w-full px-3 py-2 bg-amber-100  outline-none rounded"
+                  className="w-full px-3 py-2 border  outline-none rounded-[5px]"
                   onChange={(e) => setSubCategory(e.target.value)}
                   placeholder="Select Category"
                   required
@@ -147,7 +151,7 @@ const AddNewAd = () => {
                 <input
                   onChange={(e) => setPrice(e.target.value)}
                   value={price}
-                  className="w-full px-3 py-2 sm:w-[120px] bg-amber-100  outline-none"
+                  className="w-full px-3 py-2 sm:w-[120px] border  outline-none rounded-[5px]"
                   type="Number"
                   placeholder="0"
                   required
@@ -171,8 +175,10 @@ const AddNewAd = () => {
                 >
                   <p
                     className={`${
-                      sizes.includes("S") ? "bg-pink-200" : "bg-gray-500"
-                    } px-3 py-1 cursor-pointer`}
+                      sizes.includes("S")
+                        ? "bg-gray-800 text-white"
+                        : "bg-white"
+                    } px-3 py-1 cursor-pointer border rounded`}
                   >
                     S
                   </p>
@@ -189,8 +195,10 @@ const AddNewAd = () => {
                 >
                   <p
                     className={`${
-                      sizes.includes("M") ? "bg-pink-200" : "bg-gray-500"
-                    } px-3 py-1 cursor-pointer`}
+                      sizes.includes("M")
+                        ? "bg-gray-800 text-white"
+                        : "bg-white"
+                    } px-3 py-1 cursor-pointer  border rounded`}
                   >
                     M
                   </p>
@@ -207,8 +215,10 @@ const AddNewAd = () => {
                 >
                   <p
                     className={`${
-                      sizes.includes("L") ? "bg-pink-200" : "bg-gray-500"
-                    } px-3 py-1 cursor-pointer`}
+                      sizes.includes("L")
+                        ? "bg-gray-800 text-white"
+                        : "bg-white"
+                    } px-3 py-1 cursor-pointer  border rounded`}
                   >
                     L{" "}
                   </p>
@@ -225,8 +235,10 @@ const AddNewAd = () => {
                 >
                   <p
                     className={`${
-                      sizes.includes("XL") ? "bg-pink-200" : "bg-gray-500"
-                    } px-3 py-1 cursor-pointer`}
+                      sizes.includes("XL")
+                        ? "bg-gray-800 text-white"
+                        : "bg-white"
+                    } px-3 py-1 cursor-pointer  border rounded`}
                   >
                     XL
                   </p>
@@ -242,8 +254,10 @@ const AddNewAd = () => {
                 >
                   <p
                     className={`${
-                      sizes.includes("XXL") ? "bg-pink-200" : "bg-gray-500"
-                    } px-3 py-1 cursor-pointer`}
+                      sizes.includes("XXL")
+                        ? "bg-gray-800 text-white"
+                        : "bg-white"
+                    } px-3 py-1 cursor-pointer  border rounded`}
                   >
                     XXL
                   </p>
@@ -265,7 +279,7 @@ const AddNewAd = () => {
 
             <button
               type="submit"
-              className="w-28 py-3 mt-4 bg-black text-white cursor-pointer"
+              className="w-28 py-3 mt-4 bg-orange-400 text-white rounded font-bold cursor-pointer"
             >
               ADD
             </button>

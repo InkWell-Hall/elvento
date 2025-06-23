@@ -1,47 +1,48 @@
 import { Heart, Search } from "lucide-react";
-import bag from "../assets/bag.svg.svg"
-import sign from "../assets/sign.svg.svg"
-import timer from "../assets/timer.svg.svg"
-
-
+import bag from "../assets/bag.svg.svg";
+import sign from "../assets/sign.svg.svg";
+import timer from "../assets/timer.svg.svg";
+import { Link } from "react-router";
+import { useContext } from "react";
+import { AdContext } from "../context/AdContext";
 
 export default function Navbar() {
-
+  const { getCartCount } = useContext(AdContext);
   return (
-    <nav className="flex justify-between items-center px-8 py-4 text-bold h-10">
+    <div className="flex justify-between items-center px-8 py-4 text-bold h-10 z-20">
       <div className="flex justify-center items-center">
-        <h1 className="text bold space-between text-headinding">
-          <span>Elvento</span>
+        <h1 className="text bold space-between font-lead-font font-light text-3xl">
+          <Link to={"/"}>
+            EL<span className="font-bold">VENTO</span>
+          </Link>
         </h1>
         <div>
-          <ul class="flex gap-4 p-4 rounded  ">
+          <ul class="flex gap-4 p-4">
             <li>
-              <a
-                class="text-black font-bold"
-                href="#">Women</a>
+              <a class="text-black font-bold" href="#">
+                Women
+              </a>
             </li>
             <li>
-              <a
-                class="text-black font-bold"
-                href="#">Curve</a>
+              <a class="text-black font-bold" href="#">
+                Curve
+              </a>
             </li>
             <li>
-              <a
-                class="text-black font-bold"
-                href="#">Men</a>
+              <a class="text-black font-bold" href="#">
+                Men
+              </a>
             </li>
             <li>
-              <a
-                class="text-black font-bold"
-                href="#">Kids</a>
+              <a class="text-black font-bold" href="#">
+                Kids
+              </a>
             </li>
             <li>
-              <a
-                class="text-black font-bold"
-                href="#">Beauty</a>
+              <a class="text-black font-bold" href="#">
+                Beauty
+              </a>
             </li>
-
-
           </ul>
         </div>
       </div>
@@ -53,21 +54,18 @@ export default function Navbar() {
         <img src={bag} />
         <img src={timer} />
         <img src={sign} />
-        <Heart />
-        <img src={bag} />
+        <Link to={"/favorites"}>
+          <Heart />
+        </Link>
+        <div>
+          <Link to={"/cart"} className="relative">
+            <img src={bag} />
+            <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
+              {getCartCount()}
+            </p>
+          </Link>
+        </div>
       </div>
-
-
-
-
-
-    </nav>
-
-  )
+    </div>
+  );
 }
-
-
-
-
-
-

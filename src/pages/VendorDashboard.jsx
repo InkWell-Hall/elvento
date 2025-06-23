@@ -17,18 +17,34 @@ const VendorDashboard = () => {
           Welcome {name} to your Dasboard
         </h1>
         <div className="cards  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 mb-5">
-          <Tile title={"Ads Running"} value={45} icon={<Megaphone />} />
+          <Tile
+            title={"Ads Running"}
+            value={45}
+            icon={<Megaphone color="orange" />}
+          />
           <Tile
             title={"NUMBER OF SALES"}
             value={45}
-            icon={<BadgeDollarSign />}
+            icon={<BadgeDollarSign color="orange" />}
           />
-          <Tile title={"ORDERS DELIVERED"} value={45} icon={<Boxes />} />
-          <Tile title={"AUDIENCE REACHED"} value={45} icon={<UsersRound />} />
-          <Tile title={"Number of Ads"} value={45} icon={<Megaphone />} />
+          <Tile
+            title={"ORDERS DELIVERED"}
+            value={45}
+            icon={<Boxes color="orange" />}
+          />
+          <Tile
+            title={"AUDIENCE REACHED"}
+            value={45}
+            icon={<UsersRound color="orange" />}
+          />
+          <Tile
+            title={"Number of Ads"}
+            value={45}
+            icon={<Megaphone color="orange" />}
+          />
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 auto-rows-[minmax(180px,_auto)]">
-          <div className="p-5 rounded-lg text-center bg-blue-200 col-span-1 row-span-2 font-lead-font font-bold">
+          <div className="p-5 rounded-lg text-center bg-blue-200 col-span-1 row-span-1 font-lead-font font-bold">
             Consistent Buyers
             <div></div>
           </div>
@@ -41,16 +57,16 @@ const VendorDashboard = () => {
           {/* <div className="p-5 rounded-lg border bg-blue-200  col-span-1">
             box3
           </div> */}
-          <div className="p-5 rounded-lg border bg-blue-200 col-span-1 row-span-2">
+          <div className="p-5 rounded-lg border bg-blue-200 col-span-1 row-span-1">
             box4
             {/* <ChartBox users={80} /> */}
           </div>
-          <div className="p-5 rounded-lg border bg-blue-200">
+          {/* <div className="p-5 rounded-lg border bg-blue-200">
             box5 <ChartBox users={80} />
           </div>
           <div className="p-5 rounded-lg border bg-blue-200">
             box6 <ChartBox users={80} />
-          </div>
+          </div> */}
           <div className="p-5 rounded-lg border  col-span-2 row-span-1">
             <h1 className="mb-3 font-lead-font text-lead-text font-bold">
               Revenue Generation Chart
