@@ -9,7 +9,7 @@ export default function SignUpForm() {
     userName: "",
     email: "",
     password: "",
-    confirmPassword: " ",
+    confirmPassword: "",
     phoneNumber: "",
     role: "Buyer", // 'buyer' or 'seller'
   });
@@ -92,7 +92,7 @@ export default function SignUpForm() {
         }
       );
       console.log(response);
-      localStorage.setItem("ACCESS_TOKEN", response.data.data.accessToken);
+      localStorage.setItem("ACCESS_TOKEN", response.data.token);
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -387,7 +387,7 @@ export default function SignUpForm() {
                 onChange={handleInputChange}
                 onKeyPress={handleKeyPress}
                 className={`w-full px-4 py-3 pr-12 bg-white bg-opacity-40 border rounded-lg text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all ${
-                  errors.confirmpassword
+                  errors.confirmPassword
                     ? "border-red-400 focus:ring-red-300"
                     : "border-gray-300 focus:ring-blue-300"
                 }`}

@@ -1,11 +1,21 @@
 import { Link, useNavigate, useParams } from "react-router";
 import React, { useContext, useEffect, useState } from "react";
-import { ArrowBigLeft, Delete, DeleteIcon, Edit, Trash2 } from "lucide-react";
+import {
+  ArrowBigLeft,
+  Delete,
+  DeleteIcon,
+  Edit,
+  ShoppingBasket,
+  ShoppingCartIcon,
+  Trash2,
+} from "lucide-react";
 import { toast } from "react-toastify";
 import { products } from "../assets/asset";
 import Navbar from "../components/Navbar";
 import star from "../assets/star.png";
 import { AdContext } from "../context/AdContext";
+import FilterSidebar from "../components/FilterSideBar";
+import RelatedAds from "../components/RelatedAds";
 
 const ViewAds = () => {
   const { bookId } = useParams();
@@ -89,12 +99,14 @@ const ViewAds = () => {
                 ))}
               </div>
             </div>
-            <button
-              onClick={() => addToCart(adData.id, size)}
-              className="bg-black text-white px-8 py-3 text-sm active:bg-gray-700 cursor-pointer"
-            >
-              ADD TO CART
-            </button>
+            <div>
+              <button
+                onClick={() => addToCart(adData.id, size)}
+                className="bg-black text-white px-4 py-3 text-sm active:bg-gray-700 cursor-pointer flex gap-3 items-center"
+              >
+                ADD TO CART <ShoppingCartIcon />
+              </button>
+            </div>
             <hr className="mt-4 sm:w-4/5 mb-3" />
             <div className="text-sm text-gray-500 flex flex-col gap-1">
               <p>100% Original product.</p>
@@ -117,6 +129,7 @@ const ViewAds = () => {
           </div>
         </div>
       </div>
+      <RelatedAds />
     </>
   );
 };

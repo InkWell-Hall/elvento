@@ -13,6 +13,10 @@ import Card from "../components/Card";
 import { Sparkle } from "lucide-react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { SwiperSlide, Swiper } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
+import { Link } from "react-router";
 
 // const items = [{ name: "for you", icon:  }, "Item 2", "Item 3"];
 
@@ -24,17 +28,20 @@ const Home = () => {
     <>
       <Navbar />
       <div className="overflow-x-hidden">
-        <div className="mt-10 cursor-pointer">
-          <video autoPlay loop muted>
-            <source src={Video} type="video/mp4" />
-          </video>
+        <div className="mt-3 cursor-pointer">
+          <Link to={"/collections"}>
+            <video autoPlay loop muted>
+              <source src={Video} type="video/mp4" />
+            </video>
+          </Link>
         </div>
         <section className="w-[90%] mx-auto">
           <h1 className="text-2xl font-bold mt-10 ml-15 mb-4">BEST SELLERS</h1>
           <div className="flex gap-2 slideshow">
             {[
               1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-              20, 21, 22, 23, 24, 25,
+              20, 21, 22, 23, 24, 25, 85, 56, 56, 5, 4, 4, 3, 3, 2, 2, 2, 3, 4,
+              5, 5, 6, 6, 6, 6, 3,
             ].map((item, n) => (
               <img
                 src={n % 3 === 0 ? asset : n % 3 === 1 ? asset2 : asset3}
@@ -47,7 +54,7 @@ const Home = () => {
           {/* <img src={asset} alt="" className="w-80" /> */}
         </section>
         <section>
-          <div className="bg-[url('./assets/image4.png')] w-[100%] h-[900px] bg-cover flex flex-col text-white mt-10">
+          <div className="bg-[url('./assets/image4.png')] w-[100%] h-[90vh] bg-cover flex flex-col text-white mt-10">
             <div className="flex flex-col items-center justify-center h-full">
               <h1 className="text-6xl font-bold">NEW ARRIVALS</h1>
               <button className="mt-4 px-2 py-2 bg-blue-500 cursor-pointer text-white">
@@ -78,7 +85,7 @@ const Home = () => {
                 <img src={asset8} alt="" className="w-60 h-65" />
                 <h1 className="absolute text-2xl cursor-pointer font-bold bottom-5 left-22">
                   VENTO<span className="font-light">KIDS</span>
-                </h1>   
+                </h1>
               </div>
               <div className="flex relative">
                 <img src={asset9} alt="" className="w-65 h-65" />
@@ -95,11 +102,46 @@ const Home = () => {
             </div>
           </div>
         </section>
-        <section className="bg-black text-white mt-25">
-          <div className="w-[80%] mx-auto text-center  h-[40vh] justify-center items-center">
-            <h1 className="font-bold pt-16 text-6xl flick">60%-80% OFF SALE</h1>
-            <button className="px-3 py-2 mt-4 border ">SHOP NOW</button>
-          </div>
+        <section className="bg-black text-white mt-25 w-[100%]">
+          <Swiper
+            modules={[Autoplay]}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            loop={true}
+            slidesPerView={1} // <-- FULL WIDTH
+            spaceBetween={0} // <-- NO GAP
+            className="w-screen text-center h-[50vh]" // <-- FULL WIDTH
+          >
+            <SwiperSlide className="w-screen h-[70vh] bg-black flex items-center justify-center">
+              <div className="text-center mt-27">
+                <h1 className="text-4xl font-bold font-lead-font text-[50px] mb-4 flick">
+                  60% - 80% OFF SALE
+                </h1>
+                <button className="px-6 py-2 bg-white text-black rounded-full font-semibold">
+                  SHOP NOW
+                </button>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className="w-screen h-[70vh] bg-black flex items-center justify-center">
+              <div className="text-center mt-27">
+                <h1 className="text-4xl font-bold font-lead-font text-lead-text mb-4">
+                  SUBSCRIBE NOW TO OUR NEWSLETTERS <br /> AND GET THE LATEST
+                  UPDATES
+                </h1>
+                <button className="px-6 py-2 bg-white text-black rounded-full font-semibold">
+                  Subscribe Now!
+                </button>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className="w-screen h-[500px] flex items-center justify-center bg-blue-500">
+              <h1 className="text-4xl font-bold text-center">Slide 2</h1>
+            </SwiperSlide>
+            <SwiperSlide className="w-screen h-[500px] flex items-center justify-center bg-green-500">
+              <h1 className="text-4xl font-bold">Slide 3</h1>
+            </SwiperSlide>
+          </Swiper>
         </section>
         <section className="mt-12 px-8">
           <div>
@@ -141,22 +183,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="flex">
-            {/* <div
-          
-            className={
-            
-                ? "flex rounded-3xl border px-5 py-3 bg-black text-white"
-                : "flex rounded-3xl border px-5 py-3"
-            }
-            onClick={() => setActiveIndex(idx)}
-          >
-            <button>
-              {" "}
-              <Sparkle /> For you
-            </button>
-          </div> */}
-          </div>
+          <div className="flex"></div>
           <div className="flex cursor-pointer gap-4 w-[80%] mx-auto">
             <Card
               title={"Lola basics-multi colored"}
@@ -247,11 +274,11 @@ const Home = () => {
               discount={50}
             />
           </div>
-          <div className="flex justify-center items-center mt-20">
+          {/* <div className="flex justify-center items-center mt-20">
             <button className="boader-2 rounded-3xl px-7 py-2 bg-black text-white text-xs font-medium hover:bg-gray-950">
               Load More
             </button>
-          </div>
+          </div> */}
         </section>
       </div>
       <Footer />

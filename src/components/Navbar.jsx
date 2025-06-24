@@ -17,29 +17,29 @@ export default function Navbar() {
           </Link>
         </h1>
         <div>
-          <ul class="flex gap-4 p-4">
+          <ul className="flex gap-4 p-4">
             <li>
-              <a class="text-black font-bold" href="#">
+              <a className="text-black font-bold" href="#">
                 Women
               </a>
             </li>
             <li>
-              <a class="text-black font-bold" href="#">
+              <a className="text-black font-bold" href="#">
                 Curve
               </a>
             </li>
             <li>
-              <a class="text-black font-bold" href="#">
+              <a className="text-black font-bold" href="#">
                 Men
               </a>
             </li>
             <li>
-              <a class="text-black font-bold" href="#">
+              <a className="text-black font-bold" href="#">
                 Kids
               </a>
             </li>
             <li>
-              <a class="text-black font-bold" href="#">
+              <a className="text-black font-bold" href="#">
                 Beauty
               </a>
             </li>

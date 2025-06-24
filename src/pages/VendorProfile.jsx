@@ -1,47 +1,87 @@
-import React, { useState } from 'react';
-import { User, Phone, FileText, CreditCard, Edit3, X, Check } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  User,
+  Phone,
+  FileText,
+  CreditCard,
+  Edit3,
+  X,
+  Check,
+  Search,
+  ChevronDown,
+  Bell,
+  Mail,
+} from "lucide-react";
+import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar";
 
 // Main Vendor Profile Component
 const VendorProfile = () => {
-  const [currentView, setCurrentView] = useState('view'); // 'view' or 'edit'
-  
+  const [currentView, setCurrentView] = useState("view"); // 'view' or 'edit'
+
   // Sample vendor data - replace with your API data
   const [vendorData, setVendorData] = useState({
-    companyName: 'Golden Events Co.',
-    phoneNumber: '+233 123 456 789',
-    bio: 'We are a premier event decoration and catering service provider specializing in weddings, corporate events, and private parties. We offer full-service event planning with attention to detail.',
-    accountNumber: 'VEN-2024-001'
+    companyName: "Golden Events Co.",
+    phoneNumber: "+233 123 456 789",
+    email: "goldenevemts@gmail.com",
+    bio: "We are a premier event decoration and catering service provider specializing in weddings, corporate events, and private parties. We offer full-service event planning with attention to detail.",
+    accountNumber: "VEN-2024-001",
   });
 
   const handleEditClick = () => {
-    setCurrentView('edit');
+    setCurrentView("edit");
   };
 
   const handleSaveChanges = (newData) => {
     setVendorData(newData);
-    setCurrentView('view');
+    setCurrentView("view");
     // Here you would also make API call to save data
-    console.log('Saving data:', newData);
+    console.log("Saving data:", newData);
   };
 
   const handleCancel = () => {
-    setCurrentView('view');
+    setCurrentView("view");
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      {currentView === 'view' ? (
-        <ProfileView 
-          vendorData={vendorData} 
-          onEditClick={handleEditClick} 
-        />
-      ) : (
-        <ProfileEdit 
-          vendorData={vendorData} 
-          onSave={handleSaveChanges} 
-          onCancel={handleCancel} 
-        />
-      )}
+    <div className="flex">
+      <Sidebar />
+      <div className="min-h-screen w-490 md:ml-50 bg-gradient-to-br from-blue-50 to-indigo-100">
+        {/* <Navbar /> */}
+        <nav className=" flex justify-between items-center bg-white fixed w-280 right-0 vendnav h-15">
+          <div className="realtive ml-5">
+            <input
+              type="text"
+              className="w-full border border-gray-800 pl-7 rounded-2xl py-1 outline-none font-bold font-lead-font "
+              placeholder="search"
+            />
+            <Search className="absolute top-5 ml-2" size={18} />
+          </div>
+
+          <div className="flex gap-6 justify-between items-center">
+            <div className="flex bg-gray-50 px-2 py-2 rounded-full relative border border-blue-950 cursor-pointer">
+              <Bell />
+              <span className=" absolute right-2 bg-orange-500 text-orange-500 w-2 h-2 rounded-full"></span>
+            </div>
+            <span className="bg-blue-500 text-white py-3 px-3 font-lead-font font-bold rounded-full">
+              MC
+            </span>
+            <div className="flex mr-4">
+              <h1>Admin</h1>
+              <ChevronDown className="cursor-pointer" />
+            </div>
+          </div>
+        </nav>
+        {currentView === "view" ? (
+          <ProfileView vendorData={vendorData} onEditClick={handleEditClick} />
+        ) : (
+          <ProfileEdit
+            vendorData={vendorData}
+            onSave={handleSaveChanges}
+            onCancel={handleCancel}
+          />
+        )}
+      </div>
     </div>
   );
 };
@@ -53,8 +93,12 @@ const ProfileView = ({ vendorData, onEditClick }) => {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8 pt-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">My Business Profile</h1>
-          <p className="text-gray-600">Manage your advertising profile on Elvento</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2 mt-6">
+            My Business Profile
+          </h1>
+          <p className="text-gray-600">
+            Manage your advertising profile on Elvento
+          </p>
         </div>
 
         {/* Profile Card */}
@@ -66,8 +110,12 @@ const ProfileView = ({ vendorData, onEditClick }) => {
                 <User className="w-12 h-12 md:w-16 md:h-16 text-blue-600" />
               </div>
               <div className="text-center md:text-left text-white">
-                <h2 className="text-2xl md:text-3xl font-bold mb-2">{vendorData.companyName}</h2>
-                <p className="text-blue-100 text-sm md:text-base">Advertising Partner on Elvento</p>
+                <h2 className="text-2xl md:text-3xl font-bold mb-2">
+                  {vendorData.companyName}
+                </h2>
+                <p className="text-blue-100 text-sm md:text-base">
+                  Advertising Partner on Elvento
+                </p>
               </div>
             </div>
           </div>
@@ -81,8 +129,12 @@ const ProfileView = ({ vendorData, onEditClick }) => {
                   <Phone className="w-6 h-6 text-blue-600" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-semibold text-gray-800 mb-1">Phone Number</h3>
-                  <p className="text-gray-600 break-all">{vendorData.phoneNumber}</p>
+                  <h3 className="font-semibold text-gray-800 mb-1">
+                    Phone Number
+                  </h3>
+                  <p className="text-gray-600 break-all">
+                    {vendorData.phoneNumber}
+                  </p>
                 </div>
               </div>
 
@@ -92,8 +144,35 @@ const ProfileView = ({ vendorData, onEditClick }) => {
                   <CreditCard className="w-6 h-6 text-green-600" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-semibold text-gray-800 mb-1">Account Number</h3>
-                  <p className="text-gray-600 break-all">{vendorData.accountNumber}</p>
+                  <h3 className="font-semibold text-gray-800 mb-1">
+                    Account Number
+                  </h3>
+                  <p className="text-gray-600 break-all">
+                    {vendorData.accountNumber}
+                  </p>
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <CreditCard className="w-6 h-6 text-green-600" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-semibold text-gray-800 mb-1">Email</h3>
+                  <p className="text-gray-600 break-all">{vendorData.email}</p>
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  {/* <CreditCard className="w-6 h-6 text-green-600" /> */}
+                  <Mail className="w-6 h-6 text-green-600" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-semibold text-gray-800 mb-1">Email</h3>
+                  <p className="text-gray-600 break-all">{vendorData.email}</p>
                 </div>
               </div>
             </div>
@@ -105,8 +184,12 @@ const ProfileView = ({ vendorData, onEditClick }) => {
                   <FileText className="w-6 h-6 text-purple-600" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-semibold text-gray-800 mb-2">Business Description</h3>
-                  <p className="text-gray-600 leading-relaxed">{vendorData.bio}</p>
+                  <h3 className="font-semibold text-gray-800 mb-2">
+                    Business Description
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {vendorData.bio}
+                  </p>
                 </div>
               </div>
             </div>
@@ -135,32 +218,32 @@ const ProfileEdit = ({ vendorData, onSave, onCancel }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (field, value) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
     // Clear error when user starts typing
     if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: '' }));
+      setErrors((prev) => ({ ...prev, [field]: "" }));
     }
   };
 
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (!formData.companyName?.trim()) {
-      newErrors.companyName = 'Business name is required';
+      newErrors.companyName = "Business name is required";
     }
-    
+
     if (!formData.phoneNumber?.trim()) {
-      newErrors.phoneNumber = 'Phone number is required';
+      newErrors.phoneNumber = "Phone number is required";
     }
-    
+
     if (!formData.accountNumber?.trim()) {
-      newErrors.accountNumber = 'Account number is required';
+      newErrors.accountNumber = "Account number is required";
     }
-    
+
     if (!formData.bio?.trim()) {
-      newErrors.bio = 'Business description is required';
+      newErrors.bio = "Business description is required";
     } else if (formData.bio.trim().length < 50) {
-      newErrors.bio = 'Business description should be at least 50 characters';
+      newErrors.bio = "Business description should be at least 50 characters";
     }
 
     setErrors(newErrors);
@@ -183,8 +266,12 @@ const ProfileEdit = ({ vendorData, onSave, onCancel }) => {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8 pt-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Edit Business Profile</h1>
-          <p className="text-gray-600">Update your advertising profile information</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+            Edit Business Profile
+          </h1>
+          <p className="text-gray-600">
+            Update your advertising profile information
+          </p>
         </div>
 
         {/* Edit Form */}
@@ -197,16 +284,20 @@ const ProfileEdit = ({ vendorData, onSave, onCancel }) => {
               </label>
               <input
                 type="text"
-                value={formData.companyName || ''}
-                onChange={(e) => handleInputChange('companyName', e.target.value)}
+                value={formData.companyName || ""}
+                onChange={(e) =>
+                  handleInputChange("companyName", e.target.value)
+                }
                 className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-                  errors.companyName ? 'border-red-500' : 'border-gray-300'
+                  errors.companyName ? "border-red-500" : "border-gray-300"
                 }`}
                 placeholder="Enter your business name"
                 disabled={isLoading}
               />
               {errors.companyName && (
-                <p className="text-red-500 text-sm mt-1">{errors.companyName}</p>
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.companyName}
+                </p>
               )}
             </div>
 
@@ -217,16 +308,20 @@ const ProfileEdit = ({ vendorData, onSave, onCancel }) => {
               </label>
               <input
                 type="tel"
-                value={formData.phoneNumber || ''}
-                onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
+                value={formData.phoneNumber || ""}
+                onChange={(e) =>
+                  handleInputChange("phoneNumber", e.target.value)
+                }
                 className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-                  errors.phoneNumber ? 'border-red-500' : 'border-gray-300'
+                  errors.phoneNumber ? "border-red-500" : "border-gray-300"
                 }`}
                 placeholder="Enter phone number"
                 disabled={isLoading}
               />
               {errors.phoneNumber && (
-                <p className="text-red-500 text-sm mt-1">{errors.phoneNumber}</p>
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.phoneNumber}
+                </p>
               )}
             </div>
 
@@ -237,16 +332,20 @@ const ProfileEdit = ({ vendorData, onSave, onCancel }) => {
               </label>
               <input
                 type="text"
-                value={formData.accountNumber || ''}
-                onChange={(e) => handleInputChange('accountNumber', e.target.value)}
+                value={formData.accountNumber || ""}
+                onChange={(e) =>
+                  handleInputChange("accountNumber", e.target.value)
+                }
                 className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-                  errors.accountNumber ? 'border-red-500' : 'border-gray-300'
+                  errors.accountNumber ? "border-red-500" : "border-gray-300"
                 }`}
                 placeholder="Enter account number"
                 disabled={isLoading}
               />
               {errors.accountNumber && (
-                <p className="text-red-500 text-sm mt-1">{errors.accountNumber}</p>
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.accountNumber}
+                </p>
               )}
             </div>
 
@@ -256,11 +355,11 @@ const ProfileEdit = ({ vendorData, onSave, onCancel }) => {
                 Business Description *
               </label>
               <textarea
-                value={formData.bio || ''}
-                onChange={(e) => handleInputChange('bio', e.target.value)}
+                value={formData.bio || ""}
+                onChange={(e) => handleInputChange("bio", e.target.value)}
                 rows={4}
                 className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none ${
-                  errors.bio ? 'border-red-500' : 'border-gray-300'
+                  errors.bio ? "border-red-500" : "border-gray-300"
                 }`}
                 placeholder="Describe your business and services..."
                 disabled={isLoading}
@@ -307,6 +406,7 @@ const ProfileEdit = ({ vendorData, onSave, onCancel }) => {
         </div>
       </div>
     </div>
+    // </div>
   );
 };
 

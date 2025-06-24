@@ -13,6 +13,8 @@ import Orders from "./pages/Orders";
 import PlaceOrder from "./pages/PlaceOrder";
 import Favorites from "./pages/Favorites";
 import NotFound from "./pages/Notfound";
+import Collections from "./pages/Collections";
+import VendorProfile from "./pages/VendorProfile";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +64,14 @@ const router = createBrowserRouter([
   {
     path: "/favorites",
     element: <Favorites />,
+  },
+  {
+    path: "/collections",
+    element: <Collections />,
+  },
+  {
+    path: "/vendor-profile",
+    element: <VendorProfile />,
   },
   {
     path: "*",

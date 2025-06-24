@@ -64,3 +64,11 @@ html {
     color: white;
   }
 }
+
+.vendnav {
+  z-index: 10;
+}
+
+.desk-side {
+  z-index: 90;
+}
