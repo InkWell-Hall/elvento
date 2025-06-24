@@ -15,6 +15,9 @@ import Favorites from "./pages/Favorites";
 import NotFound from "./pages/Notfound";
 import Collections from "./pages/Collections";
 import VendorProfile from "./pages/VendorProfile";
+import VendorOrder from "./pages/VendorOrder";
+import AccountSettingsSidebar from "./components/AccountSettingsSidebar";
+import AccountSettings from "./pages/AccountSettings";
 
 const router = createBrowserRouter([
   {
@@ -64,6 +67,18 @@ const router = createBrowserRouter([
   {
     path: "/favorites",
     element: <Favorites />,
+  },
+  {
+    path: "/vendor-order",
+    element: <VendorOrder />,
+  },
+  {
+    path: "/account-settingssidebar",
+    element: <AccountSettingsSidebar />,
+  },
+  {
+    path: "/account-settings",
+    element: <AccountSettings />,
   },
   {
     path: "/collections",
