@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Video from "../assets/landingvid.mp4";
 import asset from "../assets/image1.png";
 import asset2 from "../assets/image2.png";
@@ -17,13 +17,28 @@ import { SwiperSlide, Swiper } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { Link } from "react-router";
+import { apiClient } from "../api/client";
+import { AdContext } from "../context/AdContext";
 
 // const items = [{ name: "for you", icon:  }, "Item 2", "Item 3"];
 
 const Home = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [active, setActive] = useState("");
+  const { token } = useContext(AdContext);
+  const getAllAds = async () => {
+    const response = await apiClient
+      .get("/single", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+        },
+      })
+      .then((response) => console.log(response));
+  };
 
+  useEffect(() => {
+    getAllAds();
+  }, []);
   return (
     <>
       <Navbar />

@@ -6,16 +6,13 @@ import { apiClient } from "../api/client";
 import axios from "axios";
 import VendorNavbar from "../components/VendorNavbar";
 import { toast } from "react-toastify";
-// import { toast } from 'react-toastify'; // Add this import if using toast
 
 const AddNewAd = () => {
-  const [images, setImages] = useState(null); // Changed from false to null
   const [image1, setImage1] = useState(false);
   const [image2, setImage2] = useState(false);
   const [image3, setImage3] = useState(false);
   const [image4, setImage4] = useState(false);
   const [userId, setUserId] = useState("");
-
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -32,65 +29,77 @@ const AddNewAd = () => {
     setLoading(true);
 
     try {
-      // Handle image upload - you might need to convert FileList to proper format
-      let imageData = [];
-      if (images && images.length > 0) {
-        // For now, just getting file names - you might need to upload to a service
-        imageData = Array.from(images).map((file) => file.name);
+      // Create FormData object for file uploads
+      const formData = new FormData();
+
+      // Append text fields - make sure field names match backend
+      formData.append("name", name);
+      formData.append("description", description);
+      formData.append("price", price);
+      formData.append("category", category);
+      formData.append("subCategory", subCategory);
+      formData.append("bestSeller", bestSeller); // Changed to match backend expectation
+      formData.append("size", JSON.stringify(size)); // Changed to match backend expectation
+
+      // Append image files (only if they exist)
+      if (image1) formData.append("image1", image1);
+      if (image2) formData.append("image2", image2);
+      if (image3) formData.append("image3", image3);
+      if (image4) formData.append("image4", image4);
+
+      // Debug: Log FormData contents
+      console.log("FormData contents:");
+      for (let [key, value] of formData.entries()) {
+        console.log(key, value);
       }
 
-      let data = {
-        name,
-        images: imageData, // Fixed: removed .trim() and handled properly
-        price: Number(price), // Convert to number
-        bestSeller,
-        subCategory,
-        description,
-        size, // This is now properly an array
-        category,
-      };
-
-      console.log("Sending data:", data); // Debug log
-
-      const response = await apiClient.post("/advert", data, {
+      const response = await apiClient.post("/add", formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+          // Don't set Content-Type for FormData - let browser handle it
         },
       });
 
       console.log("Response:", response);
 
       if (response.status === 201) {
-        // toast.success("Product added successfully"); // Uncomment if using toast
-        toast.succes("Product added successfully!"); // Temporary alert
+        toast.success("Product added successfully!");
 
         // Reset form
         setName("");
         setDescription("");
-        setImages(null);
         setPrice("");
         setSize([]);
         setBestSeller(false);
         setCategory("Men");
         setSubCategory("topwear");
+        // Reset images
+        setImage1(false);
+        setImage2(false);
+        setImage3(false);
+        setImage4(false);
       }
     } catch (error) {
       console.error("Error posting ad:", error);
-      // toast.error(error.response?.data?.message || "Error adding product"); // Uncomment if using toast
-      toast.error(
-        "Error adding product: " +
-          (error.response?.data?.message || error.message)
-      ); // Temporary alert
+
+      // More detailed error logging
+      if (error.response) {
+        console.error("Error response:", error.response.data);
+        toast.error(
+          "Error adding product: " +
+            (error.response.data?.message || error.response.statusText)
+        );
+      } else {
+        toast.error("Error adding product: " + error.message);
+      }
     } finally {
       setLoading(false);
     }
   };
-
   const handleReset = (event) => {
     event.preventDefault();
     setName("");
     setDescription("");
-    setImages(null); // Fixed: reset images properly
     setImage1(false);
     setImage2(false);
     setImage3(false);
@@ -104,7 +113,7 @@ const AddNewAd = () => {
 
   const getAllAds = async () => {
     try {
-      const response = await apiClient.get("/ordersAdevrt", {
+      const response = await apiClient.get("/list", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
@@ -137,16 +146,67 @@ const AddNewAd = () => {
 
               <div className="flex flex-col items-center w-full gap-3">
                 <p className="mb-2 font-lead-font text-[30px]">Upload Image</p>
-                <div className="flex gap-2 justify-center">
-                  <label htmlFor="images">Upload Images</label>
-                  <input
-                    type="file"
-                    name="images"
-                    className="w-90 border"
-                    multiple
-                    accept="image/*"
-                    onChange={(e) => setImages(e.target.files)}
-                  />
+                <div className="flex gap-2">
+                  <label htmlFor="image1">
+                    <img
+                      className="w-20"
+                      src={!image1 ? upload : URL.createObjectURL(image1)}
+                      alt=""
+                    />
+                    <input
+                      onChange={(e) => setImage1(e.target.files[0])}
+                      type="file"
+                      id="image1"
+                      name="image1"
+                      hidden
+                      required
+                    />
+                  </label>
+
+                  <label htmlFor="image2">
+                    <img
+                      className="w-20"
+                      src={!image2 ? upload : URL.createObjectURL(image2)}
+                      alt=""
+                    />
+                    <input
+                      onChange={(e) => setImage2(e.target.files[0])}
+                      type="file"
+                      id="image2"
+                      name="image2"
+                      hidden
+                    />
+                  </label>
+
+                  <label htmlFor="image3">
+                    <img
+                      className="w-20"
+                      src={!image3 ? upload : URL.createObjectURL(image3)}
+                      alt=""
+                    />
+                    <input
+                      onChange={(e) => setImage3(e.target.files[0])}
+                      type="file"
+                      id="image3"
+                      name="image3"
+                      hidden
+                    />
+                  </label>
+
+                  <label htmlFor="image4">
+                    <img
+                      className="w-20"
+                      src={!image4 ? upload : URL.createObjectURL(image4)}
+                      alt=""
+                    />
+                    <input
+                      onChange={(e) => setImage4(e.target.files[0])}
+                      type="file"
+                      name="image4"
+                      id="image4"
+                      hidden
+                    />
+                  </label>
                 </div>
               </div>
 

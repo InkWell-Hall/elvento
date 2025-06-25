@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router"; // Make sure you're using react-router-dom
 import { LayoutDashboard, Plus, Settings, Store, User } from "lucide-react";
-import logo from "../assets/Elogo.jpeg";
+import logo from "../assets/logowhite.png";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,6 +39,11 @@ const Sidebar = () => {
       href: "/vendor-shop",
       icon: <Store />,
     },
+    {
+      label: "My Ads",
+      href: "/vendor-ads",
+      icon: <Store />,
+    },
   ];
 
   const menuIcons = [];
@@ -57,7 +62,7 @@ const Sidebar = () => {
       <div className="hidden md:block w-64 bg-gray-800 text-white h-screen fixed left-0 top-0 desk-side">
         <div className="p-6 text-2xl font-bold border-b border-gray-700 font-lead-font text-lead-text">
           {/* {title} */}
-          <img src={logo} alt="" />
+          <img src={logo} alt="" className="w-40" />
         </div>
 
         <nav className="flex flex-col p-4 space-y-2">

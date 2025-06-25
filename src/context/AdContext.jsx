@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { products } from "../assets/asset";
 import { useNavigate } from "react-router";
+import { apiClient } from "../api/client";
 
 export const AdContext = createContext();
 const AdContextProvider = (props) => {
@@ -9,7 +10,7 @@ const AdContextProvider = (props) => {
   const [favoriteItems, setFavoriteItems] = useState({});
   const currency = "$";
   const [userId, setUserId] = useState("");
-
+  const token = localStorage.getItem("ACCESS_TOKEN");
   const delivery_fee = 20;
   // const navigate = useNavigate();
   //   const navigate = useNavigate();
@@ -37,19 +38,23 @@ const AdContextProvider = (props) => {
     }
     setCartItems(cartData);
 
-    // if (token) {
-    //   try {
-    //     await axios.post(
-    //       backendUrl + "/api/cart/add",
-    //       { itemId, size },
-    //       { headers: { token } }
-    //     );
-    //     toast.success("Product Added to Cart");
-    //   } catch (error) {
-    //     console.log(error);
-    //     toast.error(error.message);
-    //   }
-    // }
+    if (token) {
+      try {
+        await apiClient.post(
+          "/cart",
+          { itemId, size, userId },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+            },
+          }
+        );
+        toast.success("Product Added to Cart");
+      } catch (error) {
+        console.log(error);
+        toast.error(error.message);
+      }
+    }
   };
 
   const getUserId = () => {
@@ -168,6 +173,7 @@ const AdContextProvider = (props) => {
     console.log(cartItems);
     console.log(getCartAmount());
     getUserId();
+    console.log(token);
   }, [cartItems]);
   const value = {
     addToCart,
