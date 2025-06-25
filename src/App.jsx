@@ -18,6 +18,8 @@ import VendorProfile from "./pages/VendorProfile";
 import VendorOrder from "./pages/VendorOrder";
 import AccountSettingsSidebar from "./components/AccountSettingsSidebar";
 import AccountSettings from "./pages/AccountSettings";
+import Terms from "./components/Terms";
+import Privacy from "./components/Privacy";
 
 const router = createBrowserRouter([
   {
@@ -87,6 +89,14 @@ const router = createBrowserRouter([
   {
     path: "/vendor-profile",
     element: <VendorProfile />,
+  },
+  {
+    path: "/terms",
+    element: <Terms/>,
+  },
+  {
+    path: "/privacy",
+    element:<Privacy/>,
   },
   {
     path: "*",
