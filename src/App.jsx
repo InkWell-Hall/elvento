@@ -20,7 +20,7 @@ import AccountSettingsSidebar from "./components/AccountSettingsSidebar";
 import AccountSettings from "./pages/AccountSettings";
 import Terms from "./components/Terms";
 import Privacy from "./components/Privacy";
-import VendorShopPage from "./pages/VendorShopPage";
+import VendorShopPage from "./pages/VendorShop";
 
 const router = createBrowserRouter([
   {
@@ -101,7 +101,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/vendor-shop",
-    element: <VendorShopPage />,
+    element: <VendorShopPage/>,
   },
   {
     path: "*",
