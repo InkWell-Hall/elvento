@@ -20,27 +20,27 @@ const VendorDashboard = () => {
           <Tile
             title={"Ads Running"}
             value={45}
-            icon={<Megaphone color="orange" />}
+            icon={<Megaphone color="#4b6382" />}
           />
           <Tile
             title={"NUMBER OF SALES"}
             value={45}
-            icon={<BadgeDollarSign color="orange" />}
+            icon={<BadgeDollarSign color="#4b6382" />}
           />
           <Tile
             title={"ORDERS DELIVERED"}
             value={45}
-            icon={<Boxes color="orange" />}
+            icon={<Boxes color="#4b6382" />}
           />
           <Tile
             title={"AUDIENCE REACHED"}
             value={45}
-            icon={<UsersRound color="orange" />}
+            icon={<UsersRound color="#4b6382" />}
           />
           <Tile
             title={"Number of Ads"}
             value={45}
-            icon={<Megaphone color="orange" />}
+            icon={<Megaphone color="#4b6382" />}
           />
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 auto-rows-[minmax(180px,_auto)]">

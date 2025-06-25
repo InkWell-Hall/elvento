@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { apiClient } from "../api/client";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 export default function SignUpForm() {
   const [formData, setFormData] = useState({
@@ -14,11 +15,14 @@ export default function SignUpForm() {
     role: "Buyer", // 'buyer' or 'seller'
   });
 
+  const [accepted, setAccepted] = useState(false);
+  const [userId, setUserId] = useState("");
+
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [currentView, setCurrentView] = useState("signup"); // 'signup' or 'login'
-
+  const navigate = useNavigate();
   const validateForm = () => {
     const newErrors = {};
 
@@ -80,51 +84,90 @@ export default function SignUpForm() {
 
   const handleSubmit = async () => {
     if (!validateForm()) return;
-
-    try {
-      const response = await axios.post(
-        "https://elvento-api.onrender.com/api/V1/user/auth/signUp",
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log(response);
-      localStorage.setItem("ACCESS_TOKEN", response.data.token);
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
     setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
-      if (currentView === "signup") {
-        const roleText = formData.role === "Vendor" ? "Vendor" : "Buyer";
-        alert(
-          `Welcome ${formData.userName}! Your ${roleText} account has been created successfully.`
-        );
+      const response = await apiClient.post("/auth/signUp", formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response);
+      localStorage.setItem("ACCESS_TOKEN", response.data.token);
+      setUserId(response.data.user.id);
+      if (formData.role === "Vendor") {
+        navigate("/vendor-dashboard");
       } else {
-        alert(`Welcome back! Logged in successfully as ${formData.role}.`);
+        navigate("/");
       }
 
-      // Reset form
       setFormData({
         userName: "",
         email: "",
         password: "",
         phoneNumber: "",
         confirmPassword: "",
-        role: "buyer",
+        role: "",
       });
     } catch (error) {
-      alert("Something went wrong. Please try again.");
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
+  };
+  const handleLogin = async () => {
+    if (!validateForm()) return;
+    setIsLoading(true);
+    try {
+      const response = await apiClient.post("/auth/login", formData);
+      console.log(response);
+      localStorage.setItem("ACCESS_TOKEN", response.data.token);
+      navigate("/");
+      setFormData({
+        userName: "",
+        email: "",
+        password: "",
+        phoneNumber: "",
+        confirmPassword: "",
+        role: "",
+      });
+      if (userId) {
+        localStorage.setItem("USER_ID", userId);
+      } else {
+        console.warn("User ID not returned in response:", response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+
+    // try {
+    //   // Simulate API call
+    //   await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    //   if (currentView === "signup") {
+    //     const roleText = formData.role === "Vendor" ? "Vendor" : "Buyer";
+    //     alert(
+    //       `Welcome ${formData.userName}! Your ${roleText} account has been created successfully.`
+    //     );
+    //   } else {
+    //     alert(`Welcome back! Logged in successfully as ${formData.role}.`);
+    //   }
+
+    // Reset form
+    // setFormData({
+    //   userName: "",
+    //   email: "",
+    //   password: "",
+    //   phoneNumber: "",
+    //   confirmPassword: "",
+    //   role: "buyer",
+    //   });
+    // } catch (error) {
+    //   alert("Something went wrong. Please try again.");
+    // } finally {
+    //   setIsLoading(false);
+    // }
   };
 
   const handleKeyPress = (e) => {
@@ -174,7 +217,7 @@ export default function SignUpForm() {
                     type="button"
                     onClick={() => handleRoleChange("buyer")}
                     className={`flex-1 py-3 px-4 rounded-lg border-2 transition-all ${
-                      formData.role === "buyer"
+                      formData.role === "Buyer"
                         ? "border-blue-500 bg-blue-50 text-blue-700"
                         : "border-gray-300 bg-white bg-opacity-40 text-gray-700 hover:border-gray-400"
                     }`}
@@ -219,7 +262,7 @@ export default function SignUpForm() {
                           d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
                         />
                       </svg>
-                      <span className="font-medium">Vnedor</span>
+                      <span className="font-medium">Vendor</span>
                     </div>
                   </button>
                 </div>
@@ -268,14 +311,42 @@ export default function SignUpForm() {
                 )}
               </div>
             )}
-
-            {/* Phone number field - only show for sellers during signup */}
+            {/*  */}
             {currentView === "signup" && formData.role === "Vendor" && (
               <div>
                 <input
                   type="tel"
+                  name="accountNumber"
+                  placeholder="Enter Account Number"
+                  value={formData.accountNumber}
+                  onChange={handleInputChange}
+                  onKeyPress={handleKeyPress}
+                  className={`w-full px-4 py-3 bg-white bg-opacity-40 border rounded-lg text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all ${
+                    errors.accountNumber
+                      ? "border-red-400 focus:ring-red-300"
+                      : "border-gray-300 focus:ring-blue-300"
+                  }`}
+                />
+                {errors.accountNumber && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.accountNumber}
+                  </p>
+                )}
+              </div>
+            )}
+
+            {/* Phone number field - only show for sellers during signup */}
+            {currentView === "signup" && (
+              <div>
+                <select className="outline-none mb-3">
+                  <option value="+233">Ghana (+233)</option>
+                  <option value="+1">USA (+1)</option>
+                  <option value="+44">UK (+44)</option>
+                </select>
+                <input
+                  type="tel"
                   name="phoneNumber"
-                  placeholder="Phone Number (+1234567890)"
+                  placeholder="Enter Phone Number"
                   value={formData.phoneNumber}
                   onChange={handleInputChange}
                   onKeyPress={handleKeyPress}
@@ -459,9 +530,19 @@ export default function SignUpForm() {
               </button>
             </div>
 
+            <div className="flex gap-2">
+              <input type="checkbox" onClick={() => setAccepted(true)} />{" "}
+              <h1>
+                Accept{" "}
+                <a href="/term" className="text-blue-600">
+                  Terms and service
+                </a>
+              </h1>
+            </div>
+
             {/* Submit button */}
             <button
-              onClick={handleSubmit}
+              onClick={currentView === "signup" ? handleSubmit : handleLogin}
               disabled={isLoading}
               className={`w-full py-3 rounded-lg font-medium transition-colors mt-6 sm:mt-8 flex items-center justify-center ${
                 currentView === "signup" && formData.role === "Vendor"
@@ -469,7 +550,7 @@ export default function SignUpForm() {
                   : "bg-black hover:bg-gray-800 text-white disabled:bg-gray-400"
               } disabled:cursor-not-allowed`}
             >
-              {isLoading ? (
+              {isLoading && accepted ? (
                 <>
                   <svg
                     className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
@@ -491,13 +572,13 @@ export default function SignUpForm() {
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                     ></path>
                   </svg>
-                  {currentView === "signup"
+                  {currentView && accepted === "signup"
                     ? "Creating Account..."
                     : "Logging in..."}
                 </>
               ) : (
                 <>
-                  {currentView === "signup"
+                  {currentView && accepted === "signup"
                     ? formData.role === "Vendor"
                       ? "🏪 Create Vendor Account"
                       : "🛒 Create Buyer Account"
@@ -510,7 +591,7 @@ export default function SignUpForm() {
             {currentView === "signup" && (
               <div className="mt-6 p-4 bg-white bg-opacity-30 rounded-lg">
                 <h3 className="font-medium text-gray-800 mb-2">
-                  {formData.role === "Vnedor"
+                  {formData.role === "Vendor"
                     ? "Vendor Benefits:"
                     : "Buyer Benefits:"}
                 </h3>

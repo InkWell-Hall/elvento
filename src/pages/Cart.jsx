@@ -5,8 +5,9 @@ import { products } from "../assets/asset";
 import { Trash2 } from "lucide-react";
 import CartTotal from "../components/CartTotal";
 import Footer from "../components/Footer";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import empty from "../assets/emptytCart.jpg";
 
 const Cart = () => {
   const { currency, cartItems, updateQuantity, getCartAmount } =
@@ -47,10 +48,15 @@ const Cart = () => {
   return getCartAmount() === 0 ? (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <div className="text-center text-lead-text font-lead-font flex flex-col justify-center items-center mt-30 ">
+      <div className="text-center text-lead-text font-lead-font flex flex-col justify-center items-center mt-5 ">
+        <img src={empty} alt="" className="w-80" />
         <h1>Your cart is empty</h1>
 
-        <h1>Your cart is empty</h1>
+        <Link to={"/colections"}>
+          <button className="text-[20px] bg-black text-white py-3 px-2 rounded cursor-pointer">
+            Go Shopping
+          </button>
+        </Link>
       </div>
       <div className="mt-auto">
         <Footer />

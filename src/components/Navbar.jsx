@@ -7,7 +7,8 @@ import { useContext } from "react";
 import { AdContext } from "../context/AdContext";
 
 export default function Navbar() {
-  const { getCartCount } = useContext(AdContext);
+  const { getCartCount, getFavoriteCount, favoriteItems } =
+    useContext(AdContext);
   return (
     <div className="flex justify-between items-center px-8 py-4 text-bold h-10 z-20">
       <div className="flex justify-center items-center">
@@ -54,8 +55,11 @@ export default function Navbar() {
         <img src={bag} />
         <img src={timer} />
         <img src={sign} />
-        <Link to={"/favorites"}>
+        <Link to={"/favorites"} className="relative">
           <Heart />
+          <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
+            {getFavoriteCount()}
+          </p>
         </Link>
         <div>
           <Link to={"/cart"} className="relative">

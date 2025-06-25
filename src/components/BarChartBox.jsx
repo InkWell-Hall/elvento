@@ -55,7 +55,7 @@ const BarChartBox = () => {
             <Tooltip
               contentStyle={{ background: "white", cursor: "pointer" }}
             />
-            <Bar dataKey="uv" fill="orange" />
+            <Bar dataKey="uv" fill="#4b6382" />
           </BarChart>
         </ResponsiveContainer>
       </div>

@@ -63,7 +63,7 @@ const VendorProfile = () => {
               <Bell />
               <span className=" absolute right-2 bg-orange-500 text-orange-500 w-2 h-2 rounded-full"></span>
             </div>
-            <span className="bg-blue-500 text-white py-3 px-3 font-lead-font font-bold rounded-full">
+            <span className="bg-[#4b6382] text-white py-3 px-3 font-lead-font font-bold rounded-full">
               MC
             </span>
             <div className="flex mr-4">
@@ -104,10 +104,13 @@ const ProfileView = ({ vendorData, onEditClick }) => {
         {/* Profile Card */}
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
           {/* Header Section */}
-          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 md:p-8">
+          <div className="bg-[#4b6382] p-6 md:p-8">
             <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
               <div className="w-24 h-24 md:w-32 md:h-32 bg-white rounded-full flex items-center justify-center shadow-lg">
-                <User className="w-12 h-12 md:w-16 md:h-16 text-blue-600" />
+                <User
+                  className="w-12 h-12 md:w-16 md:h-16 text-blue-600"
+                  color="#4b6382"
+                />
               </div>
               <div className="text-center md:text-left text-white">
                 <h2 className="text-2xl md:text-3xl font-bold mb-2">
@@ -198,7 +201,7 @@ const ProfileView = ({ vendorData, onEditClick }) => {
             <div className="text-center">
               <button
                 onClick={onEditClick}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                className="inline-flex items-center gap-2 bg-[#4b6382] text-white px-8 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
                 <Edit3 className="w-5 h-5" />
                 Edit Profile

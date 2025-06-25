@@ -6,10 +6,13 @@ import { useNavigate } from "react-router";
 export const AdContext = createContext();
 const AdContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
+  const [favoriteItems, setFavoriteItems] = useState({});
   const currency = "$";
+  const [userId, setUserId] = useState("");
+
   const delivery_fee = 20;
   // const navigate = useNavigate();
-//   const navigate = useNavigate();
+  //   const navigate = useNavigate();
   const addToCart = async (itemId, size) => {
     if (!size) {
       toast.error("Select Product Size");
@@ -49,6 +52,65 @@ const AdContextProvider = (props) => {
     // }
   };
 
+  const getUserId = () => {
+    setUserId(localStorage.getItem("USER_ID"));
+  };
+  const addToFavorite = async (itemId, size) => {
+    if (!itemId) {
+      toast.error("Invalid product ID.");
+      return;
+    }
+
+    toast.success("Product successfully added to Favorites");
+    let FavoriteData = structuredClone(favoriteItems);
+
+    if (FavoriteData[itemId]) {
+      if (FavoriteData[itemId][size]) {
+        FavoriteData[itemId][size] += 1;
+      } else {
+        FavoriteData[itemId][size] = 1;
+      }
+    } else {
+      FavoriteData[itemId] = {};
+      FavoriteData[itemId][size] = 1;
+    }
+
+    setFavoriteItems(FavoriteData);
+  };
+
+  // const handleSubmit = async () => {
+  //   if (!validateForm()) return;
+  //   setIsLoading(true);
+  //   try {
+  //     const response = await apiClient.post("/auth/signUp", formData, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     console.log(response);
+  //     localStorage.setItem("ACCESS_TOKEN", response.data.token);
+  //     setUserId(response.data.user.id);
+  //     if (formData.role === "Vendor") {
+  //       navigate("/vendor-dashboard");
+  //     } else {
+  //       navigate("/");
+  //     }
+
+  //     setFormData({
+  //       userName: "",
+  //       email: "",
+  //       password: "",
+  //       phoneNumber: "",
+  //       confirmPassword: "",
+  //       role: "",
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
   const getCartCount = () => {
     let totalCount = 0;
     for (const items in cartItems) {
@@ -58,6 +120,22 @@ const AdContextProvider = (props) => {
             totalCount += cartItems[items][item];
           }
         } catch (error) {}
+      }
+    }
+    return totalCount;
+  };
+  const getFavoriteCount = () => {
+    console.log("favoriteItems:", favoriteItems); // 👈 Add this
+    let totalCount = 0;
+    for (const items in favoriteItems) {
+      for (const item in favoriteItems[items]) {
+        try {
+          if (favoriteItems[items][item] > 0) {
+            totalCount += favoriteItems[items][item];
+          }
+        } catch (error) {
+          console.log(error);
+        }
       }
     }
     return totalCount;
@@ -89,6 +167,7 @@ const AdContextProvider = (props) => {
   useEffect(() => {
     console.log(cartItems);
     console.log(getCartAmount());
+    getUserId();
   }, [cartItems]);
   const value = {
     addToCart,
@@ -99,6 +178,12 @@ const AdContextProvider = (props) => {
     delivery_fee,
     // navigate,
     getCartAmount,
+    getFavoriteCount,
+    addToFavorite,
+    favoriteItems,
+    userId,
+    setUserId,
+    getUserId,
   };
   return (
     <AdContext.Provider value={value}>{props.children}</AdContext.Provider>

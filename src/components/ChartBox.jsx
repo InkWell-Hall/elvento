@@ -57,7 +57,7 @@ const ChartBox = ({ users }) => {
         </div>
         <div>
           <h1 className="text-green-700">{users}</h1>
-          <Link to={"#"} className="text-sm font-bold text-blue-600">
+          <Link to={"#"} className="text-xs font-bold underline text-blue-600">
             View All
           </Link>
         </div>

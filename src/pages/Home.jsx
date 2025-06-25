@@ -40,7 +40,8 @@ const Home = () => {
           <div className="flex gap-2 slideshow">
             {[
               1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-              20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36
+              20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
+              36,
             ].map((item, n) => (
               <img
                 src={n % 3 === 0 ? asset : n % 3 === 1 ? asset2 : asset3}
@@ -123,6 +124,11 @@ const Home = () => {
                 </button>
               </div>
             </SwiperSlide>
+            <SwiperSlide className="w-screen h-[500px] flex items-center justify-center bg-[url(./assets/makeup.jpeg)] bg-no-repeat bg-cover bg-center">
+              <h1 className="font-bold text-center mt-30 font-lead-font text-lead-text">
+                MAGIC TOUCH OF BEAUTY
+              </h1>
+            </SwiperSlide>
             <SwiperSlide className="w-screen h-[70vh] bg-black flex items-center justify-center">
               <div className="text-center mt-27">
                 <h1 className="text-4xl font-bold font-lead-font text-lead-text mb-4">
@@ -134,11 +140,11 @@ const Home = () => {
                 </button>
               </div>
             </SwiperSlide>
-            <SwiperSlide className="w-screen h-[500px] flex items-center justify-center bg-blue-500">
-              <h1 className="text-4xl font-bold text-center">Slide 2</h1>
-            </SwiperSlide>
-            <SwiperSlide className="w-screen h-[500px] flex items-center justify-center bg-green-500">
-              <h1 className="text-4xl font-bold">Slide 3</h1>
+
+            <SwiperSlide className="w-screen h-[500px] flex items-center justify-center bg-[url(./assets/face.jpeg)] bg-no-repeat bg-cover bg-center">
+              <h1 className="text-4xl font-bold text-center mt-30 font-lead-font text-lead-text">
+                MAKE YOUR MOUTH BEAUTIFUL
+              </h1>
             </SwiperSlide>
           </Swiper>
         </section>
@@ -148,35 +154,21 @@ const Home = () => {
               <h1 className="text-2xl font-bold ml-10">SHOP THE LATEST</h1>
             </div>
             <div className="flex gap-2 mb-4 cursor-pointer items-center text-xs font-bold ml-10 ">
-              <button
-                className={
-                  active
-                    ? "flex rounded-3xl border px-5 py-3 bg-black text-white"
-                    : "flex rounded-3xl border px-5 py-3"
-                }
-                onClick={() => setActive((prev) => !prev)}
-              >
+              <button className="flex rounded-3xl transition-all duration-150 border px-5 py-3 cursor-pointer hover:bg-black hover:text-white">
                 {" "}
                 <Sparkle size={17} />
                 For You
               </button>
-              <button
-                className={
-                  active
-                    ? "flex rounded-3xl border px-5 py-3 bg-black text-white"
-                    : "flex rounded-3xl border px-5 py-3"
-                }
-                onClick={() => setActive((prev) => !prev)}
-              >
+              <button className="flex rounded-3xl border transition-all duration-400 px-5 py-3 cursor-pointer hover:bg-black hover:text-white">
                 New In
               </button>
-              <button className="rounded-3xl border  px-5 py-2 hover:bg-black hover:text-white">
+              <button className="rounded-3xl border transition-all duration-400 px-5 py-2 cursor-pointer hover:bg-black hover:text-white">
                 Sale
               </button>
-              <button className="rounded-3xl border  px-5 py-2 hover:bg-black hover:text-white">
+              <button className="rounded-3xl border transition-all duration-400 px-5 py-2 cursor-pointer hover:bg-black hover:text-white">
                 Jeans
               </button>
-              <button className="rounded-3xl border  px-5 py-2 hover:bg-black hover:text-white">
+              <button className="rounded-3xl border transition-all duration-400 px-5 py-2 cursor-pointer hover:bg-black hover:text-white">
                 Dress
               </button>
             </div>

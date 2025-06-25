@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router"; // Make sure you're using react-router-dom
-import { LayoutDashboard, Plus, Settings, User } from "lucide-react";
+import { LayoutDashboard, Plus, Settings, Store, User } from "lucide-react";
+import logo from "../assets/Elogo.jpeg";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,8 +31,13 @@ const Sidebar = () => {
     },
     {
       label: "Settings",
-      href: "/settings",
+      href: "/account-settings",
       icon: <Settings color="white" />,
+    },
+    {
+      label: "My Shop",
+      href: "/vendor-shop",
+      icon: <Store />,
     },
   ];
 
@@ -50,7 +56,8 @@ const Sidebar = () => {
       {/* Desktop sidebar */}
       <div className="hidden md:block w-64 bg-gray-800 text-white h-screen fixed left-0 top-0 desk-side">
         <div className="p-6 text-2xl font-bold border-b border-gray-700 font-lead-font text-lead-text">
-          {title}
+          {/* {title} */}
+          <img src={logo} alt="" />
         </div>
 
         <nav className="flex flex-col p-4 space-y-2">

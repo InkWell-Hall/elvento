@@ -5,8 +5,11 @@ import {
   Delete,
   DeleteIcon,
   Edit,
+  Heart,
   ShoppingBasket,
   ShoppingCartIcon,
+  Store,
+  ThumbsUp,
   Trash2,
 } from "lucide-react";
 import { toast } from "react-toastify";
@@ -14,16 +17,23 @@ import { products } from "../assets/asset";
 import Navbar from "../components/Navbar";
 import star from "../assets/star.png";
 import { AdContext } from "../context/AdContext";
-import FilterSidebar from "../components/FilterSideBar";
 import RelatedAds from "../components/RelatedAds";
+import filled from "../assets/filled.png";
 
 const ViewAds = () => {
   const { bookId } = useParams();
-  const { addToCart } = useContext(AdContext);
+  const { addToCart, addToFavorite, userId } = useContext(AdContext);
   const navigate = useNavigate();
   const [image, setImage] = useState("");
   const [adData, setAdData] = useState(null);
   const [size, setSize] = useState("");
+  const now = new Date();
+  const [like, setLike] = useState("like");
+
+  const liked = () => {
+    const itemLiked = document.getElementById("liked");
+    itemLiked.classList.toggle("bg-black");
+  };
 
   useEffect(() => {
     products.map((item, index) => {
@@ -33,6 +43,16 @@ const ViewAds = () => {
     // return null;
     console.log(adData);
   }, []);
+
+  console.log(userId);
+
+  const likeAdd = () => {
+    setLike("liked");
+    // adData.map((item, n) => {
+
+    // });
+    addToFavorite(adData.id);
+  };
   return (
     <>
       <Navbar />
@@ -54,8 +74,23 @@ const ViewAds = () => {
               ))}
             </div>
 
-            <div className="w-full sm:w-[80%]">
+            <div className="w-full sm:w-[80%] relative">
               <img src={image} alt="" className="w-full h-auto" />
+              {like === "liked" ? (
+                <img
+                  src={filled}
+                  alt=""
+                  onClick={() => setLike("like")}
+                  className="absolute top-2 right-2 cursor-pointer w-8"
+                />
+              ) : (
+                <Heart
+                  onClick={likeAdd}
+                  id="liked"
+                  className="absolute top-2 right-2 cursor-pointer "
+                  size={30}
+                />
+              )}
             </div>
           </div>
 
@@ -99,12 +134,14 @@ const ViewAds = () => {
                 ))}
               </div>
             </div>
-            <div>
+            <div className="flex items-center gap-3.5">
+              <Store onClick={() => addToFavorite(adData.id)} />
+
               <button
                 onClick={() => addToCart(adData.id, size)}
-                className="bg-black text-white px-4 py-3 text-sm active:bg-gray-700 cursor-pointer flex gap-3 items-center"
+                className="bg-black text-white px-4 py-3 text-sm  active:bg-gray-700 rounded cursor-pointer flex gap-3 items-center"
               >
-                ADD TO CART <ShoppingCartIcon />
+                ADD TO CART
               </button>
             </div>
             <hr className="mt-4 sm:w-4/5 mb-3" />
@@ -118,14 +155,122 @@ const ViewAds = () => {
         {/* Ad description */}
         <div className="mt-20">
           <div className="flex">
-            <b className="border px-5 py-3 text-sm">Description</b>
-            <p className="border px-5 py-3 text-sm">Reviews (100)</p>
+            <p className="border px-5 py-3 font-bold">REVIEWS (100)</p>
           </div>
           <div className="flex flex-col gap-4 border px-6 py-6 text-sm text-gray-500">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate
+            {/* Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate
             illum, sit vitae repellendus totam molestiae architecto suscipit
             nulla non praesentium ipsum rerum sunt mollitia ratione id, odio
-            magni unde esse?
+            magni unde esse? */}
+            <div className="first comment flex justify-between gap-8">
+              <div>
+                <div className="flex">
+                  <img src={star} alt="" />
+                  <img src={star} alt="" />
+                  <img src={star} alt="" />
+                  <img src={star} alt="" />
+                  <img src={star} alt="" />
+                </div>
+                <h1 className="font-bold">Jayson Cole</h1>
+                <p>{now.toLocaleDateString()}</p>
+              </div>
+
+              <div className="prod-deets flex flex-col gap-3 w-150">
+                <h1 className="font-bold">
+                  Tenia S. June 10, 2025 Isabella Tropical Chiffon Maxi Dress
+                </h1>
+
+                <div className="flex justify-between">
+                  <p className="font-bold">Fit: Fit too cut </p>
+                  <p className="mr-8"> Size Ordered: "M"</p>
+                </div>
+                <p>
+                  "Absolutely love this product! The quality exceeded my
+                  expectations — sturdy, well-designed, and exactly as
+                  described. It's clear a lot of thought went into making it.
+                  Highly recommended!"
+                </p>
+              </div>
+
+              <div className="flex gap-2">
+                <ThumbsUp size={20} className="cursor-pointer" />
+                <h1 className="font-bold">Helpful (0)</h1>
+              </div>
+            </div>
+            <hr />
+            {/* second comment */}
+            <div className="first comment flex justify-between gap-8">
+              <div>
+                <div className="flex">
+                  <img src={star} alt="" />
+                  <img src={star} alt="" />
+                  <img src={star} alt="" />
+                  <img src={star} alt="" />
+                  <img src={star} alt="" />
+                </div>
+                <h1 className="font-bold">Jayson Cole</h1>
+                <p>{now.toLocaleDateString()}</p>
+              </div>
+
+              <div className="prod-deets flex flex-col gap-3 w-150">
+                <h1 className="font-bold">
+                  Tenia S. June 10, 2025 Isabella Tropical Chiffon Maxi Dress
+                </h1>
+
+                <div className="flex justify-between">
+                  <p className="font-bold">Fit: Fit too cut </p>
+                  <p className="mr-8"> Size Ordered: "L"</p>
+                </div>
+                <p>
+                  "This platform is super easy to use and reliable. From
+                  browsing to checkout, the entire process is smooth and
+                  intuitive. Great selection, fast support, and a truly
+                  user-first experience!"
+                </p>
+              </div>
+
+              <div className="flex gap-2">
+                <ThumbsUp size={20} className="cursor-pointer" />
+                <h1 className="font-bold">Helpful (0)</h1>
+              </div>
+            </div>
+            <hr />
+            {/* third comment */}
+            <div className="first comment flex  justify-between gap-8">
+              <div>
+                <div className="flex">
+                  <img src={star} alt="" />
+                  <img src={star} alt="" />
+                  <img src={star} alt="" />
+                  <img src={star} alt="" />
+                  <img src={star} alt="" />
+                </div>
+                <h1 className="font-bold">Jayson Cole</h1>
+                <p>{now.toLocaleDateString()}</p>
+              </div>
+
+              <div className="prod-deets flex flex-col gap-3 w-150">
+                <h1 className="font-bold">
+                  Tenia S. June 10, 2025 Isabella Tropical Chiffon Maxi Dress
+                </h1>
+
+                <div className="flex justify-between">
+                  <p className="font-bold">Fit: Fit too cut </p>
+                  <p className="mr-8"> Size Ordered: "M"</p>
+                </div>
+                <p>
+                  "Really impressed with the craftsmanship and attention to
+                  detail. It looks even better in person and works perfectly.
+                  You can tell it's made with care — definitely worth the price"
+                </p>
+              </div>
+
+              <div className="flex gap-2">
+                <ThumbsUp size={20} className="cursor-pointer" />
+                <h1 className="font-bold">Helpful (0)</h1>
+              </div>
+            </div>
+            {/*  */}
           </div>
         </div>
       </div>
