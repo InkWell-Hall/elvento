@@ -93,7 +93,7 @@ export default function SignUpForm() {
       });
       console.log(response);
       localStorage.setItem("ACCESS_TOKEN", response.data.token);
-      setUserId(response.data.user.id);
+      localStorage.setItem("USER_ID", response.data.user.id);
       if (formData.role === "Vendor") {
         navigate("/vendor-dashboard");
       } else {
