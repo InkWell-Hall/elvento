@@ -20,7 +20,7 @@ import AccountSettingsSidebar from "./components/AccountSettingsSidebar";
 import AccountSettings from "./pages/AccountSettings";
 import Terms from "./components/Terms";
 import Privacy from "./components/Privacy";
-import VendorShopPage from "./pages/VendorShop";
+import VendorShopPage from "./pages/VendorShopPage";
 
 const router = createBrowserRouter([
   {
