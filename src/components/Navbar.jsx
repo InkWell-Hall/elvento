@@ -1,5 +1,5 @@
 import { Heart, Search } from "lucide-react";
-import bag from "../assets/bag.svg.svg";
+import bag from "../assets/Bag.svg.svg";
 import sign from "../assets/sign.svg.svg";
 import timer from "../assets/timer.svg.svg";
 import { Link } from "react-router";
