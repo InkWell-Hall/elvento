@@ -57,8 +57,8 @@ const VendorDashboard = () => {
           {/* <div className="p-5 rounded-lg border bg-blue-200  col-span-1">
             box3
           </div> */}
-          <div className="p-5 rounded-lg border bg-blue-200 col-span-1 row-span-1">
-            box4
+          <div className="p-5 rounded-lg border bg-blue-200 col-span-1 row-span-1 font-lead-font">
+            Favorites
             {/* <ChartBox users={80} /> */}
           </div>
           {/* <div className="p-5 rounded-lg border bg-blue-200">

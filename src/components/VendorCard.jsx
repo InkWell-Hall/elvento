@@ -1,8 +1,24 @@
 import { Edit, Heart, Trash } from "lucide-react";
 import React from "react";
 import { Link } from "react-router";
+import { apiClient } from "../api/client";
 
 const VendorCard = ({ title, price, oldPrice, discount, image, id }) => {
+  const deleteAd = () => {
+    apiClient
+      .post(`/remove`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+        },
+      })
+      .then((response) => {
+        console.log("Ad deleted successfully", response);
+        // Optionally, trigger a re-fetch or page reload
+      })
+      .catch((error) => {
+        console.error("Error deleting ad:", error);
+      });
+  };
   return (
     <div>
       <div className=" w-65 bg-white">
@@ -26,7 +42,7 @@ const VendorCard = ({ title, price, oldPrice, discount, image, id }) => {
                 <Edit />
               </button>
             </Link>
-            <button>
+            <button onClick={deleteAd}>
               <Trash />
             </button>
           </div>
