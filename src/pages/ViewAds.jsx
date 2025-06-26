@@ -68,7 +68,7 @@ const ViewAds = () => {
     // getAllAdverts();
   }, []);
 
-  console.log(userId);
+  // console.log(userId);
 
   const likeAdd = () => {
     setLike("liked");

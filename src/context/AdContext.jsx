@@ -9,7 +9,7 @@ const AdContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [favoriteItems, setFavoriteItems] = useState({});
   const currency = "$";
-  const [userId, setUserId] = useState("");
+  // const [userId, setUserId] = useState("");
   const [allAds, setAllAds] = useState([]);
   const token = localStorage.getItem("ACCESS_TOKEN");
   const delivery_fee = 20;
@@ -18,6 +18,12 @@ const AdContextProvider = (props) => {
   const addToCart = async (itemId, size) => {
     if (!size) {
       toast.error("Select Product Size");
+      return;
+    }
+    const storedUserId = localStorage.getItem("USER_ID");
+
+    if (!storedUserId) {
+      toast.error("Please log in to add items to cart");
       return;
     }
 
@@ -34,16 +40,16 @@ const AdContextProvider = (props) => {
       cartData[itemId][size] = 1;
     }
 
-    if (size) {
-      toast.success("Product added to cart successfully!");
-    }
+    // if (size) {
+    //   toast.success("Product added to cart successfully!");
+    // }
     setCartItems(cartData);
 
     if (token) {
       try {
         await apiClient.post(
-          "/add",
-          { itemId, size, userId },
+          "/cart/add",
+          { itemId, size, userId: storedUserId },
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
@@ -58,9 +64,9 @@ const AdContextProvider = (props) => {
     }
   };
 
-  const getUserId = () => {
-    setUserId(localStorage.getItem("USER_ID"));
-  };
+  // const getUserId = () => {
+  //   setUserId(localStorage.getItem("USER_ID"));
+  // };
   const addToFavorite = async (itemId, size) => {
     if (!itemId) {
       toast.error("Invalid product ID.");
@@ -189,7 +195,7 @@ const AdContextProvider = (props) => {
   useEffect(() => {
     console.log(cartItems);
     console.log(getCartAmount());
-    getUserId();
+    // getUserId();
     getAllAds();
     console.log(token);
   }, [cartItems]);
@@ -205,9 +211,9 @@ const AdContextProvider = (props) => {
     getFavoriteCount,
     addToFavorite,
     favoriteItems,
-    userId,
-    setUserId,
-    getUserId,
+    // userId,
+    // setUserId,
+    // getUserId,
     allAds,
   };
   return (

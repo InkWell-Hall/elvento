@@ -55,7 +55,7 @@ const Sidebar = () => {
         className="md:hidden p-4 focus:outline-none z-50 relative cursor-pointer flex"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="text-xl">&#9776;</span>
+        <span className="text-xl fixed">&#9776;</span>
       </button>
 
       {/* Desktop sidebar */}

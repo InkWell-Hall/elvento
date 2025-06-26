@@ -23,6 +23,8 @@ import Privacy from "./components/Privacy";
 import EditAd from "./pages/EditAd";
 import Women from "./pages/Women";
 import VendorShopPage from "./pages/VendorShop";
+import VendorAds from "./pages/VendorAds";
+import VendorAdvert from "./pages/VendorAdvert";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +78,10 @@ const router = createBrowserRouter([
   {
     path: "/vendor-order",
     element: <VendorOrder />,
+  },
+  {
+    path: "/vendor-ads",
+    element: <VendorAds />,
   },
   {
     path: "/account-settingssidebar",

@@ -188,7 +188,7 @@ export default function SignUpForm() {
                 <div className="flex space-x-4">
                   <button
                     type="button"
-                    onClick={() => handleRoleChange("buyer")}
+                    onClick={() => handleRoleChange("Buyer")}
                     className={`flex-1 py-3 px-4 rounded-lg border-2 transition-all ${
                       formData.role === "Buyer"
                         ? "border-blue-500 bg-blue-50 text-blue-700"
