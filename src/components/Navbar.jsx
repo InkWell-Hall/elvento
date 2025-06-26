@@ -1,75 +1,82 @@
-import { Heart, Search } from "lucide-react";
-import bag from "../assets/Bag.svg.svg";
+import { useState } from "react";
+import { Heart, LogIn, Search } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import bag from "../assets/bag.svg.svg";
 import sign from "../assets/sign.svg.svg";
 import timer from "../assets/timer.svg.svg";
-import { Link } from "react-router";
-import { useContext } from "react";
-import { AdContext } from "../context/AdContext";
 
 export default function Navbar() {
-  const { getCartCount, getFavoriteCount, favoriteItems } =
-    useContext(AdContext);
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div className="flex justify-between items-center px-8 py-4 text-bold h-10 z-20">
-      <div className="flex justify-center items-center">
-        <h1 className="text bold space-between font-lead-font font-light text-3xl">
-          <Link to={"/"}>
-            EL<span className="font-bold">VENTO</span>
-          </Link>
-        </h1>
-        <div>
-          <ul className="flex gap-4 p-4">
-            <li>
-              <a className="text-black font-bold" href="#">
-                Women
-              </a>
-            </li>
-            <li>
-              <a className="text-black font-bold" href="#">
-                Curve
-              </a>
-            </li>
-            <li>
-              <a className="text-black font-bold" href="#">
-                Men
-              </a>
-            </li>
-            <li>
-              <a className="text-black font-bold" href="#">
-                Kids
-              </a>
-            </li>
-            <li>
-              <a className="text-black font-bold" href="#">
-                Beauty
-              </a>
-            </li>
-          </ul>
+    <nav className="flex flex-wrap justify-between items-center px-4 sm:px-6 lg:px-8 py-4 h-auto relative">
+      {/* Logo and Hamburger */}
+      <div className="flex items-center justify-between w-full md:w-auto gap-10">
+  <h1 className="text-lg font-bold">Elvento</h1>
+
+  <div className="relative flex-1 max-w-xs">
+    <input
+      type="text"
+      className="w-full border border-gray-300 rounded-2xl pl-3 pr-10 py-1 text-sm"
+      placeholder="Search"
+    />
+    <Search
+      size={18}
+      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600"
+    />
+  </div>
+
+  <button
+    className="md:hidden"
+    onClick={() => setIsOpen(!isOpen)}
+    aria-label="Toggle Menu"
+  >
+    {isOpen ? <X size={24} /> : <Menu size={24} />}
+  </button>
+</div>
+
+      {/* Navigation Links - collapsible */}
+      {isOpen && (
+        <ul className="flex flex-col gap-4 p-4 absolute top-16 left-4 bg-white rounded shadow-md md:hidden z-10">
+          <li><a className="text-black font-bold" href="#">Women</a></li>
+          <li><a className="text-black font-bold" href="#">Curve</a></li>
+          <li><a className="text-black font-bold" href="#">Men</a></li>
+          <li><a className="text-black font-bold" href="#">Kids</a></li>
+          <li><a className="text-black font-bold" href="#">Beauty</a></li>
+        </ul>
+      )}
+
+      {/* Desktop nav (hidden on small screens) */}
+      <ul className="hidden md:flex gap-4 p-4">
+        <li><a className="text-black font-bold" href="#">Women</a></li>
+        <li><a className="text-black font-bold" href="#">Curve</a></li>
+        <li><a className="text-black font-bold" href="#">Men</a></li>
+        <li><a className="text-black font-bold" href="#">Kids</a></li>
+        <li><a className="text-black font-bold" href="#">Beauty</a></li>
+      </ul>
+
+      {/* Search bar */}
+      {/* <div className="flex items-center mt-4 md:mt-0 w-full md:w-auto gap-2">
+        <div className="relative w-full md:w-64">
+          <input
+            type="text"
+            className="border border-gray-300 rounded-2xl w-full pl-3 pr-10 py-1"
+            placeholder="Search"
+          />
+          <Search size={18} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600" />
         </div>
+      </div> */}
+
+      {/* Icons */}
+      <div className="md:flex flex md:justify-center justify-center gap-10 md:gap-4 mt-4 ml-12 md:mt-0 ">
+        {/* <img src={bag} alt="bag" />
+        <img src={timer} alt="timer" /> */}
+        <img src={sign} alt="sign in" />
+        <Heart />
+        <img src={bag} alt="bag duplicate" />
+        {/* <LogIn/> */}
       </div>
-      <div className="flex relative items-center ml-100">
-        <input type="text" className="border rounded-2xl " />
-        <Search color="black" size={18} className="absolute left-2 bottom-1 " />
-      </div>
-      <div className="flex flex-row gap-4">
-        <img src={bag} />
-        <img src={timer} />
-        <img src={sign} />
-        <Link to={"/favorites"} className="relative">
-          <Heart />
-          <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
-            {getFavoriteCount()}
-          </p>
-        </Link>
-        <div>
-          <Link to={"/cart"} className="relative">
-            <img src={bag} />
-            <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
-              {getCartCount()}
-            </p>
-          </Link>
-        </div>
-      </div>
-    </div>
+      <button className="bg-black hover:bg-gray-400 text-white font-semibold py-2 px-4 rounded-xl shadow-md transition duration-300 items-center cursor-pointer">Login</button>
+    </nav>
   );
 }
