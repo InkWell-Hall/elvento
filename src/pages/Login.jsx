@@ -115,6 +115,8 @@ export default function SignUpForm() {
     }
   };
 
+
+  
   const handleLogin = async () => {
     if (!validateForm()) return;
     setIsLoading(true);

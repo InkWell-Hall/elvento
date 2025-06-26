@@ -20,8 +20,20 @@ import { Link } from "react-router";
 import dress1 from "../assets/dress1.jpeg";
 import kids1 from "../assets/kids1.jpeg";
 import men2 from "../assets/men2.jpeg";
-import image from "../assets/image.png";
-import beauty from "../assets/beauty1.jpeg"
+import image from "../assets/imagee.png";
+import beauty from "../assets/beauty1.jpeg";
+import image22 from "../assets/image22.png";
+import image25 from "../assets/image25.png";
+import image26 from "../assets/image26.png";
+import image30 from "../assets/image30.png";
+import image31 from "../assets/image31.png";
+import jean1 from "../assets/jean1.png";
+import image29 from "../assets/image29.png";
+import image38 from "../assets/image38.png";
+import dress2 from "../assets/dress2.png";
+import top3 from "../assets/top3.png";
+import main2 from "../assets/main2.png";
+
 
 
 
@@ -72,7 +84,7 @@ const Home = () => {
           <div className="bg-[url('./assets/image4.png')] w-[100%] h-[90vh] bg-cover flex flex-col text-white mt-10">
             <div className="flex flex-col items-center justify-center h-full">
               <h1 className="text-6xl font-bold">NEW ARRIVALS</h1>
-              <button className="mt-4 px-2 py-2 bg-blue-500 cursor-pointer text-white">
+              <button className="mt-6 px-2 py-2 bg-blue-500 cursor-pointer text-white">
                 SHOP NOW
               </button>
             </div>
@@ -83,7 +95,7 @@ const Home = () => {
             <h1 className="text-2xl font-bold mt-10 ml-10 mb-4">
               FEATURED PRODUCTS
             </h1>
-            <div className="flex w-[90%] mx-auto mr-10 text-white gap-3">
+            <div className="flex w-[90%] mx-auto mr-10 cursor-pointer text-white gap-3">
               <div className="flex relative">
                 <img src={men2} alt="" className="w-60 h-73" />
                 <h1 className="absolute text-2xl font-bold cursor-pointer bottom-5 left-20">
@@ -169,7 +181,7 @@ const Home = () => {
               <h1 className="text-2xl font-bold ml-10">SHOP THE LATEST</h1>
             </div>
             <div className="flex gap-2 mb-4 cursor-pointer items-center text-xs font-bold ml-10 ">
-              <button className="flex rounded-3xl transition-all duration-150 border px-5 py-3 cursor-pointer hover:bg-black hover:text-white">
+              <button className="flex rounded-3xl transition-all duration-150 border px-4 py-3 cursor-pointer hover:bg-black hover:text-white">
                 {" "}
                 <Sparkle size={17} />
                 For You
@@ -200,84 +212,84 @@ const Home = () => {
             />
             <Card
               title={"Sena lisa"}
-              image={asset7}
-              price={23}
-              oldPrice={45}
-              discount={50}
+              image={top3}
+              price={18}
+              oldPrice={25}
+              discount={30}
             />
             <Card
               title={"Juvit multi-colored"}
               image={asset8}
-              price={23}
-              oldPrice={45}
+              price={27}
+              oldPrice={35}
               discount={50}
             />
             <Card
               title={"Silacs rubisx"}
-              image={asset6}
-              price={23}
-              oldPrice={45}
-              discount={50}
-            />
-          </div>
-          <div className="flex gap-4 cursor-pointer mt-20 w-[80%] mx-auto">
-            <Card
-              title={"Silacs rubisx"}
-              image={asset6}
-              price={23}
-              oldPrice={45}
-              discount={50}
-            />
-            <Card
-              title={"Silacs rubisx"}
-              image={asset6}
-              price={23}
-              oldPrice={45}
-              discount={50}
-            />
-            <Card
-              title={"Silacs rubisx"}
-              image={asset6}
-              price={23}
-              oldPrice={45}
-              discount={50}
-            />
-            <Card
-              title={"Silacs rubisx"}
-              image={asset6}
-              price={23}
-              oldPrice={45}
+              image={image25}
+              price={67}
+              oldPrice={105}
               discount={50}
             />
           </div>
-          <div className="flex gap-4 cursor-pointer w-[80%] mx-auto mt-20">
+          <div className="flex gap-4 cursor-pointer mt-14 w-[80%] mx-auto">
             <Card
               title={"Silacs rubisx"}
-              image={asset6}
-              price={23}
-              oldPrice={45}
+              image={image26}
+              price={28}
+              oldPrice={35}
               discount={50}
             />
             <Card
               title={"Silacs rubisx"}
-              image={asset6}
-              price={23}
-              oldPrice={45}
+              image={image22}
+              price={33}
+              oldPrice={50}
+              discount={43}
+            />
+            <Card
+              title={"Silacs rubisx"}
+              image={image30}
+              price={33}
+              oldPrice={40}
+              discount={20}
+            />
+            <Card
+              title={"Silacs rubisx"}
+              image={image31}
+              price={65}
+              oldPrice={75}
+              discount={10}
+            />
+          </div>
+          <div className="flex gap-4 cursor-pointer w-[80%] mx-auto mt-12">
+            <Card
+              title={"Silacs rubisx"}
+              image={dress2}
+              price={83}
+              oldPrice={43}
               discount={50}
             />
             <Card
               title={"Silacs rubisx"}
-              image={asset6}
-              price={23}
-              oldPrice={45}
+              image={jean1}
+              price={65}
+              oldPrice={85}
+              discount={40}
+            />
+            <Card
+              title={"Silacs rubisx"}
+              image={image38}
+              price={79}
+              oldPrice={125}
               discount={50}
             />
             <Card
               title={"Silacs rubisx"}
-              image={asset6}
-              price={23}
-              oldPrice={45}
-              discount={50}
+              image={image29}
+              price={26}
+              oldPrice={48}
+              discount={40}
             />
           </div>
           {/* <div className="flex justify-center items-center mt-20">
