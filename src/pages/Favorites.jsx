@@ -12,7 +12,7 @@ import Title from "../components/Ttitle";
 import Card from "../components/Card";
 
 const Favorites = () => {
-  const { currency, cartItems, favoriteItems, updateQuantity, getCartAmount } =
+  const { currency, favoriteItems, updateQuantity, getCartAmount, allAds } =
     useContext(AdContext);
 
   const [cartData, setCardData] = useState([]);
@@ -59,35 +59,24 @@ const Favorites = () => {
           </div>
           <div>
             {cartData.map((item, index) => {
-              const adData = products.find((ad) => ad.id === item.id);
+              const adData = allAds.find((ad) => ad.id === item.id);
               return (
                 <div
                   key={index}
                   className="py-4 border-t border-b grid grid-cols-[4fr_0.5fr_0.5] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4"
                 >
                   <div className="flex items-start gap-6">
-                    <img
-                      src={adData.image[0]}
-                      alt=""
-                      className="w-16 sm:w-20 rounded"
-                    />
                     <div>
-                      <p className="text-xs sm:text-lg font-medium">
-                        {adData.name}
-                      </p>
                       <div className="flex items-center gap-5 mt-2">
-                        <p>
-                          {currency}
-                          {adData.price}
-                        </p>
-                        <p className="px-2 sm:px-3 sm:py-1 border bg-slate-50">
+                        <p className="px-2 sm:px-3 sm:py-1  bg-slate-50">
                           {/* {item.size} */}
                           <Card
                             discount={89}
+                            id={item.id}
                             image={adData.image[0]}
                             oldPrice={90}
                             price={24}
-                            title={item.name}
+                            title={adData.name}
                             key={index}
                           />
                         </p>

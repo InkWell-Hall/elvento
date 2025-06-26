@@ -3,7 +3,7 @@ import { X, Filter, DollarSign, Tag, MapPin } from "lucide-react";
 
 const categories = [
   "All Categories",
-  "Electronics",
+  "Kids",
   "Fashion",
   "Home & Garden",
   "Automotive",

@@ -3,6 +3,8 @@ import { Filter, Grid, List } from "lucide-react";
 import FilterSidebar from "../components/FilterSideBar";
 import Navbar from "../components/Navbar";
 import Card from "../components/Card";
+import { apiClient } from "../api/client";
+import { Link } from "react-router";
 
 const mockAds = [
   {
@@ -81,11 +83,30 @@ const mockAds = [
 ];
 
 export default function Collections() {
+  const [adData, setAdData] = useState([]);
+  const getAllAds = async () => {
+    try {
+      const response = await apiClient.get("/list", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+        },
+      });
+
+      console.log(response.data.products);
+      setAdData(response.data.products || []);
+    } catch (error) {
+      console.error("Error fetching ads:", error);
+      setAdData(mockAds); // fallback to mock data
+    }
+  };
+
   const [showFilters, setShowFilters] = useState(false);
   const [viewMode, setViewMode] = useState("grid");
   const [searchQuery, _setSearchQuery] = useState("");
   const [filters, setFilters] = useState({
     category: "All Categories",
+    subCategory: "topwear",
     priceRange: [0, 100000],
     location: "",
     sortBy: "newest",
@@ -95,10 +116,13 @@ export default function Collections() {
   const handleFiltersChange = (newFilters) => {
     setFilters(newFilters);
   };
+  useEffect(() => {
+    getAllAds();
+  }, []);
 
   useEffect(() => {
     const runFilter = () => {
-      let results = mockAds.filter((ad) => ad.status === "approved");
+      let results = adData;
 
       if (filters.category !== "All Categories") {
         results = results.filter((ad) => ad.category === filters.category);
@@ -123,9 +147,10 @@ export default function Collections() {
 
       setFilteredAds(results);
     };
-
     runFilter();
-  }, [filters, searchQuery]);
+    console.log(filteredAds);
+    console.log(adData);
+  }, [filters, searchQuery, adData]);
 
   return (
     <section>
@@ -199,14 +224,17 @@ export default function Collections() {
               ) : viewMode === "grid" ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filteredAds.map((ad) => (
-                    <Card
-                      key={ad.id}
-                      discount={0}
-                      image={ad.image}
-                      oldPrice={40}
-                      price={ad.price}
-                      title={ad.title}
-                    />
+                    <Link to={`ad/${ad.id}`}>
+                      <Card
+                        key={ad.id}
+                        discount={0}
+                        image={ad.image[0]}
+                        oldPrice={40}
+                        price={ad.price}
+                        title={ad.name}
+                        id={ad.id}
+                      />
+                    </Link>
                   ))}
                 </div>
               ) : (

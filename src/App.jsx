@@ -20,7 +20,9 @@ import AccountSettingsSidebar from "./components/AccountSettingsSidebar";
 import AccountSettings from "./pages/AccountSettings";
 import Terms from "./components/Terms";
 import Privacy from "./components/Privacy";
-import VendorShopPage from "./pages/VendorShopPage";
+import VendorShopPage from "./pages/VendorShop";
+import EditAd from "./pages/EditAd";
+import Women from "./pages/Women";
 
 const router = createBrowserRouter([
   {
@@ -93,15 +95,23 @@ const router = createBrowserRouter([
   },
   {
     path: "/terms",
-    element: <Terms/>,
+    element: <Terms />,
+  },
+  {
+    path: "/edit-ad",
+    element: <EditAd />,
   },
   {
     path: "/privacy",
-    element:<Privacy/>,
+    element: <Privacy />,
   },
   {
     path: "/vendor-shop",
     element: <VendorShopPage />,
+  },
+  {
+    path: "/women",
+    element: <Women />,
   },
   {
     path: "*",

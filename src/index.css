@@ -3,6 +3,7 @@
 
 html {
   scrollbar-width: none;
+  scroll-behavior: smooth;
 }
 @theme {
   --font-lead-font: "BIZ UDPMincho";

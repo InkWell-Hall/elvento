@@ -10,6 +10,7 @@ const AdContextProvider = (props) => {
   const [favoriteItems, setFavoriteItems] = useState({});
   const currency = "$";
   const [userId, setUserId] = useState("");
+  const [allAds, setAllAds] = useState([]);
   const token = localStorage.getItem("ACCESS_TOKEN");
   const delivery_fee = 20;
   // const navigate = useNavigate();
@@ -41,7 +42,7 @@ const AdContextProvider = (props) => {
     if (token) {
       try {
         await apiClient.post(
-          "/cart",
+          "/add",
           { itemId, size, userId },
           {
             headers: {
@@ -116,6 +117,22 @@ const AdContextProvider = (props) => {
   //   }
   // };
 
+  const getAllAds = async () => {
+    try {
+      const response = await apiClient.get("/list", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+        },
+      });
+
+      console.log(response.data.products);
+      setAllAds(response.data.products || []);
+    } catch (error) {
+      console.error("Error fetching ads:", error);
+    }
+  };
+
   const getCartCount = () => {
     let totalCount = 0;
     for (const items in cartItems) {
@@ -173,6 +190,7 @@ const AdContextProvider = (props) => {
     console.log(cartItems);
     console.log(getCartAmount());
     getUserId();
+    getAllAds();
     console.log(token);
   }, [cartItems]);
   const value = {
@@ -190,6 +208,7 @@ const AdContextProvider = (props) => {
     userId,
     setUserId,
     getUserId,
+    allAds,
   };
   return (
     <AdContext.Provider value={value}>{props.children}</AdContext.Provider>

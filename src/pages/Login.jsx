@@ -114,6 +114,7 @@ export default function SignUpForm() {
       setIsLoading(false);
     }
   };
+
   const handleLogin = async () => {
     if (!validateForm()) return;
     setIsLoading(true);
@@ -140,34 +141,6 @@ export default function SignUpForm() {
     } finally {
       setIsLoading(false);
     }
-
-    // try {
-    //   // Simulate API call
-    //   await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    //   if (currentView === "signup") {
-    //     const roleText = formData.role === "Vendor" ? "Vendor" : "Buyer";
-    //     alert(
-    //       `Welcome ${formData.userName}! Your ${roleText} account has been created successfully.`
-    //     );
-    //   } else {
-    //     alert(`Welcome back! Logged in successfully as ${formData.role}.`);
-    //   }
-
-    // Reset form
-    // setFormData({
-    //   userName: "",
-    //   email: "",
-    //   password: "",
-    //   phoneNumber: "",
-    //   confirmPassword: "",
-    //   role: "buyer",
-    //   });
-    // } catch (error) {
-    //   alert("Something went wrong. Please try again.");
-    // } finally {
-    //   setIsLoading(false);
-    // }
   };
 
   const handleKeyPress = (e) => {

@@ -19,10 +19,11 @@ import star from "../assets/star.png";
 import { AdContext } from "../context/AdContext";
 import RelatedAds from "../components/RelatedAds";
 import filled from "../assets/filled.png";
+import { apiClient } from "../api/client";
 
 const ViewAds = () => {
-  const { bookId } = useParams();
-  const { addToCart, addToFavorite, userId } = useContext(AdContext);
+  const { id } = useParams();
+  const { addToCart, addToFavorite, userId, token } = useContext(AdContext);
   const navigate = useNavigate();
   const [image, setImage] = useState("");
   const [adData, setAdData] = useState(null);
@@ -34,14 +35,37 @@ const ViewAds = () => {
     const itemLiked = document.getElementById("liked");
     itemLiked.classList.toggle("bg-black");
   };
+  const getAllAds = () => {
+    apiClient
+      .get("/list", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+        },
+      })
+      .then((response) => {
+        const allAdverts = response.data.products;
+        const advert = allAdverts.find((item) => String(item.id) === id);
+
+        if (advert) {
+          setAdData(advert);
+          const mainImage =
+            advert.image?.[0] ||
+            advert.imageURL?.[0] || // fallback if data uses different key
+            "";
+          setImage(mainImage);
+        } else {
+          console.log("No ad found with ID:", id);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+ 
 
   useEffect(() => {
-    products.map((item, index) => {
-      setAdData(item);
-      setImage(item.image[0]);
-    });
-    // return null;
-    console.log(adData);
+    getAllAds();
+    // getAllAdverts();
   }, []);
 
   console.log(userId);
@@ -53,6 +77,10 @@ const ViewAds = () => {
     // });
     addToFavorite(adData.id);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <Navbar />
@@ -99,7 +127,7 @@ const ViewAds = () => {
           {/* .........Ad Info......... */}
           <div className="flex-1">
             {/* <div className=" flex justify-between"> */}
-            <h1 className="font-medium text-2xl mt-2">Alata</h1>
+            <h1 className="font-medium text-2xl mt-2">{adData?.name}</h1>
             <div className="flex items-center gap-1 mt-2">
               <img src={star} alt="" className="w-5 5" />
               <img src={star} alt="" className="w-5 5" />
@@ -111,12 +139,7 @@ const ViewAds = () => {
 
             <p className="mt-5 text-3xl ">$569</p>
             <p className="mt-5 text-gray-500 md-w-4/5 mb-5">
-              {/* {AdData.description} */}
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem,
-              eius. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Incidunt minima fugiat quam fuga quaerat veritatis alias,
-              molestiae quia. Expedita, veritatis libero non ducimus aliquam
-              labore repellendus asperiores quo recusandae rerum!
+              {adData?.description}
             </p>
             <div className="flex flex-col gap-4 my-8">
               <p className="font-lead-font">Select Size</p>
@@ -274,7 +297,10 @@ const ViewAds = () => {
           </div>
         </div>
       </div>
-      <RelatedAds />
+      <RelatedAds
+        category={adData?.category}
+        // subCategory={bookData.subCategory}
+      />
     </>
   );
 };

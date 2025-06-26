@@ -7,7 +7,7 @@ import axios from "axios";
 import VendorNavbar from "../components/VendorNavbar";
 import { toast } from "react-toastify";
 
-const AddNewAd = () => {
+const EditAd = () => {
   const [image1, setImage1] = useState(false);
   const [image2, setImage2] = useState(false);
   const [image3, setImage3] = useState(false);
@@ -125,39 +125,8 @@ const AddNewAd = () => {
     }
   };
 
-  const getMyAds = async () => {
-    try {
-      const response = await apiClient.get("/allProduct", {
-        headers: {
-          // "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
-        },
-      });
-      console.log(response.data);
-    } catch (error) {
-      console.error("Error fetching ads:", error);
-    }
-  };
-
-  const getAllAdverts = () => {
-    apiClient
-      .get("/allProduct", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
-        },
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   useEffect(() => {
     getAllAds();
-    getMyAds();
-    getAllAdverts();
   }, []);
 
   return (
@@ -382,4 +351,4 @@ const AddNewAd = () => {
   );
 };
 
-export default AddNewAd;
+export default EditAd;
