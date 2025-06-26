@@ -23,6 +23,7 @@ import Privacy from "./components/Privacy";
 import VendorShopPage from "./pages/VendorShop";
 import EditAd from "./pages/EditAd";
 import Women from "./pages/Women";
+import VendorShopPage from "./pages/VendorShop";
 
 const router = createBrowserRouter([
   {
@@ -107,7 +108,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/vendor-shop",
-    element: <VendorShopPage />,
+    element: <VendorShopPage/>,
+  },
+  {
+    path: "/women",
+    element: <Women />,
   },
   {
     path: "/women",

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import Video from "../assets/landingvid.mp4";
 import asset from "../assets/image1.png";
 import asset2 from "../assets/image2.png";
@@ -17,28 +17,20 @@ import { SwiperSlide, Swiper } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { Link } from "react-router";
-import { apiClient } from "../api/client";
-import { AdContext } from "../context/AdContext";
+import dress1 from "../assets/dress1.jpeg";
+import kids1 from "../assets/kids1.jpeg";
+import men2 from "../assets/men2.jpeg";
+import image from "../assets/image.png";
+import beauty from "../assets/beauty1.jpeg"
+
+
 
 // const items = [{ name: "for you", icon:  }, "Item 2", "Item 3"];
 
 const Home = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [active, setActive] = useState("");
-  const { token } = useContext(AdContext);
-  const getAllAds = async () => {
-    const response = await apiClient
-      .get("/single", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
-        },
-      })
-      .then((response) => console.log(response));
-  };
 
-  useEffect(() => {
-    getAllAds();
-  }, []);
   return (
     <>
       <Navbar />
@@ -52,19 +44,27 @@ const Home = () => {
         </div>
         <section className="w-[90%] mx-auto">
           <h1 className="text-2xl font-bold mt-10 ml-15 mb-4">BEST SELLERS</h1>
-          <div className="flex gap-2 slideshow">
-            {[
-              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-              20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
-              36,
-            ].map((item, n) => (
+          <div className="flex gap-2">
               <img
-                src={n % 3 === 0 ? asset : n % 3 === 1 ? asset2 : asset3}
+                src={asset3}
                 alt=""
-                className="w-80"
-                key={item}
+                className="w-75"
               />
-            ))}
+              <img
+                src={asset7}
+                alt=""
+                className="w-75"
+              />
+              <img
+                src={asset}
+                alt=""
+                className="w-75"
+              />
+              <img
+                src={asset2}
+                alt=""
+                className="w-75"
+              />
           </div>
           {/* <img src={asset} alt="" className="w-80" /> */}
         </section>
@@ -80,37 +80,37 @@ const Home = () => {
         </section>
         <section className="flex">
           <div>
-            <h1 className="text-2xl font-bold mt-10 ml-17 mb-4">
+            <h1 className="text-2xl font-bold mt-10 ml-10 mb-4">
               FEATURED PRODUCTS
             </h1>
-            <div className="flex w-[90%] mx-auto text-white gap-4">
+            <div className="flex w-[90%] mx-auto mr-10 text-white gap-3">
               <div className="flex relative">
-                <img src={asset5} alt="" className="w-60 h-65" />
+                <img src={men2} alt="" className="w-60 h-73" />
                 <h1 className="absolute text-2xl font-bold cursor-pointer bottom-5 left-20">
                   VENTO<span className="font-light">MEN</span>
                 </h1>
               </div>
               <div className="flex relative">
-                <img src={asset6} alt="" className="w-60 h-65" />
-                <h1 className="absolute text-2xl cursor-pointer font-bold bottom-5 left-14">
-                  VENTO<span className="font-light">WOMEN</span>
+                <img src={dress1} alt="" className="w-60 h-73" />
+                <h1 className="absolute text-2xl cursor-pointer font-bold bottom-5 left-17">
+                  VENTO<span className="font-light">DOLL</span>
                 </h1>
               </div>
               <div className="flex relative">
-                <img src={asset8} alt="" className="w-60 h-65" />
-                <h1 className="absolute text-2xl cursor-pointer font-bold bottom-5 left-22">
+                <img src={kids1} alt="" className="w-62 h-73" />
+                <h1 className="absolute text-2xl cursor-pointer font-bold bottom-5 left-21">
                   VENTO<span className="font-light">KIDS</span>
                 </h1>
               </div>
               <div className="flex relative">
-                <img src={asset9} alt="" className="w-65 h-65" />
+                <img src={image} alt="" className="w-63 h-73" />
                 <h1 className="absolute text-2xl cursor-pointer font-bold bottom-5 left-16">
                   VENTO<span className="font-light">CURVE</span>
                 </h1>
               </div>
               <div className="flex relative">
-                <img src={asset10} alt="" className="w-60 h-65" />
-                <h1 className="absolute cursor-pointer text-2xl font-bold bottom-5 left-14">
+                <img src={beauty} alt="" className="w-57 h-73" />
+                <h1 className="absolute cursor-pointer text-2xl font-bold bottom-5 left-10">
                   VENTO<span className="font-light">BEAUTY</span>
                 </h1>
               </div>
