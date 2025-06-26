@@ -108,11 +108,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/vendor-shop",
-    element: <VendorShopPage/>,
-  },
-  {
-    path: "/women",
-    element: <Women />,
+    element: <VendorShopPage />,
   },
   {
     path: "/women",
