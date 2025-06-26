@@ -3,6 +3,8 @@ import Sidebar from "../components/Sidebar";
 import VendorNavbar from "../components/VendorNavbar";
 import Card from "../components/Card";
 import { apiClient } from "../api/client";
+import { Link } from "react-router";
+import VendorCard from "../components/VendorCard";
 
 const VendorAds = () => {
   const [vendorAd, setVendorAd] = useState([]);
@@ -37,7 +39,11 @@ const VendorAds = () => {
                 className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 "
                 key={index}
               >
-                <Card id={item.id} title={item.name} image={item.image[0]} />
+                <VendorCard
+                  id={item.id}
+                  title={item.name}
+                  image={item.image[0]}
+                />
               </div>
             );
           })}

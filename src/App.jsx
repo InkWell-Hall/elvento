@@ -104,7 +104,7 @@ const router = createBrowserRouter([
     element: <Terms />,
   },
   {
-    path: "/edit-ad",
+    path: "/edit-ad/:id",
     element: <EditAd />,
   },
   {

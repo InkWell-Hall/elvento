@@ -52,7 +52,7 @@ const Cart = () => {
         <img src={empty} alt="" className="w-80" />
         <h1>Your cart is empty</h1>
 
-        <Link to={"/colections"}>
+        <Link to={"/collections"}>
           <button className="text-[20px] bg-black text-white py-3 px-2 rounded cursor-pointer">
             Go Shopping
           </button>

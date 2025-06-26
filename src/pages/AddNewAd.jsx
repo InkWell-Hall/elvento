@@ -64,7 +64,7 @@ const AddNewAd = () => {
 
       if (response.status === 201) {
         toast.success("Product added successfully!");
-
+        navigate("/vendor-ads");
         // Reset form
         setName("");
         setDescription("");

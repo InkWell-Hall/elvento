@@ -3,6 +3,9 @@ import { AdContext } from "../context/AdContext";
 import CartTotal from "../components/CartTotal";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import stripe_logo from "../assets/stripe_logo.png";
+import razorpay_logo from "../assets/razorpay_logo.png";
+import { apiClient } from "../api/client";
 // import Title from "../component/Title";
 // import CartTotal from "../component/CartTotal";
 // import { assets } from "../assets/assets";
@@ -11,125 +14,136 @@ import Footer from "../components/Footer";
 const PlaceOrder = () => {
   const [method, setMethod] = useState("COD");
   const { navigate } = useContext(AdContext);
-
+  // () => navigate("/orders")
+  const placeOrder = async (event) => {
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData.entries());
+    event.preventDefault();
+    const response = await apiClient
+      .post("/place", data, { headers: { "Content-Type": "application/json" } })
+      .then((response) => console.log(response));
+  };
   return (
     <>
       <Navbar />
-      <div className="w-[80%] mx-auto">
-        <div className="flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t">
-          <div className="flex flex-col gap-4 w-full sm:max-w-[480px]">
-            <div className="text-xl sm:text-2xl my-3">
-              {/* <Title text1={"Delevery"} text2={"INFORMATION"} /> */}
-            </div>
-            <div className="flex gap-3">
+      <form onSubmit={placeOrder}>
+        <div className="w-[80%] mx-auto">
+          <div className="flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t">
+            <div className="flex flex-col gap-4 w-full sm:max-w-[480px]">
+              <div className="text-xl sm:text-2xl my-3">
+                <title text1={"Delevery"} text2={"INFORMATION"} />
+              </div>
+              <div className="flex gap-3">
+                <input
+                  type="text"
+                  className="outline-none border border-gray-300 rounded py-1.5 px-3.5 w-full"
+                  placeholder="First name"
+                />
+                <input
+                  type="text"
+                  className="outline-none border border-gray-300 rounded py-1.5 px-3.5 w-full"
+                  placeholder="Last name"
+                />
+              </div>
               <input
-                type="text"
+                type="email"
                 className="outline-none border border-gray-300 rounded py-1.5 px-3.5 w-full"
-                placeholder="First name"
+                placeholder="Email"
               />
               <input
                 type="text"
                 className="outline-none border border-gray-300 rounded py-1.5 px-3.5 w-full"
-                placeholder="Last name"
+                placeholder="Street"
               />
-            </div>
-            <input
-              type="email"
-              className="outline-none border border-gray-300 rounded py-1.5 px-3.5 w-full"
-              placeholder="Email"
-            />
-            <input
-              type="text"
-              className="outline-none border border-gray-300 rounded py-1.5 px-3.5 w-full"
-              placeholder="Street"
-            />
-            <div className="flex gap-3">
-              <input
-                type="text"
-                className="outline-none border border-gray-300 rounded py-1.5 px-3.5 w-full"
-                placeholder="City"
-              />
-              <input
-                type="text"
-                className="outline-none border border-gray-300 rounded py-1.5 px-3.5 w-full"
-                placeholder="State"
-              />
-            </div>
-            <div className="flex gap-3">
+              <div className="flex gap-3">
+                <input
+                  type="text"
+                  className="outline-none border border-gray-300 rounded py-1.5 px-3.5 w-full"
+                  placeholder="City"
+                />
+                <input
+                  type="text"
+                  className="outline-none border border-gray-300 rounded py-1.5 px-3.5 w-full"
+                  placeholder="State"
+                />
+              </div>
+              <div className="flex gap-3">
+                <input
+                  type="number"
+                  className="outline-none border border-gray-300 rounded py-1.5 px-3.5 w-full"
+                  placeholder="Zipcode"
+                />
+                <input
+                  type="text"
+                  className="outline-none border border-gray-300 rounded py-1.5 px-3.5 w-full"
+                  placeholder="Country"
+                />
+              </div>
               <input
                 type="number"
                 className="outline-none border border-gray-300 rounded py-1.5 px-3.5 w-full"
-                placeholder="Zipcode"
-              />
-              <input
-                type="text"
-                className="outline-none border border-gray-300 rounded py-1.5 px-3.5 w-full"
-                placeholder="Country"
+                placeholder="Phone"
               />
             </div>
-            <input
-              type="number"
-              className="outline-none border border-gray-300 rounded py-1.5 px-3.5 w-full"
-              placeholder="Phone"
-            />
-          </div>
 
-          {/* ..............right side....... */}
-          <div className="mt-8">
-            <div className="mt-8 min-w-80">
-              <CartTotal />
-            </div>
-
-            <div className="mt-12">
-              {/* <Title text1={"PAYMENT"} text2={"METHOD"} /> */}
-              <div className="flex gap-3 flex-col lg:flex-row">
-                <div
-                  onClick={() => setMethod("COD")}
-                  className="flex items-center gap-1 border p-2 cursor-pointer"
-                >
-                  <p
-                    className={`min-w-3.5 h-3.5 border rounded-full ${
-                      method === "COD" ? "bg-green-500" : ""
-                    }`}
-                  ></p>
-                  {/* <img src={assets.stripe_logo} className="h-5 mx-0" alt="" /> */}
-                </div>
-                <div
-                  onClick={() => setMethod("Stripe")}
-                  className="flex items-center gap-1 border p-2 cursor-pointer"
-                >
-                  <p
-                    className={`min-w-3.5 h-3.5 border rounded-full ${
-                      method === "Stripe" ? "bg-green-500" : ""
-                    }`}
-                  ></p>
-                  {/* <img src={assets.stripe_logo} className="h-5 mx-0" alt="" /> */}
-                </div>
-                <div
-                  onClick={() => setMethod("RAZORPAY")}
-                  className="flex items-center gap-1 border p-2 cursor-pointer"
-                >
-                  <p
-                    className={`min-w-3.5 h-3.5 border rounded-full ${
-                      method === "RAZORPAY" ? "bg-green-500" : ""
-                    }`}
-                  ></p>
-                  {/* <img src={assets.stripe_logo} className="h-5 mx-0" alt="" /> */}
-                </div>
+            {/* ..............right side....... */}
+            <div className="mt-8">
+              <div className="mt-8 min-w-80">
+                <CartTotal />
               </div>
 
-              <div className="w-full text-end mt-8">
-                <button
-                  onClick={() => navigate("/orders")}
-                  className="text-white bg-black px-16 py-3 text-sm"
-                >
-                  PLACE ORDER
-                </button>
+              <div className="mt-12">
+                {/* <Title text1={"PAYMENT"} text2={"METHOD"} /> */}
+                <div className="flex gap-3 flex-col lg:flex-row">
+                  <div
+                    onClick={() => setMethod("COD")}
+                    className="flex items-center gap-1 border p-2 cursor-pointer"
+                  >
+                    <p
+                      className={`min-w-3.5 h-3.5 border rounded-full ${
+                        method === "COD" ? "bg-green-500" : ""
+                      }`}
+                    ></p>
+                    {/* <img src={assets.stripe_logo} className="h-5 mx-0" alt="" /> */}
+                    <h1>COD</h1>
+                  </div>
+                  <div
+                    onClick={() => setMethod("Stripe")}
+                    className="flex items-center gap-1 border p-2 cursor-pointer"
+                  >
+                    <p
+                      className={`min-w-3.5 h-3.5 border rounded-full ${
+                        method === "Stripe" ? "bg-green-500" : ""
+                      }`}
+                    ></p>
+                    <img src={stripe_logo} className="h-5 mx-0" alt="" />
+                  </div>
+                  <div
+                    onClick={() => setMethod("RAZORPAY")}
+                    className="flex items-center gap-1 border p-2 cursor-pointer"
+                  >
+                    <p
+                      className={`min-w-3.5 h-3.5 border rounded-full ${
+                        method === "RAZORPAY" ? "bg-green-500" : ""
+                      }`}
+                    ></p>
+                    <img src={razorpay_logo} className="h-5 mx-0" alt="" />
+                  </div>
+                </div>
+
+                <div className="w-full text-end mt-8">
+                  <button
+                    type="submit"
+                    className="text-white bg-black px-16 py-3 text-sm cursor-pointer"
+                  >
+                    PLACE ORDER
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </form>
       <Footer />
     </>
   );
