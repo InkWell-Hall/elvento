@@ -117,7 +117,7 @@ export default function FilterSideBar({
           </div>
 
           {/* Price Range Filter */}
-          <div className="mb-6">
+          {/* <div className="mb-6">
             <div className="flex items-center space-x-2 mb-3">
               <DollarSign className="h-4 w-4 text-gray-600 dark:text-gray-400" />
               <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -144,24 +144,7 @@ export default function FilterSideBar({
             <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
               ${localFilters.priceRange[0]} - ${localFilters.priceRange[1]}
             </div>
-          </div>
-
-          {/* Location Filter */}
-          <div className="mb-6">
-            <div className="flex items-center space-x-2 mb-3">
-              <MapPin className="h-4 w-4 text-gray-600 dark:text-gray-400" />
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Location
-              </label>
-            </div>
-            <input
-              type="text"
-              placeholder="Enter location..."
-              value={localFilters.location}
-              onChange={(e) => handleFilterChange("location", e.target.value)}
-              className="input-field"
-            />
-          </div>
+          </div> */}
 
           {/* Sort By */}
           <div className="mb-6">

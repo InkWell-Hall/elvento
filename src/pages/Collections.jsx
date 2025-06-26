@@ -183,18 +183,7 @@ export default function Collections() {
             <div className="flex-1">
               {/* Results Header */}
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                    {searchQuery
-                      ? `Search Results for "${searchQuery}"`
-                      : "All Ads"}
-                  </h2>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    {filteredAds.length} ads found
-                  </p>
-                </div>
-
-                <div className="flex items-center space-x-2">
+                {/* <div className="flex items-center space-x-2">
                   <button
                     onClick={() => setViewMode("grid")}
                     className={`p-2 rounded-md transition-colors ${
@@ -215,7 +204,7 @@ export default function Collections() {
                   >
                     <List className="h-5 w-5" />
                   </button>
-                </div>
+                </div> */}
               </div>
 
               {/* Ads Display */}
