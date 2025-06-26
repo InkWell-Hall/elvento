@@ -43,6 +43,9 @@ const VendorAds = () => {
                   id={item.id}
                   title={item.name}
                   image={item.image[0]}
+                  price={item.price}
+                  discount={20}
+                  oldPrice={12}
                 />
               </div>
             );

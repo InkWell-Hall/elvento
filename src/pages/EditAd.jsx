@@ -76,8 +76,10 @@ const EditAd = () => {
           console.error("Error fetching ad data:", error);
         });
     }
+  }, [id]); // This will run whenever advert changes
+  useEffect(() => {
     if (advert && advert.length > 0) {
-      const advertData = advert[0]; // Assuming you want the first advert
+      const advertData = advert[0];
       console.log("Populating form with:", advertData);
 
       setName(advertData.name || "");
@@ -94,7 +96,7 @@ const EditAd = () => {
       setOriginalImage3(advertData.image3 || "");
       setOriginalImage4(advertData.image4 || "");
     }
-  }, [advert, id]); // This will run whenever advert changes
+  }, [advert]); // This only runs when advert changes
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -119,13 +121,27 @@ const EditAd = () => {
       const response = await apiClient.patch(`/single/${id}`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json",
         },
       });
       console.log("Update successful:", response.data);
+      console.log("Current form state:", {
+        name,
+        description,
+        category,
+        subCategory,
+        price,
+        bestSeller,
+        size,
+        hasImage1: !!image1,
+        hasImage2: !!image2,
+        hasImage3: !!image3,
+        hasImage4: !!image4,
+      });
       navigate("/vendor-ads");
     } catch (err) {
       console.error("Failed to update ad:", err);
+
       alert("Failed to update ad. Please try again.");
     } finally {
       setLoading(false);
