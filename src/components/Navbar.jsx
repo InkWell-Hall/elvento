@@ -1,18 +1,30 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Heart, LogIn, Search } from "lucide-react";
 import { Menu, X } from "lucide-react";
 import bag from "../assets/bag.svg.svg";
 import sign from "../assets/sign.svg.svg";
 import timer from "../assets/timer.svg.svg";
+import { Link, useNavigate } from "react-router";
+import { AdContext } from "../context/AdContext";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { getCartCount, getFavoriteCount } = useContext(AdContext);
+  const navigate = useNavigate();
+  const determiner = localStorage.getItem("ACCESS_TOKEN");
+  const logOut = () => {
+    localStorage.removeItem("ACCESS_TOKEN");
+    navigate("/");
+  };
   return (
     <nav className="flex flex-wrap justify-between items-center px-4 sm:px-6 lg:px-8 py-4 h-auto relative">
       {/* Logo and Hamburger */}
       <div className="flex items-center justify-between w-full md:w-auto gap-10">
-        <h1 className="text-lg font-bold">Elvento</h1>
+        <Link to={"/"}>
+          <h1 className="text-lg font-lead-font text-lead-text">
+            EL<span className="font-bold">VENTO</span>
+          </h1>
+        </Link>
 
         <div className="relative flex-1 max-w-xs">
           <input
@@ -114,13 +126,41 @@ export default function Navbar() {
         {/* <img src={bag} alt="bag" />
         <img src={timer} alt="timer" /> */}
         <img src={sign} alt="sign in" />
-        <Heart />
-        <img src={bag} alt="bag duplicate" />
+        <div className="relative">
+          <Link to={"/favorites"}>
+            <Heart />
+            <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
+              {getFavoriteCount()}
+            </p>
+          </Link>
+        </div>
+        <div className="relative">
+          <Link to={"/cart"}>
+            <img src={bag} alt="bag duplicate" />
+            <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
+              {getCartCount()}
+            </p>
+          </Link>
+        </div>
         {/* <LogIn/> */}
       </div>
-      <button className="bg-black hover:bg-gray-400 text-white font-semibold py-2 px-4 rounded-xl shadow-md transition duration-300 items-center cursor-pointer">
-        Login
-      </button>
+      {/* <Link to={"/login"}> */}
+      <div>
+        {determiner ? (
+          <button
+            onClick={logOut}
+            className="bg-black hover:bg-gray-400 text-white font-semibold py-2 px-4 rounded-xl shadow-md transition duration-300 items-center cursor-pointer"
+          >
+            LogOut
+          </button>
+        ) : (
+          <Link to={"/login"}>
+            <button className="bg-black hover:bg-gray-400 text-white font-semibold py-2 px-4 rounded-xl shadow-md transition duration-300 items-center cursor-pointer">
+              Login
+            </button>
+          </Link>
+        )}
+      </div>
     </nav>
   );
 }

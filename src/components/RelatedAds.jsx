@@ -1,55 +1,67 @@
-import React, { use, useContext, useEffect, useState } from "react";
-import { AdContext } from "../context/AdContext";
+import React, { useContext, useEffect, useState } from "react";
+// import ProductsItems from "./ProductsItems";
 import { Link, useParams } from "react-router";
-import Card from "./Card";
-// import BookItem from "./BookItem";
-// import { useParams } from "react-router";
-// import { apiClient } from "../api/client";
+import { AdContext } from "../context/AdContext";
+import Title from "../components/Ttitle";
+import Card from "../components/Card";
 
-const RelatedAds = ({ category, subCategory }) => {
+const RelatedProducts = ({ category }) => {
   const { allAds } = useContext(AdContext);
+  const { productId } = useParams();
+  const [productData, setProductData] = useState(false);
+  const [image, setImage] = useState("");
+
+  const fetchProductData = async () => {
+    allAds.map((item) => {
+      if (item._id === productId) {
+        setProductData(item);
+        setImage(item.image[0]);
+        return null;
+      }
+    });
+  };
+  useEffect(() => {
+    fetchProductData();
+  }, [productId, allAds]);
+
   const [related, setRelated] = useState([]);
-  const { id } = useParams();
-  console.log(allAds);
 
   useEffect(() => {
-    if (allAds.length && category) {
-      const relatedBooks = allAds.filter(
-        (item) =>
-          item.id !== id && // exclude current book
-          item.category?.toLowerCase() === category.toLowerCase()
-      );
-      setRelated(relatedBooks.slice(0, 5));
+    if (allAds.length > 0) {
+      let productsCopy = allAds.slice();
+
+      productsCopy = productsCopy.filter((item) => category === item.category);
+
+      // productsCopy = productsCopy.filter(
+      //   (item) => subCategory === item.subCategory
+      // );
+
+      setRelated(productsCopy.slice(0, 5));
     }
-  }, [allAds, category, id]);
+  }, [allAds]);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    // window.location.reload();
-  }, [id]);
+  // Scroll to top when a new product is clicked
 
   return (
     <div className="my-24">
       <div className="text-center text-3xl py-2">
-        <h1>RELATED PRODUCTS</h1>
+        <Title text1={"RELATED"} text2={"PRODUCTS"} />
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 gap-y-6 w-[90%] mx-auto">
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
         {related.map((item, index) => (
-          <Link to={`/ad/${item.id}`} key={item.id}>
-            <Card
-              title={item.name}
-              id={item.id}
-              image={item.image[0]}
-              // author={item.author}
-              oldPrice={20}
-              discount={90}
-              key={index}
-            />
-          </Link>
+          <Card
+            onClick={() => setImage(item)}
+            key={index}
+            name={item.name}
+            id={item.id}
+            image={item.image[0]}
+            price={item.price}
+          />
         ))}
       </div>
     </div>
   );
 };
 
-export default RelatedAds;
+export default RelatedProducts;

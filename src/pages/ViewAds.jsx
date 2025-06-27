@@ -61,12 +61,11 @@ const ViewAds = () => {
         console.log(error);
       });
   };
- 
 
   useEffect(() => {
     getAllAds();
     // getAllAdverts();
-  }, []);
+  }, [id]);
 
   // console.log(userId);
 
@@ -80,7 +79,7 @@ const ViewAds = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [id]);
   return (
     <>
       <Navbar />
@@ -158,7 +157,9 @@ const ViewAds = () => {
               </div>
             </div>
             <div className="flex items-center gap-3.5">
-              <Store onClick={() => addToFavorite(adData.id)} />
+              <Link to={"/vendor-shop"}>
+                <Store />
+              </Link>
 
               <button
                 onClick={() => addToCart(adData.id, size)}

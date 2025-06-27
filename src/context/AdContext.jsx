@@ -19,6 +19,8 @@ const AdContextProvider = (props) => {
     if (!size) {
       toast.error("Select Product Size");
       return;
+    } else {
+      toast.success("Product Added to Cart");
     }
     const storedUserId = localStorage.getItem("USER_ID");
 
@@ -45,23 +47,23 @@ const AdContextProvider = (props) => {
     // }
     setCartItems(cartData);
 
-    if (token) {
-      try {
-        await apiClient.post(
-          "/cart/add",
-          { itemId, size, userId: storedUserId },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
-            },
-          }
-        );
-        toast.success("Product Added to Cart");
-      } catch (error) {
-        console.log(error);
-        toast.error(error.message);
-      }
-    }
+    // if (token) {
+    //   try {
+    //     await apiClient.post(
+    //       "/cart/add",
+    //       { itemId, size, userId: storedUserId },
+    //       {
+    //         headers: {
+    //           Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+    //         },
+    //       }
+    //     );
+    //     toast.success("Product Added to Cart");
+    //   } catch (error) {
+    //     console.log(error);
+    //     toast.error(error.message);
+    //   }
+    // }
   };
 
   // const getUserId = () => {

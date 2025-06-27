@@ -26,7 +26,7 @@ const Card = ({ title, price, oldPrice, discount, image, id }) => {
         <div><Heart className="text-black" /></div>
       </div> */}
 
-      <div className=" w-65 bg-white">
+      <div className=" w-65 bg-white p-5">
         <Link to={`/ad/${id}`}>
           {" "}
           <div>
