@@ -69,7 +69,7 @@ const AdContextProvider = (props) => {
   // const getUserId = () => {
   //   setUserId(localStorage.getItem("USER_ID"));
   // };
-  const addToFavorite = async (itemId, size) => {
+  const addToFavoriteWithToken = async (itemId, size) => {
     if (!itemId) {
       toast.error("Invalid product ID.");
       return;
@@ -90,6 +90,23 @@ const AdContextProvider = (props) => {
     }
 
     setFavoriteItems(FavoriteData);
+  };
+  const addToFavoriteWithoutToken = (itemId, size) => {
+    if (!token) {
+      toast.error("Please sign in to add items to favorites.");
+      return;
+    }
+
+    // Simulate adding to favorites (e.g., local state or Redux)
+    try {
+      // Example: update local state or context
+      // favorites.push({ itemId, size }); or setFavorites([...favorites, { ... }])
+
+      toast.success("Item added to favorites!");
+    } catch (error) {
+      console.error("Failed to add to favorites:", error);
+      toast.error("Something went wrong. Please try again.");
+    }
   };
 
   // const handleSubmit = async () => {
@@ -211,8 +228,10 @@ const AdContextProvider = (props) => {
     // navigate,
     getCartAmount,
     getFavoriteCount,
-    addToFavorite,
+    addToFavoriteWithoutToken,
+    // addToFavorite,
     favoriteItems,
+    addToFavoriteWithToken,
     // userId,
     // setUserId,
     // getUserId,

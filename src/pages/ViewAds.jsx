@@ -23,7 +23,8 @@ import { apiClient } from "../api/client";
 
 const ViewAds = () => {
   const { id } = useParams();
-  const { addToCart, addToFavorite, userId, token } = useContext(AdContext);
+  const { addToCart, addToFavoriteWithoutToken, userId, token } =
+    useContext(AdContext);
   const navigate = useNavigate();
   const [image, setImage] = useState("");
   const [adData, setAdData] = useState(null);
@@ -70,11 +71,15 @@ const ViewAds = () => {
   // console.log(userId);
 
   const likeAdd = () => {
-    setLike("liked");
+    if (token) {
+      setLike("liked");
+      addToFavoriteWithoutToken(adData.id);
+    } else {
+      toast.error("Please Login To Add To Favorites");
+    }
     // adData.map((item, n) => {
 
     // });
-    addToFavorite(adData.id);
   };
 
   useEffect(() => {

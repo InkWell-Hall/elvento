@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
 import { Heart, LogIn, Search } from "lucide-react";
 import { Menu, X } from "lucide-react";
-import bag from "../assets/bag.svg.svg";
+import bag from "../assets/Bag.svg.svg";
 import sign from "../assets/sign.svg.svg";
 import timer from "../assets/timer.svg.svg";
 import { Link, useNavigate } from "react-router";
 import { AdContext } from "../context/AdContext";
+import { toast } from "react-toastify";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +16,21 @@ export default function Navbar() {
   const logOut = () => {
     localStorage.removeItem("ACCESS_TOKEN");
     navigate("/");
+  };
+
+  const preventFav = () => {
+    if (determiner) {
+      navigate("/favorites");
+    } else {
+      toast.error("Please log In to View Favorites");
+    }
+  };
+  const preventCart = () => {
+    if (determiner) {
+      navigate("/cart");
+    } else {
+      toast.error("Please log In to View Favorites");
+    }
   };
   return (
     <nav className="flex flex-wrap justify-between items-center px-4 sm:px-6 lg:px-8 py-4 h-auto relative">
@@ -127,7 +143,7 @@ export default function Navbar() {
         <img src={timer} alt="timer" /> */}
         <img src={sign} alt="sign in" />
         <div className="relative">
-          <Link to={"/favorites"}>
+          <Link onClick={preventFav}>
             <Heart />
             <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
               {getFavoriteCount()}
@@ -135,7 +151,7 @@ export default function Navbar() {
           </Link>
         </div>
         <div className="relative">
-          <Link to={"/cart"}>
+          <Link onClick={preventCart}>
             <img src={bag} alt="bag duplicate" />
             <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
               {getCartCount()}

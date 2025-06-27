@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import { apiClient } from "../api/client";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 export default function SignUpForm() {
   const [formData, setFormData] = useState({
@@ -110,13 +111,12 @@ export default function SignUpForm() {
       });
     } catch (error) {
       console.log(error);
+      toast.error(error.message);
     } finally {
       setIsLoading(false);
     }
   };
 
-
-  
   const handleLogin = async () => {
     if (!validateForm()) return;
     setIsLoading(true);
@@ -140,6 +140,7 @@ export default function SignUpForm() {
       }
     } catch (error) {
       console.log(error);
+      toast.error(error.response.data.message);
     } finally {
       setIsLoading(false);
     }
