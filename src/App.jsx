@@ -28,6 +28,7 @@ import VendorShopPage from "./pages/VendorShop";
 import VendorAds from "./pages/VendorAds";
 import VendorAdvert from "./pages/VendorAdvert";
 import Curve from "./pages/Curve";
+import Beauty from "./pages/Beauty";
 
 const router = createBrowserRouter([
   {
@@ -133,6 +134,10 @@ const router = createBrowserRouter([
   {
     path: "/men",
     element: <Men />,
+  },
+  {
+    path:"beauty",
+    element:<Beauty />
   },
   {
     path: "*",

@@ -56,7 +56,7 @@ const ChartBox = ({ users }) => {
           <span>Total Number of Sales</span>
         </div>
         <div>
-          <h1 className="text-green-700">{users}</h1>
+          <h1 className="text-[#2C2C2C]">{users}</h1>
           <Link to={"#"} className="text-xs font-bold underline text-blue-600">
             View All
           </Link>
@@ -74,7 +74,7 @@ const ChartBox = ({ users }) => {
               <Line
                 type="monotone"
                 dataKey="pv"
-                stroke="orange"
+                stroke="#5C3C66"
                 strokeWidth={2}
                 dot={false}
               />

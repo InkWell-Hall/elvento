@@ -46,13 +46,13 @@ const VendorProfile = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="min-h-screen w-490 md:ml-50 bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="min-h-screen w-490 md:ml-50 bg-[#E7EFC7]">
         {/* <Navbar /> */}
-        <nav className=" flex justify-between items-center bg-white fixed w-280 right-0 vendnav h-15">
+        <nav className=" flex justify-between items-center text-black bg-black/40 backdrop:blur-2xl  fixed w-282 right-0 vendnav h-15">
           <div className="realtive ml-5">
             <input
               type="text"
-              className="w-full border border-gray-800 pl-7 rounded-2xl py-1 outline-none font-bold font-lead-font "
+              className="w-full border border-white pl-7 rounded-2xl py-1 outline-none font-bold font-lead-font "
               placeholder="search"
             />
             <Search className="absolute top-5 ml-2" size={18} />
@@ -61,14 +61,14 @@ const VendorProfile = () => {
           <div className="flex gap-6 justify-between items-center">
             <div className="flex bg-gray-50 px-2 py-2 rounded-full relative border border-blue-950 cursor-pointer">
               <Bell />
-              <span className=" absolute right-2 bg-orange-500 text-orange-500 w-2 h-2 rounded-full"></span>
+              <span className=" absolute right-2 bg-yellow-700 text-orange-500 w-2 h-2 rounded-full"></span>
             </div>
-            <span className="bg-[#4b6382] text-white py-3 px-3 font-lead-font font-bold rounded-full">
+            <span className="bg-black text-white py-3 px-3 font-lead-font font-bold rounded-full">
               MC
             </span>
             <div className="flex mr-4">
-              <h1>Admin</h1>
-              <ChevronDown className="cursor-pointer" />
+              <h1 className="font-bold vendortag1 text-white ">Vendor</h1>
+            <ChevronDown className="cursor-pointer font-bold mt-0.5"color="white" />
             </div>
           </div>
         </nav>
@@ -104,7 +104,7 @@ const ProfileView = ({ vendorData, onEditClick }) => {
         {/* Profile Card */}
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
           {/* Header Section */}
-          <div className="bg-[#4b6382] p-6 md:p-8">
+          <div className="bg-yellow-700 p-6 md:p-8">
             <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
               <div className="w-24 h-24 md:w-32 md:h-32 bg-white rounded-full flex items-center justify-center shadow-lg">
                 <User
@@ -129,7 +129,7 @@ const ProfileView = ({ vendorData, onEditClick }) => {
               {/* Phone Number */}
               <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
                 <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-6 h-6 text-blue-600" />
+                  <Phone className="w-6 h-6 text-[#23723b]" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <h3 className="font-semibold text-gray-800 mb-1">
@@ -144,7 +144,7 @@ const ProfileView = ({ vendorData, onEditClick }) => {
               {/* Account Number */}
               <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
                 <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <CreditCard className="w-6 h-6 text-green-600" />
+                  <CreditCard className="w-6 h-6 text-[#da6691]" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <h3 className="font-semibold text-gray-800 mb-1">
@@ -159,7 +159,7 @@ const ProfileView = ({ vendorData, onEditClick }) => {
               {/* Email */}
               <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
                 <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <CreditCard className="w-6 h-6 text-green-600" />
+                  <CreditCard className="w-6 h-6 text-[#a85dda]" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <h3 className="font-semibold text-gray-800 mb-1">Email</h3>
@@ -171,7 +171,7 @@ const ProfileView = ({ vendorData, onEditClick }) => {
               <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
                 <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
                   {/* <CreditCard className="w-6 h-6 text-green-600" /> */}
-                  <Mail className="w-6 h-6 text-green-600" />
+                  <Mail className="w-6 h-6 text-[#b33813]" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <h3 className="font-semibold text-gray-800 mb-1">Email</h3>
@@ -184,7 +184,7 @@ const ProfileView = ({ vendorData, onEditClick }) => {
             <div className="mb-8">
               <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
                 <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <FileText className="w-6 h-6 text-purple-600" />
+                  <FileText className="w-6 h-6 text-[#8d5609]" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <h3 className="font-semibold text-gray-800 mb-2">
@@ -201,7 +201,7 @@ const ProfileView = ({ vendorData, onEditClick }) => {
             <div className="text-center">
               <button
                 onClick={onEditClick}
-                className="inline-flex items-center gap-2 bg-[#4b6382] text-white px-8 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                className="inline-flex items-center gap-2 bg-yellow-700 text-white px-8 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
                 <Edit3 className="w-5 h-5" />
                 Edit Profile
@@ -391,7 +391,7 @@ const ProfileEdit = ({ vendorData, onSave, onCancel }) => {
             <button
               onClick={handleSave}
               disabled={isLoading}
-              className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-yellow-700 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
               {isLoading ? (
                 <>

@@ -116,7 +116,7 @@ const AddNewAd = () => {
       const response = await apiClient.get("/list", {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+          Authorization:` Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
         },
       });
       console.log(response.data);
@@ -130,7 +130,7 @@ const AddNewAd = () => {
       const response = await apiClient.get("/allProduct", {
         headers: {
           // "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+          Authorization:` Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
         },
       });
       console.log(response.data);
@@ -143,7 +143,7 @@ const AddNewAd = () => {
     apiClient
       .get("/allProduct", {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+          Authorization:`Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
         },
       })
       .then((response) => {
@@ -162,16 +162,16 @@ const AddNewAd = () => {
 
   return (
     <>
-      <div className="home flex-col md:flex min-h-screen overflow-x-hidden ">
+      <div className="home flex-col md:flex bg-[#E7EFC7] min-h-screen overflow-x-hidden ">
         <Sidebar />
         <div>
           <VendorNavbar />
           <div className="lg:ml-50 ml-0 md:ml-30 mt-20">
             <form
               onSubmit={postAd}
-              className="flex flex-col items-center w-full max-w-3xl gap-4 md:ml-50 rounded-2xl m-4 bg-gray-200"
+              className="flex flex-col items-center w-full max-w-3xl gap-4 md:ml-50 rounded-2xl m-4 bg-white"
             >
-              <div className="bg-gray-800 text-white rounded add w-full text-center font-lead-font text-lead-text h-40 flex justify-center items-center">
+              <div className="bg-yellow-700 text-white rounded add w-full text-center font-lead-font text-lead-text h-40 flex justify-center items-center">
                 <h1>Post New Ad</h1>
               </div>
 
@@ -246,7 +246,7 @@ const AddNewAd = () => {
                 <input
                   type="text"
                   placeholder="type here"
-                  className="w-full max-w-[500px] px-3 py-2 border border-gray-800 rounded-[5px] outline-none"
+                  className="w-full max-w-[500px] px-3 py-2 border border-yellow-700 rounded-[5px] outline-none"
                   required
                   onChange={(e) => setName(e.target.value)}
                   value={name}
@@ -275,12 +275,16 @@ const AddNewAd = () => {
                   <select
                     onChange={(e) => setCategory(e.target.value)}
                     value={category}
-                    className="w-full px-3 py-2 border p-2 outline-none rounded-[5px]"
+                    className="w-full px-3 py-2 border border-yellow-700 p-2 outline-none rounded-[5px]"
                     required
                   >
                     <option value="Men">Men</option>
                     <option value="Women">Women</option>
                     <option value="kids">Kids</option>
+                    <option value="Curve">Curve</option>
+                    <option value="Beauty">Beauty</option>
+                    
+
                   </select>
                 </div>
 
@@ -289,7 +293,7 @@ const AddNewAd = () => {
                     Sub Category
                   </p>
                   <select
-                    className="w-full px-3 py-2 border outline-none rounded-[5px]"
+                    className="w-full px-3 py-2 border border-yellow-700 outline-none rounded-[5px]"
                     onChange={(e) => setSubCategory(e.target.value)}
                     value={subCategory}
                     required
@@ -297,6 +301,7 @@ const AddNewAd = () => {
                     <option value="topwear">Topwear</option>
                     <option value="bottomwear">Bottomwear</option>
                     <option value="winterwear">Winterwear</option>
+                    <option value="Dress">Dress</option>
                   </select>
                 </div>
 
@@ -361,14 +366,14 @@ const AddNewAd = () => {
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="w-28 py-3 mt-4 bg-[#4b6382] text-white rounded font-bold cursor-pointer"
+                  className="w-28 py-3 mt-4 bg-yellow-700 text-white rounded font-bold cursor-pointer"
                   disabled={loading}
                 >
                   CLEAR
                 </button>
                 <button
                   type="submit"
-                  className="w-28 py-3 mt-4 bg-[#4b6382] text-white rounded font-bold cursor-pointer disabled:opacity-50"
+                  className="w-28 py-3 mt-4 bg-yellow-700 text-white rounded font-bold cursor-pointer disabled:opacity-50"
                   disabled={loading}
                 >
                   {loading ? "ADDING..." : "ADD"}

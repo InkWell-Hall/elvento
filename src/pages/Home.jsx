@@ -53,7 +53,7 @@ const Home = () => {
           </Link>
         </div>
         <section className="w-[90%] mx-auto">
-          <h1 className="text-2xl font-bold mt-10 ml-15 mb-4">BEST SELLERS</h1>
+          <h1 className="text-2xl font-bold mt-10 ml-15 mb-4 font-lead-font">BEST SELLERS</h1>
           <div className="flex gap-2">
             <img src={asset3} alt="" className="w-75" />
             <img src={asset7} alt="" className="w-75" />
@@ -74,7 +74,7 @@ const Home = () => {
         </section>
         <section className="flex">
           <div>
-            <h1 className="text-2xl font-bold mt-10 ml-10 mb-4">
+            <h1 className="text-2xl font-bold mt-10 ml-10 mb-4 font-lead-font">
               FEATURED PRODUCTS
             </h1>
             <div className="flex w-[90%] mx-auto mr-10 cursor-pointer text-white gap-3">
