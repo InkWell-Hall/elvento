@@ -2,6 +2,7 @@ import { Link, useNavigate, useParams } from "react-router";
 import React, { useContext, useEffect, useState } from "react";
 import {
   ArrowBigLeft,
+  Coins,
   Delete,
   DeleteIcon,
   Edit,
@@ -23,8 +24,12 @@ import { apiClient } from "../api/client";
 
 const ViewAds = () => {
   const { id } = useParams();
-  const { addToCart, addToFavoriteWithoutToken, userId, token } =
-    useContext(AdContext);
+  const {
+    addToCart,
+    addToFavoriteWithoutToken,
+    addToFavoriteWithToken,
+    userId,
+  } = useContext(AdContext);
   const navigate = useNavigate();
   const [image, setImage] = useState("");
   const [adData, setAdData] = useState(null);
@@ -36,6 +41,8 @@ const ViewAds = () => {
     const itemLiked = document.getElementById("liked");
     itemLiked.classList.toggle("bg-black");
   };
+
+  const token = localStorage.getItem("ACCESS_TOKEN");
   const getAllAds = () => {
     apiClient
       .get("/list", {
@@ -71,11 +78,13 @@ const ViewAds = () => {
   // console.log(userId);
 
   const likeAdd = () => {
-    if (token) {
-      setLike("liked");
+    if (!token) {
       addToFavoriteWithoutToken(adData.id);
-    } else {
-      toast.error("Please Login To Add To Favorites");
+    } else if (token) {
+      addToFavoriteWithToken(adData.id);
+      setLike("liked");
+
+      // toast.error("Please Login To Add To Favorites");
     }
     // adData.map((item, n) => {
 

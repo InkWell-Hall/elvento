@@ -8,14 +8,16 @@ import { Link, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import empty from "../assets/emptytCart.jpg";
 import { apiClient } from "../api/client";
+import Title from "../components/Ttitle";
+import Card from "../components/Card";
 
 const Cart = () => {
-  const { currency, cartItems, updateQuantity, getCartAmount } =
+  const { currency, cartItems, updateQuantity, getCartAmount, allAds } =
     useContext(AdContext);
 
   const [cartData, setCartData] = useState([]);
   const [productsData, setProductsData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const verifyOrder = () => {
@@ -27,37 +29,56 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    const tempData = [];
-    for (const items in cartItems) {
-      for (const item in cartItems[items]) {
-        if (cartItems[items][item] > 0) {
-          tempData.push({
-            id: items,
-            size: item,
-            quantity: cartItems[items][item],
-          });
+    if (allAds.length > 0) {
+      const tempData = [];
+      for (const items in cartItems) {
+        for (const item in cartItems[items]) {
+          if (cartItems[items][item] > 0) {
+            tempData.push({
+              id: items,
+              size: item,
+              quantity: cartItems[items][item],
+            });
+          }
         }
       }
+      setCartData(tempData);
     }
-    setCartData(tempData);
-  }, [cartItems]);
-
-  // Process cart items into displayable format
+  }, [cartItems, allAds]);
+  console.log(cartData);
   useEffect(() => {
-    const tempData = [];
-    for (const itemId in cartItems) {
-      for (const size in cartItems[itemId]) {
-        if (cartItems[itemId][size] > 0) {
-          tempData.push({
-            id: itemId,
-            size: size,
-            quantity: cartItems[itemId][size],
-          });
-        }
-      }
+    getCartAmount();
+  }, []);
+
+  const deleteUserCart = async () => {
+    try {
+      const response = await apiClient
+        .delete(`/delete/${cartData[0].id}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+          },
+        })
+        .then((response) => console.log(response), window.location.reload());
+    } catch (error) {
+      console.log(error.message);
     }
-    setCartData(tempData);
-  }, [cartItems]);
+  };
+  // Process cart items into displayable format
+  // useEffect(() => {
+  //   const tempData = [];
+  //   for (const itemId in cartItems) {
+  //     for (const size in cartItems[itemId]) {
+  //       if (cartItems[itemId][size] > 0) {
+  //         tempData.push({
+  //           id: itemId,
+  //           size: size,
+  //           quantity: cartItems[itemId][size],
+  //         });
+  //       }
+  //     }
+  //   }
+  //   setCartData(tempData);
+  // }, [cartItems]);
 
   // Debug logs
   useEffect(() => {
@@ -96,17 +117,17 @@ const Cart = () => {
     </div>
   ) : (
     <>
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col bg-rebecca min-h-screen">
         <Navbar />
         <div className="border-t pt-14 w-[80%] mx-auto mt-4">
           <div className="text-2xl mb-3">
             <h1 className="font-lead-font text-lead-text font-light">
-              <Title text1={"YOUR"} text2={"FAVORITES"} />
+              <Title text1={"YOUR"} text2={"CART"} />
             </h1>
           </div>
           <div>
-            {cartData.map((item, index) => {
-              const adData = allAds.find((ad) => ad.id === item.id);
+            {cartData?.map((item, index) => {
+              const adData = allAds?.find((ad) => ad.id === item.id);
               return (
                 <div
                   key={index}
@@ -145,24 +166,19 @@ const Cart = () => {
                           )
                     }
                   />
-                  <Trash2
-                    className="cursor-pointer"
-                    onClick={() => {
-                      updateQuantity(item.id, item.size, 0);
-                    }}
-                  />
+                  <Trash2 className="cursor-pointer" onClick={deleteUserCart} />
                 </div>
               );
             })}
           </div>
         </div>
-        <div className="flex justify-end my-20">
+        <div className="flex justify-end my-20 mx-5">
           <div className="w-full sm:w-[450px]">
             <CartTotal />
             <div className="w-full text-end">
               <button
-                onClick={() => checker()}
-                className="bg-black text-white text-sm my-8 px-8 py-3 active:bg-gray-700"
+                onClick={() => verifyOrder()}
+                className="bg-black cursor-pointer text-white text-sm my-8 px-8 py-3 active:bg-gray-700"
               >
                 PROCEED TO CHECKOUT
               </button>

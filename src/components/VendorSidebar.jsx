@@ -15,7 +15,7 @@ const VendorSidebar = ({ links = [], title = "Menu" }) => {
       </button>
 
       {/* Desktop sidebar (static layout) */}
-      <div className="hidden md:block w-64 bg-gray-800 text-white h-screen">
+      <div className="hidden md:block w-64 bg-[#dfbac0] text-white h-screen">
         <div className="p-6 text-2xl font-bold border-b border-gray-700">
           {title}
         </div>

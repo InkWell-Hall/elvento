@@ -78,7 +78,7 @@ export default function SignUpForm() {
     setFormData((prev) => ({
       ...prev,
       role: role,
-      phone: role === "Buyer" ? "" : prev.phone, // Clear phone if switching to buyer
+      // phoneNumber: role === "Buyer" ? "" : prev.phoneNumber,
     }));
     setErrors({});
   };
@@ -95,6 +95,7 @@ export default function SignUpForm() {
       console.log(response);
       localStorage.setItem("ACCESS_TOKEN", response.data.token);
       localStorage.setItem("USER_ID", response.data.user.id);
+      toast.success("Account Created Successfully");
       if (formData.role === "Vendor") {
         navigate("/vendor-dashboard");
       } else {
@@ -111,7 +112,8 @@ export default function SignUpForm() {
       });
     } catch (error) {
       console.log(error);
-      toast.error(error.message);
+      // toast.error(error.message);
+      toast.error(error.response.data.error.details[0].message);
     } finally {
       setIsLoading(false);
     }
@@ -125,6 +127,7 @@ export default function SignUpForm() {
       console.log(response);
       localStorage.setItem("ACCESS_TOKEN", response.data.token);
       navigate("/");
+      toast.success("Account Created Successfully");
       setFormData({
         userName: "",
         email: "",
@@ -159,7 +162,7 @@ export default function SignUpForm() {
       userName: "",
       email: "",
       password: "",
-      phone: "",
+      phoneNumber: "",
       role: "buyer",
     });
   };

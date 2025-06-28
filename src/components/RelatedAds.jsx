@@ -38,7 +38,7 @@ const RelatedProducts = ({ category }) => {
 
       setRelated(productsCopy.slice(0, 5));
     }
-  }, [allAds]);
+  }, [allAds, productId]);
 
   // Scroll to top when a new product is clicked
 

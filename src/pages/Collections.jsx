@@ -6,82 +6,6 @@ import Card from "../components/Card";
 import { apiClient } from "../api/client";
 import { Link } from "react-router";
 
-const mockAds = [
-  {
-    id: 1,
-    title: "iPhone 13 Pro",
-    category: "Phones",
-    location: "Accra",
-    price: 7000,
-    status: "approved",
-    image:
-      "https://img.freepik.com/free-photo/smiling-couple-viewing-pictures-camera_53876-14440.jpg",
-    vendorName: "GadgetHub",
-    createdAt: "2024-06-01T10:00:00Z",
-  },
-  {
-    id: 2,
-    title: "Dell XPS 13",
-    category: "Laptops",
-    location: "Kumasi",
-    price: 9000,
-    status: "approved",
-    image:
-      "https://img.freepik.com/free-photo/smiling-couple-viewing-pictures-camera_53876-14440.jpg",
-    vendorName: "TechStore",
-    createdAt: "2024-06-03T12:00:00Z",
-  },
-  {
-    id: 3,
-    title: "Samsung Galaxy S22",
-    category: "Phones",
-    location: "Takoradi",
-    price: 6000,
-    status: "approved",
-    image:
-      "https://img.freepik.com/free-photo/smiling-couple-viewing-pictures-camera_53876-14440.jpg",
-    vendorName: "Mobiles Ghana",
-    createdAt: "2024-06-05T15:00:00Z",
-  },
-  {
-    id: 4,
-    title: "Used Toyota Corolla",
-    category: "Vehicles",
-    location: "Accra",
-    price: 45000,
-    status: "approved",
-    image:
-      "https://img.freepik.com/free-photo/smiling-couple-viewing-pictures-camera_53876-14440.jpg",
-    vendorName: "Car Dealer",
-    createdAt: "2024-06-02T09:00:00Z",
-  },
-  {
-    id: 5,
-    title: "Used Toyota Corolla",
-    category: "Vehicles",
-    location: "Accra",
-    price: 45000,
-    status: "approved",
-    image:
-      "https://img.freepik.com/free-photo/smiling-couple-viewing-pictures-camera_53876-14440.jpg",
-    vendorName: "Car Dealer",
-    createdAt: "2024-06-02T09:00:00Z",
-  },
-  {
-    id: 6,
-    title: "Used Toyota Corolla",
-    category: "Vehicles",
-    location: "Accra",
-    price: 45000,
-    status: "approved",
-    image:
-      "https://img.freepik.com/free-photo/smiling-couple-viewing-pictures-camera_53876-14440.jpg",
-    vendorName: "Car Dealer",
-    createdAt: "2024-06-02T09:00:00Z",
-  },
-  // ... repeat for others
-];
-
 export default function Collections() {
   const [adData, setAdData] = useState([]);
   const getAllAds = async () => {
@@ -148,8 +72,8 @@ export default function Collections() {
       setFilteredAds(results);
     };
     runFilter();
-    console.log(filteredAds);
-    console.log(adData);
+    console.log("filtered ads", filteredAds);
+    console.log("Ads Data:", adData);
   }, [filters, searchQuery, adData]);
 
   return (
@@ -182,30 +106,7 @@ export default function Collections() {
             {/* Ads Grid */}
             <div className="flex-1">
               {/* Results Header */}
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-                {/* <div className="flex items-center space-x-2">
-                  <button
-                    onClick={() => setViewMode("grid")}
-                    className={`p-2 rounded-md transition-colors ${
-                      viewMode === "grid"
-                        ? "bg-blue-100 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400"
-                        : "text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                    }`}
-                  >
-                    <Grid className="h-5 w-5" />
-                  </button>
-                  <button
-                    onClick={() => setViewMode("list")}
-                    className={`p-2 rounded-md transition-colors ${
-                      viewMode === "list"
-                        ? "bg-blue-100 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400"
-                        : "text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                    }`}
-                  >
-                    <List className="h-5 w-5" />
-                  </button>
-                </div> */}
-              </div>
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4"></div>
 
               {/* Ads Display */}
               {filteredAds.length === 0 ? (

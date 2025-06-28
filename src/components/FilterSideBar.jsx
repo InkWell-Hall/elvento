@@ -1,19 +1,7 @@
 import React, { useState } from "react";
 import { X, Filter, DollarSign, Tag, MapPin } from "lucide-react";
 
-const categories = [
-  "All Categories",
-  "Kids",
-  "Fashion",
-  "Home & Garden",
-  "Automotive",
-  "Sports",
-  "Health & Beauty",
-  "Services",
-  "Real Estate",
-  "Jobs",
-  "Other",
-];
+const categories = ["All Categories", "Kids", "Fashion", "Beauty"];
 
 const sortOptions = [
   { value: "newest", label: "Newest First" },

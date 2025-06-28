@@ -33,9 +33,7 @@ import image38 from "../assets/image38.png";
 import dress2 from "../assets/dress2.png";
 import top3 from "../assets/top3.png";
 import main2 from "../assets/main2.png";
-
-
-
+import { products } from "../assets/asset";
 
 // const items = [{ name: "for you", icon:  }, "Item 2", "Item 3"];
 
@@ -57,26 +55,10 @@ const Home = () => {
         <section className="w-[90%] mx-auto">
           <h1 className="text-2xl font-bold mt-10 ml-15 mb-4">BEST SELLERS</h1>
           <div className="flex gap-2">
-              <img
-                src={asset3}
-                alt=""
-                className="w-75"
-              />
-              <img
-                src={asset7}
-                alt=""
-                className="w-75"
-              />
-              <img
-                src={asset}
-                alt=""
-                className="w-75"
-              />
-              <img
-                src={asset2}
-                alt=""
-                className="w-75"
-              />
+            <img src={asset3} alt="" className="w-75" />
+            <img src={asset7} alt="" className="w-75" />
+            <img src={asset} alt="" className="w-75" />
+            <img src={asset2} alt="" className="w-75" />
           </div>
           {/* <img src={asset} alt="" className="w-80" /> */}
         </section>
@@ -85,7 +67,7 @@ const Home = () => {
             <div className="flex flex-col items-center justify-center h-full">
               <h1 className="text-6xl font-bold">NEW ARRIVALS</h1>
               <button className="mt-6 px-2 py-2 bg-blue-500 cursor-pointer text-white">
-                SHOP NOW
+                <Link to={"/collections"}>SHOP NOW</Link>
               </button>
             </div>
           </div>
@@ -202,8 +184,19 @@ const Home = () => {
           </div>
 
           <div className="flex"></div>
-          <div className="flex cursor-pointer gap-4 w-[80%] mx-auto">
-            <Card
+          <div className="cursor-pointer gap-4 w-[80%] mx-auto grid grid-cols-4">
+            {products.map((item, index) => (
+              <Card
+                title={item.name}
+                image={item.image}
+                price={item.price}
+                oldPrice={45}
+                id={item.id}
+                discount={50}
+              />
+            ))}
+            ;
+            {/* <Card
               title={"Lola basics-multi colored"}
               image={asset6}
               price={23}
@@ -291,12 +284,13 @@ const Home = () => {
               oldPrice={48}
               discount={40}
             />
-          </div>
-          {/* <div className="flex justify-center items-center mt-20">
+          </div> */}
+            {/* <div className="flex justify-center items-center mt-20">
             <button className="boader-2 rounded-3xl px-7 py-2 bg-black text-white text-xs font-medium hover:bg-gray-950">
               Load More
             </button>
           </div> */}
+          </div>
         </section>
       </div>
       <Footer />

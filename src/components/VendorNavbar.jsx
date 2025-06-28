@@ -4,7 +4,7 @@ import React from "react";
 const VendorNavbar = () => {
   return (
     <div>
-      <nav className=" flex justify-between items-center bg-white fixed w-280 right-0 vendnav h-15">
+      <nav className=" flex justify-between items-center bg-[#4b6382] fixed w-280 right-0 vendnav h-15">
         <div className="realtive ml-5">
           <input
             type="text"

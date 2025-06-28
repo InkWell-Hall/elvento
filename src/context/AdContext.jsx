@@ -19,15 +19,13 @@ const AdContextProvider = (props) => {
     if (!size) {
       toast.error("Select Product Size");
       return;
-    } else {
-      toast.success("Product Added to Cart");
     }
     const storedUserId = localStorage.getItem("USER_ID");
 
-    if (!storedUserId) {
-      toast.error("Please log in to add items to cart");
-      return;
-    }
+    // if (!storedUserId) {
+    //   toast.error("Please log in to add items to cart");
+    //   return;
+    // }
 
     let cartData = structuredClone(cartItems);
 
@@ -47,23 +45,21 @@ const AdContextProvider = (props) => {
     // }
     setCartItems(cartData);
 
-    // if (token) {
-    //   try {
-    //     await apiClient.post(
-    //       "/cart/add",
-    //       { itemId, size, userId: storedUserId },
-    //       {
-    //         headers: {
-    //           Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
-    //         },
-    //       }
-    //     );
-    //     toast.success("Product Added to Cart");
-    //   } catch (error) {
-    //     console.log(error);
-    //     toast.error(error.message);
-    //   }
-    // }
+    try {
+      await apiClient.post(
+        "/cart/add",
+        { itemId, size, userId: storedUserId },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+          },
+        }
+      );
+      toast.success("Product Added to Cart");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
   };
 
   // const getUserId = () => {
@@ -199,7 +195,7 @@ const AdContextProvider = (props) => {
   const getCartAmount = () => {
     let totalAmount = 0;
     for (const items in cartItems) {
-      let itemInfo = products.find((ad) => ad.id === items);
+      let itemInfo = allAds.find((ad) => ad.id === items);
       for (const item in cartItems[items]) {
         try {
           if (cartItems[items][item] > 0) {
@@ -208,16 +204,37 @@ const AdContextProvider = (props) => {
         } catch (error) {}
       }
     }
-
     return totalAmount;
   };
+
+  const getUserCart = async () => {
+    try {
+      let userId = localStorage.getItem("USER_ID");
+      const response = await apiClient.get(
+        `/get/${userId}`,
+
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+          },
+        }
+      );
+      console.log(response);
+      setCartItems(response.data.cartData);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
+
   useEffect(() => {
     console.log(cartItems);
     console.log(getCartAmount());
     // getUserId();
     getAllAds();
+    getUserCart();
     console.log(token);
-  }, [cartItems]);
+  }, []);
   const value = {
     addToCart,
     cartItems,

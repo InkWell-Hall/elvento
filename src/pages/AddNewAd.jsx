@@ -162,16 +162,16 @@ const AddNewAd = () => {
 
   return (
     <>
-      <div className="home flex-col md:flex min-h-screen overflow-x-hidden bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="home flex-col md:flex min-h-screen overflow-x-hidden ">
         <Sidebar />
         <div>
           <VendorNavbar />
           <div className="lg:ml-50 ml-0 md:ml-30 mt-20">
             <form
               onSubmit={postAd}
-              className="flex flex-col items-center w-full max-w-3xl gap-4 md:ml-50 rounded-2xl m-4 bg-white"
+              className="flex flex-col items-center w-full max-w-3xl gap-4 md:ml-50 rounded-2xl m-4 bg-gray-200"
             >
-              <div className="bg-[#4b6382] text-white rounded add w-full text-center font-lead-font text-lead-text h-40 flex justify-center items-center">
+              <div className="bg-gray-800 text-white rounded add w-full text-center font-lead-font text-lead-text h-40 flex justify-center items-center">
                 <h1>Post New Ad</h1>
               </div>
 

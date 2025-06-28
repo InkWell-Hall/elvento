@@ -6,13 +6,14 @@ import { apiClient } from "../api/client";
 const VendorCard = ({ title, price, oldPrice, discount, image, id }) => {
   const deleteAd = () => {
     apiClient
-      .post(`/remove`, {
+      .delete(`/remove/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
         },
       })
       .then((response) => {
         console.log("Ad deleted successfully", response);
+        window.location.reload();
         // Optionally, trigger a re-fetch or page reload
       })
       .catch((error) => {

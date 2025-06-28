@@ -19,12 +19,15 @@ import VendorOrder from "./pages/VendorOrder";
 import AccountSettingsSidebar from "./components/AccountSettingsSidebar";
 import AccountSettings from "./pages/AccountSettings";
 import Terms from "./components/Terms";
+import Kids from "./pages/kids";
+import Men from "./pages/Men";  
 import Privacy from "./components/Privacy";
 import EditAd from "./pages/EditAd";
 import Women from "./pages/Women";
 import VendorShopPage from "./pages/VendorShop";
 import VendorAds from "./pages/VendorAds";
 import VendorAdvert from "./pages/VendorAdvert";
+import Curve from "./pages/Curve";
 
 const router = createBrowserRouter([
   {
@@ -118,6 +121,18 @@ const router = createBrowserRouter([
   {
     path: "/women",
     element: <Women />,
+  },
+  {
+    path: "/curve",
+    element: <Curve />,
+  },
+  {
+    path: "/kids",
+    element: <Kids />,
+  },
+  {
+    path: "/men",
+    element: <Men />,
   },
   {
     path: "*",

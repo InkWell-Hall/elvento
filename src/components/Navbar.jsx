@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import bag from "../assets/Bag.svg.svg";
 import sign from "../assets/sign.svg.svg";
 import timer from "../assets/timer.svg.svg";
-import { Link, useNavigate } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import { AdContext } from "../context/AdContext";
 import { toast } from "react-toastify";
 
@@ -69,27 +69,27 @@ export default function Navbar() {
       {isOpen && (
         <ul className="flex flex-col gap-4 p-4 absolute top-16 left-4 bg-white rounded shadow-md md:hidden z-10">
           <li>
-            <a className="text-black font-bold" href="#">
+            <NavLink className="text-black font-bold" to={"/women"}>
               Women
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a className="text-black font-bold" href="#">
+            <a className="text-black font-bold" href="/curve">
               Curve
             </a>
           </li>
           <li>
-            <a className="text-black font-bold" href="#">
+            <a className="text-black font-bold" href="/men">
               Men
             </a>
           </li>
           <li>
-            <a className="text-black font-bold" href="#">
+            <a className="text-black font-bold" href="/kids">
               Kids
             </a>
           </li>
           <li>
-            <a className="text-black font-bold" href="#">
+            <a className="text-black font-bold" href="/beauty">
               Beauty
             </a>
           </li>
@@ -99,27 +99,27 @@ export default function Navbar() {
       {/* Desktop nav (hidden on small screens) */}
       <ul className="hidden md:flex gap-4 p-4">
         <li>
-          <a className="text-black font-bold" href="#">
+          <NavLink className="text-black font-bold" to={"/women"}>
             Women
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a className="text-black font-bold" href="#">
+          <Link to={"/curve"} className="text-black font-bold">
             Curve
-          </a>
+          </Link>
         </li>
         <li>
-          <a className="text-black font-bold" href="#">
+          <a className="text-black font-bold" href="/men">
             Men
           </a>
         </li>
         <li>
-          <a className="text-black font-bold" href="#">
+          <a className="text-black font-bold" href="/kids">
             Kids
           </a>
         </li>
         <li>
-          <a className="text-black font-bold" href="#">
+          <a className="text-black font-bold" href="beauty">
             Beauty
           </a>
         </li>
