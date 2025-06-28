@@ -59,8 +59,8 @@ const Sidebar = () => {
       </button>
 
       {/* Desktop sidebar */}
-      <div className="hidden md:block w-64 bg-gray-800 text-white h-screen fixed left-0 top-0 desk-side">
-        <div className="p-6 text-2xl font-bold border-b border-gray-700 font-lead-font text-lead-text">
+      <div className="hidden md:block w-64 bg-black text-white h-screen fixed left-0 top-0 desk-side">
+        <div className="p-6 text-2xl font-bold border-b border-white font-lead-font text-lead-text">
           {/* {title} */}
           <img src={logo} alt="" className="w-40" />
         </div>

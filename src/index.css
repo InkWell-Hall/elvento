@@ -8,6 +8,7 @@ html {
 @theme {
   --font-lead-font: "BIZ UDPMincho";
   --text-lead-text: 36px;
+  --font-body-font: "Outfit";
 }
 .box {
   padding: 20px;
@@ -16,7 +17,7 @@ html {
 }
 
 .active {
-  border-right: 4px solid orange;
+  border-right: 4px solid whitesmoke;
 }
 
 .desk-side {
@@ -72,4 +73,10 @@ html {
 
 .desk-side {
   z-index: 90;
+}
+.vendortag {
+  font-family:'BIZ UDPMincho';
+}
+.vendortag1 {
+  font-family:'BIZ UDPMincho';
 }

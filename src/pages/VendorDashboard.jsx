@@ -6,7 +6,7 @@ import BarChartBox from "../components/BarChartBox";
 import PieChartBox from "../components/PieChartBox";
 
 const VendorDashboard = () => {
-  const name = "Kweku";
+  const name = "Adel";
   return (
     <div className="home flex min-h-screen overflow-x-hidden">
       <Sidebar />
@@ -44,11 +44,11 @@ const VendorDashboard = () => {
           />
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 auto-rows-[minmax(180px,_auto)]">
-          <div className="p-5 rounded-lg text-center bg-blue-200 col-span-1 row-span-1 font-lead-font font-bold">
+          <div className="p-5 rounded-lg text-center bg-[#D6C6E1] col-span-1 row-span-1 font-lead-font font-bold">
             Consistent Buyers
             <div></div>
           </div>
-          <div className="p-5 rounded-lg border col-span-2 font-lead-font font-bold">
+          <div className="p-5 rounded-lg border-2 border-[#5C3C6] col-span-2 font-lead-font font-bold">
             Sales Over the month{" "}
             <div>
               <ChartBox users={354} />
@@ -57,7 +57,7 @@ const VendorDashboard = () => {
           {/* <div className="p-5 rounded-lg border bg-blue-200  col-span-1">
             box3
           </div> */}
-          <div className="p-5 rounded-lg border bg-blue-200 col-span-1 row-span-1 font-lead-font">
+          <div className="p-5 rounded-lg  bg-[#D6C6E1] col-span-1 row-span-1 font-bold font-lead-font">
             Favorites
             {/* <ChartBox users={80} /> */}
           </div>

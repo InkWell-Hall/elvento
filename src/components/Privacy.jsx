@@ -3,7 +3,7 @@ import AccountSettingsSidebar from "./AccountSettingsSidebar";
 
 const Privacy = () => {
   return (
-    <div className="flex bg-blue-200 overflow-x-hidden">
+    <div className="flex bg-[#E7EFC7] overflow-x-hidden">
       <div>
         <AccountSettingsSidebar />
       </div>
