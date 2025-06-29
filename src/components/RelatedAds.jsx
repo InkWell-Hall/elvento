@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 // import ProductsItems from "./ProductsItems";
 import { Link, useParams } from "react-router";
 import { AdContext } from "../context/AdContext";
-import Title from "../components/Ttitle";
+import Title from "../components/Title";
 import Card from "../components/Card";
 
 const RelatedProducts = ({ category }) => {

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Title from "../components/Ttitle";
+import Title from "../components/Title";
 import { products } from "../assets/asset";
 import { AdContext } from "../context/AdContext";
 import Footer from "../components/Footer";

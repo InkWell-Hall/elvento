@@ -8,7 +8,7 @@ import Footer from "../components/Footer";
 import { Link, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import empty from "../assets/emptytCart.jpg";
-import Title from "../components/Ttitle";
+import Title from "../components/Title";
 import Card from "../components/Card";
 
 const Favorites = () => {

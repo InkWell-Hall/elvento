@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import empty from "../assets/emptytCart.jpg";
 import { apiClient } from "../api/client";
-import Title from "../components/Ttitle";
+import Title from "../components/Title";
 import Card from "../components/Card";
 
 const Cart = () => {

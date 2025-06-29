@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import { Filter } from "lucide-react";
 import FilterSideBar from "../components/FilterSideBar";
 import { Link } from "react-router";
+import { apiClient } from "../api/client";
 
 const Women = () => {
   const { allAds } = useContext(AdContext);
@@ -18,11 +19,11 @@ const Women = () => {
         },
       });
 
-      console.log(response.data.products);
+      // console.log(response.data.products);
       setAdData(response.data.products || []);
     } catch (error) {
-      console.error("Error fetching ads:", error);
-      setAdData(mockAds); // fallback to mock data
+      // console.error("Error fetching ads:", error);
+      // setAdData(mockAds); // fallback to mock data
     }
   };
 
@@ -73,8 +74,8 @@ const Women = () => {
       setFilteredAds(results);
     };
     runFilter();
-    console.log("filtered ads", filteredAds);
-    console.log("Ads Data:", adData);
+    // console.log("filtered ads", filteredAds);
+    // console.log("Ads Data:", adData);
   }, [filters, searchQuery, adData]);
 
   const women = allAds.filter((item) => item.category === "Women");
@@ -117,7 +118,9 @@ const Women = () => {
               ) : viewMode === "grid" ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {women.map((ad) => (
-                    <Link to={`ad/${ad.id}`}>
+                    <div key={ad.id}>
+                      {" "}
+                      {/* <Link to={`ad/${ad.id}`}> */}
                       <Card
                         key={ad.id}
                         discount={0}
@@ -127,7 +130,8 @@ const Women = () => {
                         title={ad.name}
                         id={ad.id}
                       />
-                    </Link>
+                      {/* </Link> */}
+                    </div>
                   ))}
                 </div>
               ) : (

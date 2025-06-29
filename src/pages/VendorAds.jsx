@@ -5,6 +5,7 @@ import Card from "../components/Card";
 import { apiClient } from "../api/client";
 import { Link } from "react-router";
 import VendorCard from "../components/VendorCard";
+import Title from "../components/Title";
 
 const VendorAds = () => {
   const [vendorAd, setVendorAd] = useState([]);
@@ -32,24 +33,26 @@ const VendorAds = () => {
         <div>
           <VendorNavbar />
         </div>
-        <div className="ml-70">
-          {vendorAd?.map((item, index) => {
-            return (
-              <div
-                className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 "
-                key={index}
-              >
-                <VendorCard
-                  id={item.id}
-                  title={item.name}
-                  image={item.image[0]}
-                  price={item.price}
-                  discount={20}
-                  oldPrice={12}
-                />
-              </div>
-            );
-          })}
+        <div className="sm:ml-0 md:ml-70 pt-20">
+          <div className="text-6xl mb-2">
+            <Title text1={"My"} text2={"Adverts"} />
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 md:ml-3">
+            {vendorAd?.map((item, index) => {
+              return (
+                <div key={index}>
+                  <VendorCard
+                    id={item.id}
+                    title={item.name}
+                    image={item.image[0]}
+                    price={item.price}
+                    discount={20}
+                    oldPrice={12}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

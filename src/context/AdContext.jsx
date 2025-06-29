@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { products } from "../assets/asset";
-import { useNavigate } from "react-router";
+// import { products } from "../assets/asset";
+// import { useNavigate } from "react-router";
 import { apiClient } from "../api/client";
 
 export const AdContext = createContext();
@@ -9,23 +9,16 @@ const AdContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [favoriteItems, setFavoriteItems] = useState({});
   const currency = "$";
-  // const [userId, setUserId] = useState("");
   const [allAds, setAllAds] = useState([]);
   const token = localStorage.getItem("ACCESS_TOKEN");
   const delivery_fee = 20;
-  // const navigate = useNavigate();
-  //   const navigate = useNavigate();
+
   const addToCart = async (itemId, size) => {
     if (!size) {
       toast.error("Select Product Size");
       return;
     }
     const storedUserId = localStorage.getItem("USER_ID");
-
-    // if (!storedUserId) {
-    //   toast.error("Please log in to add items to cart");
-    //   return;
-    // }
 
     let cartData = structuredClone(cartItems);
 
@@ -40,9 +33,6 @@ const AdContextProvider = (props) => {
       cartData[itemId][size] = 1;
     }
 
-    // if (size) {
-    //   toast.success("Product added to cart successfully!");
-    // }
     setCartItems(cartData);
 
     try {
@@ -62,9 +52,6 @@ const AdContextProvider = (props) => {
     }
   };
 
-  // const getUserId = () => {
-  //   setUserId(localStorage.getItem("USER_ID"));
-  // };
   const addToFavoriteWithToken = async (itemId, size) => {
     if (!itemId) {
       toast.error("Invalid product ID.");
@@ -93,50 +80,13 @@ const AdContextProvider = (props) => {
       return;
     }
 
-    // Simulate adding to favorites (e.g., local state or Redux)
     try {
-      // Example: update local state or context
-      // favorites.push({ itemId, size }); or setFavorites([...favorites, { ... }])
-
       toast.success("Item added to favorites!");
     } catch (error) {
       console.error("Failed to add to favorites:", error);
       toast.error("Something went wrong. Please try again.");
     }
   };
-
-  // const handleSubmit = async () => {
-  //   if (!validateForm()) return;
-  //   setIsLoading(true);
-  //   try {
-  //     const response = await apiClient.post("/auth/signUp", formData, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     console.log(response);
-  //     localStorage.setItem("ACCESS_TOKEN", response.data.token);
-  //     setUserId(response.data.user.id);
-  //     if (formData.role === "Vendor") {
-  //       navigate("/vendor-dashboard");
-  //     } else {
-  //       navigate("/");
-  //     }
-
-  //     setFormData({
-  //       userName: "",
-  //       email: "",
-  //       password: "",
-  //       phoneNumber: "",
-  //       confirmPassword: "",
-  //       role: "",
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
 
   const getAllAds = async () => {
     try {
@@ -207,6 +157,19 @@ const AdContextProvider = (props) => {
     return totalAmount;
   };
 
+  const getAllOrders = async () => {
+    try {
+      const response = await apiClient.get("/order/list", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+        },
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   const getUserCart = async () => {
     try {
       let userId = localStorage.getItem("USER_ID");
@@ -233,6 +196,7 @@ const AdContextProvider = (props) => {
     // getUserId();
     getAllAds();
     getUserCart();
+    getAllOrders();
     console.log(token);
   }, []);
   const value = {

@@ -2,6 +2,7 @@ import { Edit, Heart, Trash } from "lucide-react";
 import React from "react";
 import { Link } from "react-router";
 import { apiClient } from "../api/client";
+import { Tooltip } from "recharts";
 
 const VendorCard = ({ title, price, oldPrice, discount, image, id }) => {
   const deleteAd = () => {
@@ -21,7 +22,7 @@ const VendorCard = ({ title, price, oldPrice, discount, image, id }) => {
       });
   };
   return (
-    <div>
+    <div className="mb-4">
       <div className=" w-65 bg-white">
         {" "}
         <div>
@@ -37,14 +38,18 @@ const VendorCard = ({ title, price, oldPrice, discount, image, id }) => {
             </span>
           </h3>
           <p className="text-xs">Up to {discount} percent off dinner wears!</p>
-          <div className="mt-2 flex gap-2">
+          <div className="mt-2 flex gap-2 items-center">
             <Link to={`/edit-ad/${id}`}>
               <button className="bg-gray-100 cursor-pointer">
-                <Edit />
+                <Edit color="gray" />
               </button>
             </Link>
-            <button onClick={deleteAd}>
-              <Trash />
+
+            <button
+              onClick={deleteAd}
+              className="bg-gray-100 cursor-pointer mb-1.5 rounded"
+            >
+              <Trash color="red" />
             </button>
           </div>
         </div>

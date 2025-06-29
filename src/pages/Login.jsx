@@ -125,9 +125,16 @@ export default function SignUpForm() {
     try {
       const response = await apiClient.post("/auth/login", formData);
       console.log(response);
+      console.log(response.data);
       localStorage.setItem("ACCESS_TOKEN", response.data.token);
-      navigate("/");
-      toast.success("Account Created Successfully");
+      localStorage.setItem("USER_ID", response.data.user.id);
+
+      if (response.data.user.role === "Buyer") {
+        navigate("/");
+      } else {
+        navigate("/vendor-dashboard");
+      }
+      toast.success("LoginSuccessfully");
       setFormData({
         userName: "",
         email: "",
