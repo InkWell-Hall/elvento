@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Filter, Grid, List } from "lucide-react";
 import FilterSidebar from "../components/FilterSideBar";
 import Navbar from "../components/Navbar";
 import Card from "../components/Card";
 import { apiClient } from "../api/client";
 import { Link } from "react-router";
+import { AdContext } from "../context/AdContext";
 
 export default function Collections() {
   const [adData, setAdData] = useState([]);
+  const { search } = useContext(AdContext);
+
   const getAllAds = async () => {
     try {
       const response = await apiClient.get("/list", {
@@ -17,20 +20,19 @@ export default function Collections() {
         },
       });
 
-      console.log(response.data.products);
+      console.log("API Response:", response.data.products);
       setAdData(response.data.products || []);
     } catch (error) {
       console.error("Error fetching ads:", error);
-      setAdData(mockAds); // fallback to mock data
+      setAdData([]); // fallback to empty array
     }
   };
 
   const [showFilters, setShowFilters] = useState(false);
   const [viewMode, setViewMode] = useState("grid");
-  const [searchQuery, _setSearchQuery] = useState("");
   const [filters, setFilters] = useState({
     category: "All Categories",
-    subCategory: "topwear",
+    subCategory: "",
     priceRange: [0, 100000],
     location: "",
     sortBy: "newest",
@@ -40,41 +42,122 @@ export default function Collections() {
   const handleFiltersChange = (newFilters) => {
     setFilters(newFilters);
   };
+
   useEffect(() => {
     getAllAds();
   }, []);
 
   useEffect(() => {
     const runFilter = () => {
-      let results = adData;
+      let results = [...adData]; // Create a copy to avoid mutation
 
-      if (filters.category !== "All Categories") {
-        results = results.filter((ad) => ad.category === filters.category);
-      }
+      console.log("Starting filter with adData:", adData);
+      console.log("Current filters:", filters);
+      console.log("Search query:", search);
 
-      results = results.filter(
-        (ad) =>
-          ad.price >= filters.priceRange[0] && ad.price <= filters.priceRange[1]
-      );
-
-      if (filters.location) {
-        results = results.filter((ad) =>
-          ad.location.toLowerCase().includes(filters.location.toLowerCase())
+      // Apply search filter first (from context)
+      if (search && search.trim()) {
+        results = results.filter(
+          (ad) =>
+            ad.name?.toLowerCase().includes(search.toLowerCase()) ||
+            ad.title?.toLowerCase().includes(search.toLowerCase()) ||
+            ad.description?.toLowerCase().includes(search.toLowerCase())
         );
+        console.log("After search filter:", results.length);
       }
 
-      if (searchQuery) {
-        results = results.filter((ad) =>
-          ad.title.toLowerCase().includes(searchQuery.toLowerCase())
-        );
+      // Apply category filter
+      if (filters.category && filters.category !== "All Categories") {
+        results = results.filter((ad) => {
+          // Check both 'category' and 'Category' fields (case variations)
+          const adCategory = ad.category || ad.Category || "";
+          return adCategory.toLowerCase() === filters.category.toLowerCase();
+        });
+        console.log("After category filter:", results.length);
       }
 
+      // Apply subcategory filter
+      if (filters.subCategory) {
+        results = results.filter((ad) => {
+          const adSubCategory =
+            ad.subCategory || ad.subcategory || ad.SubCategory || "";
+          return (
+            adSubCategory.toLowerCase() === filters.subCategory.toLowerCase()
+          );
+        });
+        console.log("After subcategory filter:", results.length);
+      }
+
+      // Apply price range filter
+      if (filters.priceRange && filters.priceRange.length === 2) {
+        results = results.filter((ad) => {
+          const price = parseFloat(ad.price) || 0;
+          return (
+            price >= filters.priceRange[0] && price <= filters.priceRange[1]
+          );
+        });
+        console.log("After price filter:", results.length);
+      }
+
+      // Apply location filter
+      // if (filters.location && filters.location.trim()) {
+      //   results = results.filter((ad) => {
+      //     const adLocation = ad.location || ad.city || ad.address || "";
+      //     return adLocation
+      //       .toLowerCase()
+      //       .includes(filters.location.toLowerCase());
+      //   });
+      //   console.log("After location filter:", results.length);
+      // }
+
+      // Apply sorting
+      if (filters.sortBy) {
+        results = results.sort((a, b) => {
+          switch (filters.sortBy) {
+            case "newest":
+              // Assuming there's a date field, otherwise use createdAt or _id
+              const dateA = new Date(a.createdAt || a.date || a._id);
+              const dateB = new Date(b.createdAt || b.date || b._id);
+              return dateB - dateA;
+
+            case "oldest":
+              const oldDateA = new Date(a.createdAt || a.date || a._id);
+              const oldDateB = new Date(b.createdAt || b.date || b._id);
+              return oldDateA - oldDateB;
+
+            case "price-low":
+              return (parseFloat(a.price) || 0) - (parseFloat(b.price) || 0);
+
+            case "price-high":
+              return (parseFloat(b.price) || 0) - (parseFloat(a.price) || 0);
+
+            case "popular":
+              // Assuming there's a views or popularity field
+              return (
+                (b.views || b.popularity || 0) - (a.views || a.popularity || 0)
+              );
+
+            default:
+              return 0;
+          }
+        });
+        console.log("After sorting:", results.length);
+      }
+
+      console.log("Final filtered results:", results);
       setFilteredAds(results);
     };
+
     runFilter();
-    console.log("filtered ads", filteredAds);
-    console.log("Ads Data:", adData);
-  }, [filters, searchQuery, adData]);
+  }, [filters, search, adData]); // Include search in dependencies
+
+  // Debug: Log sample ad structure
+  useEffect(() => {
+    if (adData.length > 0) {
+      console.log("Sample ad structure:", adData[0]);
+      console.log("Available fields:", Object.keys(adData[0]));
+    }
+  }, [adData]);
 
   return (
     <section>
@@ -100,38 +183,83 @@ export default function Collections() {
                 onClose={() => setShowFilters(false)}
                 filters={filters}
                 onFiltersChange={handleFiltersChange}
+                adData={adData}
               />
             </div>
 
             {/* Ads Grid */}
             <div className="flex-1">
               {/* Results Header */}
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4"></div>
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                <div className="text-sm text-gray-600">
+                  Showing {filteredAds.length} of {adData.length} results
+                  {search && ` for "${search}"`}
+                </div>
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={() => setViewMode("grid")}
+                    className={`p-2 rounded ${
+                      viewMode === "grid"
+                        ? "bg-blue-100 text-blue-600"
+                        : "text-gray-400"
+                    }`}
+                  >
+                    <Grid className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={() => setViewMode("list")}
+                    className={`p-2 rounded ${
+                      viewMode === "list"
+                        ? "bg-blue-100 text-blue-600"
+                        : "text-gray-400"
+                    }`}
+                  >
+                    <List className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
 
               {/* Ads Display */}
               {filteredAds.length === 0 ? (
-                <div className="text-center text-gray-500">No ads found</div>
+                <div className="text-center text-gray-500 py-8">
+                  <p>No ads found matching your criteria</p>
+                  {(search ||
+                    filters.category !== "All Categories" ||
+                    filters.location) && (
+                    <p className="text-sm mt-2">
+                      Try adjusting your filters or search terms
+                    </p>
+                  )}
+                </div>
               ) : viewMode === "grid" ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filteredAds.map((ad) => (
-                    <Link to={`ad/${ad.id}`}>
+                    <Link key={ad._id || ad.id} to={`ad/${ad._id || ad.id}`}>
                       <Card
-                        key={ad.id}
-                        discount={0}
-                        image={ad.image[0]}
-                        oldPrice={40}
+                        discount={ad.discount || 0}
+                        image={ad.image?.[0] || ad.images?.[0] || ""}
+                        oldPrice={
+                          ad.oldPrice || ad.originalPrice || ad.price + 10
+                        }
                         price={ad.price}
-                        title={ad.name}
-                        id={ad.id}
+                        title={ad.name || ad.title}
+                        id={ad._id || ad.id}
                       />
                     </Link>
                   ))}
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {/* {filteredAds.map((ad) => (
-                    <AdCard key={ad.id} ad={ad} />
-                  ))} */}
+                  {filteredAds.map((ad) => (
+                    <div
+                      key={ad._id || ad.id}
+                      className="border rounded-lg p-4"
+                    >
+                      <h3 className="font-semibold">{ad.name || ad.title}</h3>
+                      <p className="text-gray-600">${ad.price}</p>
+                      <p className="text-sm text-gray-500">{ad.description}</p>
+                    </div>
+                  ))}
                 </div>
               )}
             </div>

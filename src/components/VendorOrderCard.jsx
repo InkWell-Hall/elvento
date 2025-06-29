@@ -7,29 +7,38 @@ export default function VendorOrderCard({ image }) {
 
   const statusOptions = ["Order Received", "Packaging", "Out for Delivery"];
   return (
-    <div className="w-190 mx-auto h-50 bg-white shadow-md rounded-lg overflow-hidden border border-gray-200 font-medium p-4 mt-20">
+    <div className="w-190 mx-auto h-50 bg-white shadow-md rounded-lg overflow-hidden border border-gray-200 font-medium p-4 mt-10">
       <div className="">
-          {/* <p className="text-sm"> Product Info</p> */}
-          <div className="flex items-center space-x-4">
-            <img
-              src={asset3}
-              alt="Product Image"
-              className="w-25 h-30 object-cover rounded-md"
-            />
-            <div className="flex items-center gap-10 justify-between ">
+        {/* <p className="text-sm"> Product Info</p> */}
+        <div className="flex items-center space-x-4">
+          <img
+            src={asset3}
+            alt="Product Image"
+            className="w-25 h-30 object-cover rounded-md"
+          />
+          <div className="flex items-center gap-10 justify-between ">
             <div className=" flex-col">
               <h2 className="text-sm mt-6">Women Black Dinner || M </h2>
               <p className="text-sm text-gray-500 mt-5">Linia Aldo</p>
-              <p className="text-sm text-gray-500">Ridge, Greater Accra Region,<br /> Ghana, 6789
-              <br /> 0345567789</p>
-              <div className="flex space-x-3 mt-1">
-                
-              </div>
+              <p className="text-sm text-gray-500">
+                Ridge, Greater Accra Region,
+                <br /> Ghana, 6789
+                <br /> 0345567789
+              </p>
+              <div className="flex space-x-3 mt-1"></div>
             </div>
             <div className="flex-col text-gray-500">
-              <h2 className="text-sm mt-8"><span className="text-black">Item:</span>1</h2>
-              <h2 className=""><span className="text-black">ID:</span>fffhtt</h2>
-              <p className="text-sm"><span className="text-black">Method:</span> COD <br /><span className="text-black">Payment:</span> Pending <br /><span className="text-black">Date:</span> 21/04/2025</p>
+              <h2 className="text-sm mt-8">
+                <span className="text-black">Item:</span>1
+              </h2>
+              <h2 className="">
+                <span className="text-black">ID:</span>fffhtt
+              </h2>
+              <p className="text-sm">
+                <span className="text-black">Method:</span> COD <br />
+                <span className="text-black">Payment:</span> Pending <br />
+                <span className="text-black">Date:</span> 21/04/2025
+              </p>
               <p className="text-sm mt-2 text-black bg-gray-100 px-2 py-1 rounded">
                 Amount: $89.99
               </p>
@@ -50,13 +59,13 @@ export default function VendorOrderCard({ image }) {
                 </select>
               </div>
             </div>
-            </div>
           </div>
         </div>
-        {/* <hr className="my-4" /> */}
+      </div>
+      {/* <hr className="my-4" /> */}
 
-        {/* Progress Bar UI */}
-        {/* <div className="flex items-center justify-between text-center mt-6 text-sm text-gray-500">
+      {/* Progress Bar UI */}
+      {/* <div className="flex items-center justify-between text-center mt-6 text-sm text-gray-500">
           {statusOptions.map((step, index) => {
             const stepStatus =
               statusOptions.indexOf(status) > index
@@ -81,7 +90,6 @@ export default function VendorOrderCard({ image }) {
             );
           })}
         </div> */}
-      </div>
-
+    </div>
   );
 }

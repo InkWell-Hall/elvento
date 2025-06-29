@@ -10,7 +10,9 @@ import { toast } from "react-toastify";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { getCartCount, getFavoriteCount } = useContext(AdContext);
+  const { getCartCount, getFavoriteCount, search, setSearch } =
+    useContext(AdContext);
+  const collections = location.pathname === "/collections";
   const navigate = useNavigate();
   const determiner = localStorage.getItem("ACCESS_TOKEN");
   const logOut = () => {
@@ -46,7 +48,8 @@ export default function Navbar() {
           <input
             type="text"
             placeholder="Search"
-            // value={search}
+            disabled={!collections}
+            value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="flex-1 px-2 py-1 rounded-full outline-none bg-inherit border text-sm"
           />

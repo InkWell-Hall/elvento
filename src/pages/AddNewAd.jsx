@@ -116,7 +116,7 @@ const AddNewAd = () => {
       const response = await apiClient.get("/list", {
         headers: {
           "Content-Type": "application/json",
-          Authorization:` Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+          Authorization: ` Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
         },
       });
       console.log(response.data);
@@ -130,7 +130,7 @@ const AddNewAd = () => {
       const response = await apiClient.get("/allProduct", {
         headers: {
           // "Content-Type": "application/json",
-          Authorization:` Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+          Authorization: ` Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
         },
       });
       console.log(response.data);
@@ -143,7 +143,7 @@ const AddNewAd = () => {
     apiClient
       .get("/allProduct", {
         headers: {
-          Authorization:`Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+          Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
         },
       })
       .then((response) => {
@@ -162,7 +162,7 @@ const AddNewAd = () => {
 
   return (
     <>
-      <div className="home flex-col md:flex bg-[#E7EFC7] min-h-screen overflow-x-hidden ">
+      <div className="home flex-col md:flex bg-[#EAEBFF] min-h-screen overflow-x-hidden ">
         <Sidebar />
         <div>
           <VendorNavbar />
@@ -171,7 +171,7 @@ const AddNewAd = () => {
               onSubmit={postAd}
               className="flex flex-col items-center w-full max-w-3xl gap-4 md:ml-50 rounded-2xl m-4 bg-white"
             >
-              <div className="bg-yellow-700 text-white rounded add w-full text-center font-lead-font text-lead-text h-40 flex justify-center items-center">
+              <div className="bg-[#0F123F] text-white rounded add w-full text-center font-lead-font text-lead-text h-40 flex justify-center items-center">
                 <h1>Post New Ad</h1>
               </div>
 
@@ -283,8 +283,6 @@ const AddNewAd = () => {
                     <option value="kids">Kids</option>
                     <option value="Curve">Curve</option>
                     <option value="Beauty">Beauty</option>
-                    
-
                   </select>
                 </div>
 
@@ -366,14 +364,14 @@ const AddNewAd = () => {
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="w-28 py-3 mt-4 bg-yellow-700 text-white rounded font-bold cursor-pointer"
+                  className="w-28 py-3 mt-4 bg-[#0F123F] text-white rounded font-bold cursor-pointer"
                   disabled={loading}
                 >
                   CLEAR
                 </button>
                 <button
                   type="submit"
-                  className="w-28 py-3 mt-4 bg-yellow-700 text-white rounded font-bold cursor-pointer disabled:opacity-50"
+                  className="w-28 py-3 mt-4 bg-[#0F123F] text-white rounded font-bold cursor-pointer disabled:opacity-50"
                   disabled={loading}
                 >
                   {loading ? "ADDING..." : "ADD"}

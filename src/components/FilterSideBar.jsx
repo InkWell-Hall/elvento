@@ -1,7 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { X, Filter, DollarSign, Tag, MapPin } from "lucide-react";
 
-const categories = ["All Categories", "Kids", "Fashion", "Beauty"];
+// You might want to make these dynamic based on your actual data
+const categories = [
+  "All Categories",
+  "Kids",
+  "Fashion",
+  "Beauty",
+  "Electronics",
+  "Home",
+  "Sports",
+];
 
 const sortOptions = [
   { value: "newest", label: "Newest First" },
@@ -16,8 +25,23 @@ export default function FilterSideBar({
   onClose,
   filters,
   onFiltersChange,
+  adData = [], // Add this prop to get actual categories from data
 }) {
   const [localFilters, setLocalFilters] = useState(filters);
+
+  // Generate dynamic categories from actual data
+  const [dynamicCategories, setDynamicCategories] = useState(categories);
+
+  useEffect(() => {
+    if (adData && adData.length > 0) {
+      const uniqueCategories = [
+        ...new Set(
+          adData.map((ad) => ad.category || ad.Category).filter(Boolean)
+        ),
+      ];
+      setDynamicCategories(["All Categories", ...uniqueCategories]);
+    }
+  }, [adData]);
 
   const handleFilterChange = (key, value) => {
     const newFilters = { ...localFilters, [key]: value };
@@ -34,7 +58,8 @@ export default function FilterSideBar({
   const clearFilters = () => {
     const defaultFilters = {
       category: "All Categories",
-      priceRange: [0, 10000],
+      subCategory: "",
+      priceRange: [0, 100000],
       location: "",
       sortBy: "newest",
     };
@@ -58,7 +83,7 @@ export default function FilterSideBar({
           isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
-        <div className="p-6">
+        <div className="p-6 overflow-y-auto h-full">
           {/* Header */}
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-2">
@@ -94,45 +119,15 @@ export default function FilterSideBar({
             <select
               value={localFilters.category}
               onChange={(e) => handleFilterChange("category", e.target.value)}
-              className="input-field"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             >
-              {categories.map((category) => (
+              {dynamicCategories.map((category) => (
                 <option key={category} value={category}>
                   {category}
                 </option>
               ))}
             </select>
           </div>
-
-          {/* Price Range Filter */}
-          {/* <div className="mb-6">
-            <div className="flex items-center space-x-2 mb-3">
-              <DollarSign className="h-4 w-4 text-gray-600 dark:text-gray-400" />
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Price Range
-              </label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <input
-                type="number"
-                placeholder="Min"
-                value={localFilters.priceRange[0]}
-                onChange={(e) => handlePriceChange(0, e.target.value)}
-                className="input-field text-sm"
-              />
-              <span className="text-gray-500">-</span>
-              <input
-                type="number"
-                placeholder="Max"
-                value={localFilters.priceRange[1]}
-                onChange={(e) => handlePriceChange(1, e.target.value)}
-                className="input-field text-sm"
-              />
-            </div>
-            <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-              ${localFilters.priceRange[0]} - ${localFilters.priceRange[1]}
-            </div>
-          </div> */}
 
           {/* Sort By */}
           <div className="mb-6">
@@ -142,7 +137,7 @@ export default function FilterSideBar({
             <select
               value={localFilters.sortBy}
               onChange={(e) => handleFilterChange("sortBy", e.target.value)}
-              className="input-field"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             >
               {sortOptions.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -150,6 +145,32 @@ export default function FilterSideBar({
                 </option>
               ))}
             </select>
+          </div>
+
+          {/* Price Range Inputs */}
+          <div className="mb-6">
+            <div className="flex items-center space-x-2 mb-3">
+              <DollarSign className="h-4 w-4 text-gray-600 dark:text-gray-400" />
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                Price Range
+              </label>
+            </div>
+            <div className="flex space-x-2 mb-3">
+              <input
+                type="number"
+                value={localFilters.priceRange[0]}
+                onChange={(e) => handlePriceChange(0, e.target.value)}
+                placeholder="Min"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              />
+              <input
+                type="number"
+                value={localFilters.priceRange[1]}
+                onChange={(e) => handlePriceChange(1, e.target.value)}
+                placeholder="Max"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              />
+            </div>
           </div>
 
           {/* Quick Price Filters */}
@@ -162,7 +183,7 @@ export default function FilterSideBar({
                 { label: "Under $50", range: [0, 50] },
                 { label: "$50-$200", range: [50, 200] },
                 { label: "$200-$500", range: [200, 500] },
-                { label: "$500+", range: [500, 10000] },
+                { label: "$500+", range: [500, 100000] },
               ].map((option) => (
                 <button
                   key={option.label}

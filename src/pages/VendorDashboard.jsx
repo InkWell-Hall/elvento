@@ -4,11 +4,12 @@ import Tile from "../components/Tile";
 import ChartBox from "../components/ChartBox";
 import BarChartBox from "../components/BarChartBox";
 import PieChartBox from "../components/PieChartBox";
+import { Link } from "react-router";
 
 const VendorDashboard = () => {
   const name = "Adel";
   return (
-    <div className="home flex min-h-screen overflow-x-hidden">
+    <div className="home flex min-h-screen overflow-x-hidden bg-[#EAEBFF]">
       <Sidebar />
 
       {/* Main Content Area */}
@@ -17,11 +18,13 @@ const VendorDashboard = () => {
           Welcome {name} to your Dasboard
         </h1>
         <div className="cards  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 mb-5">
-          <Tile
-            title={"Ads Running"}
-            value={45}
-            icon={<Megaphone color="#4b6382" />}
-          />
+          <Link to={"/vendor-ads"}>
+            <Tile
+              title={"Ads Running"}
+              value={45}
+              icon={<Megaphone color="#4b6382" />}
+            />
+          </Link>
           <Tile
             title={"NUMBER OF SALES"}
             value={45}

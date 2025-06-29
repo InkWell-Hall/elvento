@@ -46,13 +46,13 @@ const VendorProfile = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="min-h-screen w-490 md:ml-50 bg-[#E7EFC7]">
+      <div className="min-h-screen w-490 md:ml-50 bg-[#EAEBFF]">
         {/* <Navbar /> */}
-        <nav className=" flex justify-between items-center text-black bg-black/40 backdrop:blur-2xl  fixed w-282 right-0 vendnav h-15">
+        <nav className=" flex justify-between items-center text-black bg-white fixed w-282 right-0 vendnav h-15">
           <div className="realtive ml-5">
             <input
               type="text"
-              className="w-full border border-white pl-7 rounded-2xl py-1 outline-none font-bold font-lead-font "
+              className="w-full border border-gray pl-7 rounded-2xl py-1 outline-none font-bold font-lead-font "
               placeholder="search"
             />
             <Search className="absolute top-5 ml-2" size={18} />
@@ -67,8 +67,11 @@ const VendorProfile = () => {
               MC
             </span>
             <div className="flex mr-4">
-              <h1 className="font-bold vendortag1 text-white ">Vendor</h1>
-            <ChevronDown className="cursor-pointer font-bold mt-0.5"color="white" />
+              <h1 className="font-bold vendortag1 text-black ">Vendor</h1>
+              <ChevronDown
+                className="cursor-pointer font-bold mt-0.5"
+                color="black"
+              />
             </div>
           </div>
         </nav>
@@ -104,7 +107,7 @@ const ProfileView = ({ vendorData, onEditClick }) => {
         {/* Profile Card */}
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
           {/* Header Section */}
-          <div className="bg-yellow-700 p-6 md:p-8">
+          <div className="bg-[#0F123F] p-6 md:p-8">
             <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
               <div className="w-24 h-24 md:w-32 md:h-32 bg-white rounded-full flex items-center justify-center shadow-lg">
                 <User
@@ -201,7 +204,7 @@ const ProfileView = ({ vendorData, onEditClick }) => {
             <div className="text-center">
               <button
                 onClick={onEditClick}
-                className="inline-flex items-center gap-2 bg-yellow-700 text-white px-8 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                className="inline-flex items-center gap-2 bg-[#0F123F] text-white px-8 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
                 <Edit3 className="w-5 h-5" />
                 Edit Profile
@@ -391,7 +394,7 @@ const ProfileEdit = ({ vendorData, onSave, onCancel }) => {
             <button
               onClick={handleSave}
               disabled={isLoading}
-              className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-yellow-700 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-[#0F123F] text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
               {isLoading ? (
                 <>

@@ -24,7 +24,7 @@ const VendorSidebar = ({ links = [], title = "Menu" }) => {
             <Link
               key={idx}
               to={href}
-              className="hover:bg-gray-700 p-2 rounded transition"
+              className="hover:bg-[#FF807E] p-2 rounded transition"
             >
               {label}
             </Link>
@@ -48,7 +48,7 @@ const VendorSidebar = ({ links = [], title = "Menu" }) => {
             <Link
               key={idx}
               to={href}
-              className="hover:bg-gray-700 p-2 rounded transition"
+              className="hover:bg-[#FF807E] p-2 rounded transition"
               onClick={() => setIsOpen(false)}
             >
               {label}

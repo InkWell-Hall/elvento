@@ -21,7 +21,7 @@ const Sidebar = () => {
     },
     {
       label: "Orders",
-      href: "/vendor-orders",
+      href: "/vendor-order",
       icon: <LayoutDashboard color="white" />,
     },
     {
@@ -59,10 +59,10 @@ const Sidebar = () => {
       </button>
 
       {/* Desktop sidebar */}
-      <div className="hidden md:block w-64 bg-black text-white h-screen fixed left-0 top-0 desk-side">
-        <div className="p-6 text-2xl font-bold border-b border-white font-lead-font text-lead-text">
+      <div className="hidden md:block w-64 bg-[#0F123F] text-white h-screen fixed left-0 top-0 desk-side">
+        <div className="px-4 text-2xl font-bold border-b border-white font-lead-font text-lead-text">
           {/* {title} */}
-          <img src={logo} alt="" className="w-40" />
+          <img src={logo} alt="" className="w-50" />
         </div>
 
         <nav className="flex flex-col p-4 space-y-2">
@@ -70,7 +70,7 @@ const Sidebar = () => {
             <NavLink
               key={idx}
               to={href}
-              className="hover:bg-gray-700 p-2 rounded transition"
+              className="hover:bg-[#FF807E] p-2 rounded transition"
             >
               <div className=" border-gray-600 pb-2 flex gap-4">
                 {icon}
@@ -95,7 +95,7 @@ const Sidebar = () => {
             <NavLink
               key={idx}
               to={href}
-              className="hover:bg-gray-700 p-2 rounded transition"
+              className="hover:bg-[#FF807E] p-2 rounded transition"
               onClick={() => setIsOpen(false)}
             >
               {label}

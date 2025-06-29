@@ -6,6 +6,7 @@ import { apiClient } from "../api/client";
 import { Link } from "react-router";
 import VendorCard from "../components/VendorCard";
 import Title from "../components/Title";
+import Modal from "../modals/DeleteAdModal";
 
 const VendorAds = () => {
   const [vendorAd, setVendorAd] = useState([]);
@@ -27,14 +28,14 @@ const VendorAds = () => {
     myAds();
   }, []);
   return (
-    <div>
+    <div className="bg-[#EAEBFF]">
       <Sidebar />
       <div className="">
         <div>
           <VendorNavbar />
         </div>
         <div className="sm:ml-0 md:ml-70 pt-20">
-          <div className="text-6xl mb-2">
+          <div className="text-6xl mb-2 text-center">
             <Title text1={"My"} text2={"Adverts"} />
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 md:ml-3">

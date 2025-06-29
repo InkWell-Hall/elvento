@@ -8,6 +8,8 @@ export const AdContext = createContext();
 const AdContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [favoriteItems, setFavoriteItems] = useState({});
+  const [search, setSearch] = useState("");
+
   const currency = "$";
   const [allAds, setAllAds] = useState([]);
   const token = localStorage.getItem("ACCESS_TOKEN");
@@ -48,7 +50,7 @@ const AdContextProvider = (props) => {
       toast.success("Product Added to Cart");
     } catch (error) {
       console.log(error);
-      toast.error(error.message);
+      toast.error(error.response.data.message);
     }
   };
 
@@ -74,6 +76,7 @@ const AdContextProvider = (props) => {
 
     setFavoriteItems(FavoriteData);
   };
+
   const addToFavoriteWithoutToken = (itemId, size) => {
     if (!token) {
       toast.error("Please sign in to add items to favorites.");
@@ -117,6 +120,7 @@ const AdContextProvider = (props) => {
     }
     return totalCount;
   };
+
   const getFavoriteCount = () => {
     console.log("favoriteItems:", favoriteItems); // 👈 Add this
     let totalCount = 0;
@@ -186,7 +190,7 @@ const AdContextProvider = (props) => {
       setCartItems(response.data.cartData);
     } catch (error) {
       console.log(error);
-      toast.error(error.message);
+      toast.error(error.response.data.message);
     }
   };
 
@@ -204,6 +208,7 @@ const AdContextProvider = (props) => {
     cartItems,
     getCartCount,
     currency,
+    setCartItems,
     updateQuantity,
     delivery_fee,
     // navigate,
@@ -212,6 +217,8 @@ const AdContextProvider = (props) => {
     addToFavoriteWithoutToken,
     // addToFavorite,
     favoriteItems,
+    search,
+    setSearch,
     addToFavoriteWithToken,
     // userId,
     // setUserId,
