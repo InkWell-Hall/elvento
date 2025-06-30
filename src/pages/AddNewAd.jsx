@@ -260,7 +260,7 @@ const AddNewAd = () => {
                 <textarea
                   type="text"
                   placeholder="Write description here"
-                  className="w-full max-w-[500px] px-3 py-2 border outline-none resize-none rounded-[5px]"
+                  className="w-full max-w-[500px] px-3 py-2 border border-yellow-700 outline-none resize-none rounded-[5px]"
                   onChange={(e) => setDescription(e.target.value)}
                   value={description}
                   required
@@ -300,6 +300,7 @@ const AddNewAd = () => {
                     <option value="bottomwear">Bottomwear</option>
                     <option value="winterwear">Winterwear</option>
                     <option value="Dress">Dress</option>
+                    <option value="Dress">Cosmetics</option>
                   </select>
                 </div>
 
@@ -310,7 +311,7 @@ const AddNewAd = () => {
                   <input
                     onChange={(e) => setPrice(e.target.value)}
                     value={price}
-                    className="w-full px-3 py-2 sm:w-[120px] border outline-none rounded-[5px]"
+                    className="w-full px-3 py-2 sm:w-[120px] border border-yellow-700 outline-none rounded-[5px]"
                     type="number"
                     placeholder="0"
                     required
@@ -339,7 +340,7 @@ const AddNewAd = () => {
                           size.includes(sizeOption)
                             ? "bg-gray-800 text-white"
                             : "bg-white"
-                        } px-3 py-1 cursor-pointer border rounded`}
+                        } px-3 py-1 cursor-pointer border border-yellow-700 rounded`}
                       >
                         {sizeOption}
                       </p>
@@ -355,7 +356,7 @@ const AddNewAd = () => {
                   onChange={() => setBestSeller((prev) => !prev)}
                   checked={bestSeller}
                 />
-                <label className="cursor-pointer" htmlFor="bestseller">
+                <label className="cursor-pointer " htmlFor="bestseller">
                   Add to bestseller
                 </label>
               </div>
