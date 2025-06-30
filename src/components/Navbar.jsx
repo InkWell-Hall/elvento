@@ -37,6 +37,8 @@ export default function Navbar() {
       toast.error("Please log In to View Cart");
     }
   };
+
+  console.log("token:", determiner);
   return (
     <nav className="flex flex-wrap justify-between items-center px-4 sm:px-6 lg:px-8 py-4 h-auto relative">
       {/* Logo and Hamburger */}
@@ -178,7 +180,7 @@ export default function Navbar() {
           <Link onClick={preventFav}>
             <Heart />
             <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
-              {token ? getFavoriteCount() : 0}
+              {determiner ? getFavoriteCount() : 0}
             </p>
           </Link>
         </div>
@@ -186,7 +188,7 @@ export default function Navbar() {
           <Link onClick={preventCart}>
             <img src={bag} alt="bag duplicate" />
             <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
-              {token ? getFavoriteCount() : 0}
+              {token ? getCartCount() : 0}
             </p>
           </Link>
         </div>

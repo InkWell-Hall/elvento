@@ -53,8 +53,10 @@ const Home = () => {
           </Link>
         </div>
         <section className="w-[90%] mx-auto">
-          <h1 className="text-2xl font-bold mt-10 ml-15 mb-4 font-lead-font">BEST SELLERS</h1>
-          <div className="flex gap-2">
+          <h1 className="text-2xl font-bold mt-10 ml-15 mb-4 font-lead-font">
+            BEST SELLERS
+          </h1>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-2">
             <img src={asset3} alt="" className="w-75" />
             <img src={asset7} alt="" className="w-75" />
             <img src={asset} alt="" className="w-75" />
@@ -77,7 +79,7 @@ const Home = () => {
             <h1 className="text-2xl font-bold mt-10 ml-10 mb-4 font-lead-font">
               FEATURED PRODUCTS
             </h1>
-            <div className="flex w-[90%] mx-auto mr-10 cursor-pointer text-white gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 w-[90%] mx-auto mr-10 cursor-pointer text-white gap-3">
               <div className="flex relative">
                 <img src={men2} alt="" className="w-60 h-73" />
                 <h1 className="absolute text-2xl font-bold cursor-pointer bottom-5 left-20">
