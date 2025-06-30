@@ -18,6 +18,11 @@ export default function Navbar() {
 
   const token = localStorage.getItem("ACCESS_TOKEN");
   const collections = location.pathname === "/collections";
+  const women = location.pathname === "/women";
+  const curve = location.pathname === "/curve";
+  const kids = location.pathname === "/kids";
+  const beauty = location.pathname === "/beauty";
+  const men = location.pathname === "/men";
   const navigate = useNavigate();
   const determiner = localStorage.getItem("ACCESS_TOKEN");
   const logOut = () => {
@@ -51,20 +56,22 @@ export default function Navbar() {
           </h1>
         </Link>
 
-        <div className="relative flex-1 max-w-xs">
-          <input
-            type="text"
-            placeholder="Search"
-            disabled={!collections}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="flex-1 px-2 py-1 rounded-full outline-none bg-inherit border text-sm"
-          />
-          <Search
-            size={18}
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600"
-          />
-        </div>
+        {collections || women || curve || men || kids || beauty ? (
+          <div className="relative flex-1 max-w-xs">
+            <input
+              type="text"
+              placeholder="Search"
+              disabled={!collections}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="flex-1 px-2 py-1 rounded-full outline-none bg-inherit border text-sm"
+            />
+            <Search
+              size={18}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600"
+            />
+          </div>
+        ) : null}
 
         <button
           className="md:hidden"
