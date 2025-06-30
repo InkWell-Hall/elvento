@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { apiClient } from "../api/client";
 import { toast } from "react-toastify";
+import StatusTracker from "../components/StatusTracker";
 
 const Orders = () => {
   const { currency } = useContext(AdContext);
@@ -121,17 +122,14 @@ const Orders = () => {
                   </p>
                 </div>
               </div>
-              <div className="md:w-1/2 flex justify-between">
-                <div className="flex items-center gap-2">
-                  <p className="min-w-2 h-2 rounded-full bg-green-500"></p>
-                  <p className="text-sm md:text-base">{item.status}</p>
-                </div>
+              <div className="md:w-1/2 flex flex-col gap-4">
                 <button
-                  className="border px-4 py-2 text-sm font-medium rounded-sm cursor-pointer"
+                  className="self-start border px-4 py-2 text-sm font-medium rounded-sm cursor-pointer hover:bg-gray-100"
                   onClick={loadOrderData}
                 >
                   Track order
                 </button>
+                <StatusTracker status={item.status} />
               </div>
             </div>
           ))}

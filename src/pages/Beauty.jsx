@@ -1,65 +1,155 @@
-import React from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import React, { useContext, useEffect, useState } from "react";
+import { AdContext } from "../context/AdContext";
 import Card from "../components/Card";
-
-import beauty1 from "../assets/beauty1.png";
-import beauty2 from "../assets/beauty2.png";
-import beauty3 from "../assets/beauty3.jpeg";
-import beauty4 from "../assets/beauty4.jpeg";
+import Navbar from "../components/Navbar";
+import { Filter } from "lucide-react";
+import FilterSideBar from "../components/FilterSideBar";
+import { Link } from "react-router";
+import { apiClient } from "../api/client";
 
 const Beauty = () => {
-  const beautyAds = [
-    {
-      title: "Lola basics-multi colored",
-      image: beauty1,
-      price: 23,
-      oldPrice: 45,
-      discount: 50,
-    },
-    {
-      title: "Sena lisa",
-      image: beauty2,
-      price: 18,
-      oldPrice: 25,
-      discount: 30,
-    },
-    {
-      title: "Juvit multi-colored",
-      image: beauty3,
-      price: 27,
-      oldPrice: 35,
-      discount: 50,
-    },
-    {
-      title: "Silacs rubisx",
-      image: beauty4,
-      price: 67,
-      oldPrice: 105,
-      discount: 50,
-    },
-  ];
+  const { allAds } = useContext(AdContext);
+  const [adData, setAdData] = useState([]);
+  const getAllAds = async () => {
+    try {
+      const response = await apiClient.get("/list", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+        },
+      });
 
-  return (
-    <>
+      // console.log(response.data.products);
+      setAdData(response.data.products || []);
+    } catch (error) {
+      // console.error("Error fetching ads:", error);
+      // setAdData(mockAds); // fallback to mock data
+    }
+  };
+
+  const [showFilters, setShowFilters] = useState(false);
+  const [viewMode, setViewMode] = useState("grid");
+  const [searchQuery, _setSearchQuery] = useState("");
+  const [filters, setFilters] = useState({
+    category: "All Categories",
+    subCategory: "topwear",
+    priceRange: [0, 100000],
+    location: "",
+    sortBy: "newest",
+  });
+  const [filteredAds, setFilteredAds] = useState([]);
+
+  const handleFiltersChange = (newFilters) => {
+    setFilters(newFilters);
+  };
+  useEffect(() => {
+    getAllAds();
+  }, []);
+
+  useEffect(() => {
+    const runFilter = () => {
+      let results = adData;
+
+      if (filters.category !== "All Categories") {
+        results = results.filter((ad) => ad.category === filters.category);
+      }
+
+      results = results.filter(
+        (ad) =>
+          ad.price >= filters.priceRange[0] && ad.price <= filters.priceRange[1]
+      );
+
+      if (filters.location) {
+        results = results.filter((ad) =>
+          ad.location.toLowerCase().includes(filters.location.toLowerCase())
+        );
+      }
+
+      if (searchQuery) {
+        results = results.filter((ad) =>
+          ad.title.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      }
+
+      setFilteredAds(results);
+    };
+    runFilter();
+    // console.log("filtered ads", filteredAds);
+    // console.log("Ads Data:", adData);
+  }, [filters, searchQuery, adData]);
+
+  const beauty = allAds.filter((item) => item.category === "Beauty");
+  console.log(beauty);
+  return beauty.length > 0 ? (
+    <section>
       <Navbar />
-      <div className="py-12 bg-gray-50 min-h-screen">
-        <h1 className="text-3xl font-bold mb-10">Beauty Collection</h1>
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 px-4">
-          {beautyAds.map((item, index) => (
-            <Card
-              key={index}
-              title={item.title}
-              image={item.image}
-              price={item.price}
-              oldPrice={item.oldPrice}
-              discount={item.discount}
-            />
-          ))}
+      <div className="min-h-screen">
+        {/* Main Content */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Filters Sidebar */}
+            <div className="lg:w-72 flex-shrink-0">
+              <div className="lg:hidden mb-4">
+                <button
+                  onClick={() => setShowFilters(true)}
+                  className="btn-secondary flex items-center space-x-2"
+                >
+                  <Filter className="h-4 w-4" />
+                  <span>Filters</span>
+                </button>
+              </div>
+
+              <FilterSideBar
+                isOpen={showFilters}
+                onClose={() => setShowFilters(false)}
+                filters={filters}
+                onFiltersChange={handleFiltersChange}
+              />
+            </div>
+
+            {/* Ads Grid */}
+            <div className="flex-1">
+              {/* Results Header */}
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4"></div>
+
+              {/* Ads Display */}
+              {beauty.length === 0 ? (
+                <div className="text-center text-gray-500">No ads found</div>
+              ) : viewMode === "grid" ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {beauty.map((ad) => (
+                    <div key={ad.id}>
+                      {" "}
+                      {/* <Link to={`ad/${ad.id}`}> */}
+                      <Card
+                        key={ad.id}
+                        discount={0}
+                        image={ad.image[0]}
+                        oldPrice={40}
+                        price={ad.price}
+                        title={ad.name}
+                        id={ad.id}
+                      />
+                      {/* </Link> */}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {/* {filteredAds.map((ad) => (
+                    <AdCard key={ad.id} ad={ad} />
+                  ))} */}
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
-      <Footer />
-    </>
+    </section>
+  ) : (
+    <div>
+      <h1>No beauty's Items</h1>
+    </div>
   );
 };
 
