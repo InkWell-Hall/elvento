@@ -18,6 +18,7 @@ const Cart = () => {
   const [cartData, setCartData] = useState([]);
   const [productsData, setProductsData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [cartId, setCartId] = useState();
   const navigate = useNavigate();
 
   const verifyOrder = () => {
@@ -48,21 +49,23 @@ const Cart = () => {
   console.log(cartData);
   useEffect(() => {
     getCartAmount();
+    setCartId(cartData.map((item) => item.id));
   }, []);
 
   const deleteUserCart = async () => {
     try {
-      const response = await apiClient
-        .delete(`/delete/${cartData[0].id}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
-          },
-        })
-        .then((response) => console.log(response), window.location.reload());
+      const response = await apiClient.delete(`/delete/${cartData[0].id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+        },
+      });
+      console.log(response);
+      window.location.reload(); // only runs after the response is logged
     } catch (error) {
       console.log(error.message);
     }
   };
+
   // Process cart items into displayable format
   // useEffect(() => {
   //   const tempData = [];

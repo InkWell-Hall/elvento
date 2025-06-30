@@ -10,8 +10,11 @@ import { toast } from "react-toastify";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [show, setShow] = useState(true);
+
   const { getCartCount, getFavoriteCount, search, setSearch } =
     useContext(AdContext);
+  const token = localStorage.getItem("ACCESS_TOKEN");
   const collections = location.pathname === "/collections";
   const navigate = useNavigate();
   const determiner = localStorage.getItem("ACCESS_TOKEN");
@@ -31,7 +34,7 @@ export default function Navbar() {
     if (determiner) {
       navigate("/cart");
     } else {
-      toast.error("Please log In to View Favorites");
+      toast.error("Please log In to View Cart");
     }
   };
   return (
@@ -144,12 +147,38 @@ export default function Navbar() {
       <div className="md:flex flex md:justify-center justify-center gap-10 md:gap-4 mt-4 ml-12 md:mt-0 ">
         {/* <img src={bag} alt="bag" />
         <img src={timer} alt="timer" /> */}
-        <img src={sign} alt="sign in" />
+        <img
+          src={sign}
+          alt="sign in"
+          onClick={() => setShow(!show)}
+          className="cursor-pointer"
+        />
+        {/* <div
+          className={
+            show
+              ? "bg-yellow-700 flex-col gap-2 items-center hidden cursor-pointer w-30 rounded absolute right-10 top-9 border h-30"
+              : "bg-gray-200 flex-col gap-2 items-center flex cursor-pointer w-30 rounded absolute right-65 top-16 border-black text-black h-30 z-90"
+          }
+        >
+          <p className="hover:bg-black hover:text-white rounded px-2 py-2">
+            Verify Account
+          </p>
+          <p className="hover:bg-black hover:text-white rounded px-2 ">
+            Verify Account
+          </p>
+
+          <p
+            className="hover:bg-black hover:text-white rounded px-2 w-[100%]"
+            onClick={logOut}
+          >
+            Sign Out
+          </p>
+        </div> */}
         <div className="relative">
           <Link onClick={preventFav}>
             <Heart />
             <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
-              {getFavoriteCount()}
+              {token ? getFavoriteCount() : 0}
             </p>
           </Link>
         </div>
@@ -157,7 +186,7 @@ export default function Navbar() {
           <Link onClick={preventCart}>
             <img src={bag} alt="bag duplicate" />
             <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
-              {getCartCount()}
+              {token ? getFavoriteCount() : 0}
             </p>
           </Link>
         </div>
@@ -165,10 +194,11 @@ export default function Navbar() {
       </div>
       {/* <Link to={"/login"}> */}
       <div>
+        {" "}
         {determiner ? (
           <button
             onClick={logOut}
-            className="bg-black hover:bg-gray-400 text-white font-semibold py-2 px-4 rounded-xl shadow-md transition duration-300 items-center cursor-pointer"
+            className="bg-black hover:bg-gray-400 text-white font-semibold py-2 px-4 rounded-xl shadow-md transition duration-300 items-center cursor-pointer" //   onClick={logOut} // <button
           >
             LogOut
           </button>

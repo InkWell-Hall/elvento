@@ -40,8 +40,8 @@ const VendorOrder = () => {
 
   const statusHandler = async (event, orderId) => {
     try {
-      const response = await axios.post(
-        backendUrl + "/api/order/status",
+      const response = await apiClient.post(
+        "/status",
         { orderId, status: event.target.value },
         { headers: { token } }
       );

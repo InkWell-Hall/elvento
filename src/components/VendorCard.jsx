@@ -2,7 +2,6 @@ import { Edit, Heart, Trash } from "lucide-react";
 import React, { useState } from "react";
 import { Link } from "react-router";
 import { apiClient } from "../api/client";
-import { Tooltip } from "recharts";
 import Modal from "../modals/DeleteAdModal";
 import { toast } from "react-toastify";
 
@@ -48,23 +47,24 @@ const VendorCard = ({ title, price, oldPrice, discount, image, id }) => {
             <p className="text-xs">
               Up to {discount} percent off dinner wears!
             </p>
-            <div className="mt-2 flex justify-between gap-2 items-center">
-              <Link to={`/edit-ad/${id}`}>
-                <button className="bg-gray-100 cursor-pointer px-2 rounded-full py-2">
-                  <Edit color="gray" />
-                </button>
-              </Link>
-
-              <button
-                onClick={openModal}
-                className="bg-gray-100 cursor-pointer mb-1.5 px-2 py-2 rounded-full"
-              >
-                <Trash color="red" />
-              </button>
-            </div>
           </div>
         </Link>
+        <div className="mt-2 flex justify-between gap-2 items-center">
+          <Link to={`/edit-ad/${id}`}>
+            <button className="bg-gray-100 cursor-pointer px-2 rounded-full py-2">
+              <Edit color="gray" />
+            </button>
+          </Link>
+
+          <button
+            onClick={openModal}
+            className="bg-gray-100 cursor-pointer mb-1.5 px-2 py-2 rounded-full"
+          >
+            <Trash color="red" />
+          </button>
+        </div>
       </div>
+
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <h2 className="text-xl font-semibold mb-4 font-lead-font">
           Delete Advert
