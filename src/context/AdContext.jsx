@@ -194,6 +194,14 @@ const AdContextProvider = (props) => {
     }
   };
 
+  const getAllUsers = async () => {
+    try {
+      const userID = localStorage.getItem("USER_ID");
+      const response = await apiClient.get(`auth/allUsers/${userID}`);
+      console.log(response);
+    } catch (error) {}
+  };
+
   useEffect(() => {
     console.log(cartItems);
     console.log(getCartAmount());
@@ -201,6 +209,7 @@ const AdContextProvider = (props) => {
     getAllAds();
     getUserCart();
     getAllOrders();
+    getAllUsers();
     console.log(token);
   }, []);
   const value = {

@@ -14,6 +14,8 @@ export default function Navbar() {
 
   const { getCartCount, getFavoriteCount, search, setSearch } =
     useContext(AdContext);
+  // const [show, setShow] = useState(true);
+
   const token = localStorage.getItem("ACCESS_TOKEN");
   const collections = location.pathname === "/collections";
   const navigate = useNavigate();
@@ -149,33 +151,32 @@ export default function Navbar() {
       <div className="md:flex flex md:justify-center justify-center gap-10 md:gap-4 mt-4 ml-12 md:mt-0 ">
         {/* <img src={bag} alt="bag" />
         <img src={timer} alt="timer" /> */}
-        <img
-          src={sign}
-          alt="sign in"
-          onClick={() => setShow(!show)}
-          className="cursor-pointer"
-        />
-        {/* <div
-          className={
-            show
-              ? "bg-yellow-700 flex-col gap-2 items-center hidden cursor-pointer w-30 rounded absolute right-10 top-9 border h-30"
-              : "bg-gray-200 flex-col gap-2 items-center flex cursor-pointer w-30 rounded absolute right-65 top-16 border-black text-black h-30 z-90"
-          }
-        >
-          <p className="hover:bg-black hover:text-white rounded px-2 py-2">
-            Verify Account
-          </p>
-          <p className="hover:bg-black hover:text-white rounded px-2 ">
-            Verify Account
-          </p>
-
-          <p
-            className="hover:bg-black hover:text-white rounded px-2 w-[100%]"
-            onClick={logOut}
+        <div className="relative">
+          <img
+            src={sign}
+            alt="sign in"
+            onClick={() => setShow(!show)}
+            className="cursor-pointer"
+          />
+          <div
+            className={
+              show
+                ? "hidden "
+                : "bg-yellow-700 text-white flex-col gap-2 items-center flex cursor-pointer w-30 rounded absolute -left-9 top-9 border h-30 z-10"
+            }
           >
-            Sign Out
-          </p>
-        </div> */}
+            <p className="hover:bg-black rounded px-2 py-2 w-[100%]">
+              Verify Account
+            </p>
+            <p
+              className="hover:bg-black rounded px-2 w-[100%]"
+              onClick={() => navigate("/orders")}
+            >
+              Order
+            </p>
+            <p className="hover:bg-black rounded px-2 w-[100%]">Sign Out</p>
+          </div>
+        </div>
         <div className="relative">
           <Link onClick={preventFav}>
             <Heart />
@@ -186,7 +187,9 @@ export default function Navbar() {
         </div>
         <div className="relative">
           <Link onClick={preventCart}>
+            {/* <div className="relative"> */}
             <img src={bag} alt="bag duplicate" />
+
             <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
               {token ? getCartCount() : 0}
             </p>

@@ -186,15 +186,19 @@ export default function SignUpForm() {
     <>
       <div className="min-h-screen flex flex-col bg-transparent">
         <Navbar />
+        <video
+          src={what3}
+          autoPlay
+          loop
+          muted
+          className={
+            currentView === "signup"
+              ? "absolute top-0 left-0 w-full h-[170%] object-cover object-center-90% -z-3"
+              : "absolute top-0 left-0 w-full h-[120%] object-cover object-center-90% -z-3"
+          }
+        ></video>
         {/* Main Content */}
-        <div className="flex flex-1 items-center justify-center px-4 sm:px-8 py-8 sm:py-12 min-h-[80vh] ">
-          <video
-            src={what3}
-            autoPlay
-            loop
-            muted
-            className="absolute top-0 left-0 w-full h-[185vh] object-cover object-center-90% -z-3"
-          ></video>
+        <div className="flex flex-1 items-center justify-center px-4 sm:px-8 py-8 sm:py-12 min-h-[100vh]">
           <div className="w-full max-w-sm shadow-2xl bg-black/40 backdrop:blur-2xl rounded-2xl px-8 py-4 text-white sm:max-w-md">
             <h1 className="text-3xl sm:text-4xl font-lead-font font-bold text-white mb-8 sm:mb-12 text-center">
               {currentView === "signup" ? "Sign Up —" : "Login —"}
