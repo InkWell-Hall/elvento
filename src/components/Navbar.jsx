@@ -40,7 +40,7 @@ export default function Navbar() {
 
   console.log("token:", determiner);
   return (
-    <nav className="flex flex-wrap justify-between items-center px-4 sm:px-6 lg:px-8 py-4 h-auto relative">
+    <nav className="flex flex-wrap justify-between bg-white items-center px-4 sm:px-6 lg:px-8 py-3 h-full relative">
       {/* Logo and Hamburger */}
       <div className="flex items-center justify-between w-full md:w-auto gap-10">
         <Link to={"/"}>

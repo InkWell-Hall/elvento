@@ -294,7 +294,7 @@ const ProfileEdit = ({ vendorData, onSave, onCancel }) => {
                 onChange={(e) =>
                   handleInputChange("companyName", e.target.value)
                 }
-                className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
+                className={`w-full px-4 py-3 border border-yellow-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
                   errors.companyName ? "border-red-500" : "border-gray-300"
                 }`}
                 placeholder="Enter your business name"
@@ -318,7 +318,7 @@ const ProfileEdit = ({ vendorData, onSave, onCancel }) => {
                 onChange={(e) =>
                   handleInputChange("phoneNumber", e.target.value)
                 }
-                className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
+                className={`w-full px-4 py-3 border border-yellow-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
                   errors.phoneNumber ? "border-red-500" : "border-gray-300"
                 }`}
                 placeholder="Enter phone number"
@@ -342,7 +342,7 @@ const ProfileEdit = ({ vendorData, onSave, onCancel }) => {
                 onChange={(e) =>
                   handleInputChange("accountNumber", e.target.value)
                 }
-                className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
+                className={`w-full px-4 py-3 border border-yellow-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
                   errors.accountNumber ? "border-red-500" : "border-gray-300"
                 }`}
                 placeholder="Enter account number"
@@ -364,7 +364,7 @@ const ProfileEdit = ({ vendorData, onSave, onCancel }) => {
                 value={formData.bio || ""}
                 onChange={(e) => handleInputChange("bio", e.target.value)}
                 rows={4}
-                className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none ${
+                className={`w-full px-4 py-3 border border-yellow-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none ${
                   errors.bio ? "border-red-500" : "border-gray-300"
                 }`}
                 placeholder="Describe your business and services..."
@@ -386,7 +386,7 @@ const ProfileEdit = ({ vendorData, onSave, onCancel }) => {
             <button
               onClick={onCancel}
               disabled={isLoading}
-              className="inline-flex items-center justify-center gap-2 px-8 py-3 border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3 border-2 border-yellow-700 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <X className="w-5 h-5" />
               Cancel
