@@ -93,49 +93,53 @@ const Orders = () => {
   }, [allAds]);
   return (
     <>
-      <Navbar />
-      <div className="border-t pt-16 w-[80%] mx-auto">
-        <div className="text-2xl">
-          <Title text1={"MY"} text2={"ORDERS"} />
-        </div>
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <div className="border-t pt-16 w-[80%] mx-auto">
+          <div className="text-2xl">
+            <Title text1={"MY"} text2={"ORDERS"} />
+          </div>
 
-        <div>
-          {orderData?.map((item, index) => (
-            <div
-              key={index}
-              className="py-4 border-t border-b text-gray-700 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
-            >
-              <div className="gap-6 text-sm">
-                <img className="w-16 sm:w-20" src={item.image[0]} />
-                <div>
-                  <p className="sm:text-base font-medium">{item.name}</p>
-                  <div className="flex items-center gap-3 mt-2 text-base text-gray-700">
-                    <p className="text-lg">
-                      {currency}
-                      {item.price}
+          <div>
+            {orderData?.map((item, index) => (
+              <div
+                key={index}
+                className="py-4 border-t border-b text-gray-700 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+              >
+                <div className="gap-6 text-sm">
+                  <img className="w-16 sm:w-20" src={item.image[0]} />
+                  <div>
+                    <p className="sm:text-base font-medium">{item.name}</p>
+                    <div className="flex items-center gap-3 mt-2 text-base text-gray-700">
+                      <p className="text-lg">
+                        {currency}
+                        {item.price}
+                      </p>
+                      <p>Quantity:{item.quantity}</p>
+                      <p>Size: {item.size}</p>
+                    </div>
+                    <p className="mt-2">
+                      Date: <span className="text-gray-400">{item.date}</span>
                     </p>
-                    <p>Quantity:{item.quantity}</p>
-                    <p>Size: {item.size}</p>
                   </div>
-                  <p className="mt-2">
-                    Date: <span className="text-gray-400">{item.date}</span>
-                  </p>
+                </div>
+                <div className="md:w-1/2 flex flex-col gap-4">
+                  <button
+                    className="self-start border px-4 py-2 text-sm font-medium rounded-sm cursor-pointer hover:bg-gray-100"
+                    onClick={loadOrderData}
+                  >
+                    Track order
+                  </button>
+                  <StatusTracker status={item.status} />
                 </div>
               </div>
-              <div className="md:w-1/2 flex flex-col gap-4">
-                <button
-                  className="self-start border px-4 py-2 text-sm font-medium rounded-sm cursor-pointer hover:bg-gray-100"
-                  onClick={loadOrderData}
-                >
-                  Track order
-                </button>
-                <StatusTracker status={item.status} />
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+        <div className="mt-auto">
+          <Footer />
         </div>
       </div>
-      <Footer />
     </>
   );
 };
