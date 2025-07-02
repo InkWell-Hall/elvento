@@ -27,7 +27,8 @@ export default function Navbar() {
   const determiner = localStorage.getItem("ACCESS_TOKEN");
   const logOut = () => {
     localStorage.removeItem("ACCESS_TOKEN");
-    navigate("/");
+    navigate("/login");
+    toast.success("Logout Succesfull");
   };
 
   const preventFav = () => {
@@ -61,7 +62,7 @@ export default function Navbar() {
             <input
               type="text"
               placeholder="Search"
-              disabled={!collections}
+              disabled={!collections && women && curve && men && beauty}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="flex-1 px-2 py-1 rounded-full outline-none bg-inherit border text-sm"
@@ -126,19 +127,19 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
-          <a className="text-black font-bold" href="/men">
+          <Link to={"/men"} className="text-black font-bold">
             Men
-          </a>
+          </Link>
         </li>
         <li>
-          <a className="text-black font-bold" href="/kids">
+          <Link to={"/kids"} className="text-black font-bold">
             Kids
-          </a>
+          </Link>
         </li>
         <li>
-          <a className="text-black font-bold" href="beauty">
+          <Link to={"/beauty"} className="text-black font-bold">
             Beauty
-          </a>
+          </Link>
         </li>
       </ul>
 
@@ -169,19 +170,21 @@ export default function Navbar() {
             className={
               show
                 ? "hidden "
-                : "bg-yellow-700 text-white flex-col gap-2 items-center flex cursor-pointer w-30 rounded absolute -left-9 top-9 border h-30 z-10"
+                : "bg-gray-100 text-black flex-col gap-2 items-center flex cursor-pointer w-30 rounded absolute -left-9 top-9 border h-37 z-10"
             }
           >
-            <p className="hover:bg-black rounded px-2 py-2 w-[100%]">
+            <p className="hover:bg-black hover:text-white rounded px-2 py-2 w-[100%]">
               Verify Account
             </p>
             <p
-              className="hover:bg-black rounded px-2 w-[100%]"
+              className="hover:bg-black hover:text-white rounded px-2 py-2  w-[100%]"
               onClick={() => navigate("/orders")}
             >
-              Order
+              My Orders
             </p>
-            <p className="hover:bg-black rounded px-2 w-[100%]">Sign Out</p>
+            <p className="hover:bg-black hover:text-white rounded px-2  py-2 w-[100%]">
+              Sign Out
+            </p>
           </div>
         </div>
         <div className="relative">

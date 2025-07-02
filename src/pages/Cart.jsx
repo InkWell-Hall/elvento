@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AdContext } from "../context/AdContext";
 import Navbar from "../components/Navbar";
-import { Trash2 } from "lucide-react";
+import { Trash, Trash2 } from "lucide-react";
 import CartTotal from "../components/CartTotal";
 import Footer from "../components/Footer";
 import { Link, useNavigate } from "react-router";
@@ -134,48 +134,61 @@ const Cart = () => {
               return (
                 <div
                   key={index}
-                  className="py-4 border-t border-b grid grid-cols-[4fr_0.5fr_0.5] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4"
+                  className="py-4 border-t border-b text-gray-700 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4"
                 >
                   <div className="flex items-start gap-6">
-                    <div>
+                    <img
+                      src={adData.image[0]}
+                      className="w-16 sm:w-20"
+                      alt=""
+                    />
+                    <div className="flex flex-col justify-between gap-10">
+                      <p className="text-xs sm:text-lg font-medium ">
+                        {adData.name}
+                      </p>
                       <div className="flex items-center gap-5 mt-2">
-                        <p className="px-2 sm:px-3 sm:py-1  bg-slate-50">
-                          {/* {item.size} */}
-                          <Card
-                            discount={89}
-                            id={item.id}
-                            image={adData.image[0]}
-                            oldPrice={90}
-                            price={24}
-                            title={adData.name}
-                            key={index}
-                          />
+                        <p>
+                          {currency}
+                          {adData.price}
+                        </p>
+                        <p className="px-2 sm:px-3 sm:py-1 border bg-slate-50">
+                          {item.size}
                         </p>
                       </div>
                     </div>
                   </div>
                   <input
-                    type="number"
-                    min={1}
-                    defaultValue={item.quantity}
-                    className="border max-w-10 sm:max-w-20 px-1 sm:px-2 py-1"
-                    onChange={(event) =>
-                      event.target.value === "" || event.target.value === "0"
+                    onChange={(e) =>
+                      e.target.value === " " || e.target.value === "0"
                         ? null
                         : updateQuantity(
                             item.id,
                             item.size,
-                            Number(event.target.value)
+                            Number(e.target.value)
                           )
                     }
+                    type="number"
+                    min={1}
+                    defaultValue={item.quantity}
+                    className=" border max-w-10 sm:max-w-20 px-1 sm:px-2 py-1 "
                   />
-                  <Trash2 className="cursor-pointer" onClick={deleteUserCart} />
+                  {/* <img
+                    onClick={() => updateQuantity(item.id, item.size, 0)}
+                    src={assets.bin_icon}
+                    className="w-4 mr-4 sm:w-5 cursor-pointer"
+                    alt=""
+                  /> */}
+                  <Trash
+                    // onClick={() => updateQuantity(item.id, item.size, 0)}
+                    className="w-4 mr-4 sm:w-5 cursor-pointer"
+                    onClick={deleteUserCart}
+                  />
                 </div>
               );
             })}
           </div>
         </div>
-        <div className="flex justify-end my-20 mx-5">
+        <div className="flex justify-end my-20 w-[80%] mx-auto">
           <div className="w-full sm:w-[450px]">
             <CartTotal />
             <div className="w-full text-end">

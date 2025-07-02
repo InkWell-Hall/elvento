@@ -53,8 +53,10 @@ const Home = () => {
           </Link>
         </div>
         <section className="w-[90%] mx-auto">
-          <h1 className="text-2xl font-bold mt-10 ml-3 mb-4 font-lead-font">BEST SELLERS</h1>
-          <div className="flex gap-2">
+          <h1 className="text-2xl font-bold mt-10 ml-15 mb-4 font-lead-font">
+            BEST SELLERS
+          </h1>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-2">
             <img src={asset3} alt="" className="w-75" />
             <img src={asset7} alt="" className="w-75" />
             <img src={asset} alt="" className="w-75" />
@@ -62,8 +64,8 @@ const Home = () => {
           </div>
           {/* <img src={asset} alt="" className="w-80" /> */}
         </section>
-        {/* <section>
-          <div className="bg-[url('./assets/landpic.jpeg')] bg-no-repeat w-[100%] h-[ 60vh] bg-cover flex flex-col text-white mt-10  bg-[position:0px_80px] min-h-screen">
+        <section>
+          <div className="bg-[url('./assets/image4.png')] w-[100%] h-[90vh] bg-cover flex flex-col text-white mt-10">
             <div className="flex flex-col items-center justify-center h-full">
               <h1 className="text-6xl font-bold">NEW ARRIVALS</h1>
               <button className="mt-6 px-2 py-2 bg-blue-500 cursor-pointer text-white">
@@ -71,52 +73,42 @@ const Home = () => {
               </button>
             </div>
           </div>
-        </section> */}
+        </section>
         <section className="flex">
           <div>
-            <h1 className="text-2xl font-bold mt-16 ml-10 mb-4 font-lead-font">
+            <h1 className="text-2xl font-bold mt-10 ml-10 mb-4 font-lead-font">
               FEATURED PRODUCTS
             </h1>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 w-[90%] mx-auto mr-10 cursor-pointer text-white gap-3">
               <div className="flex relative">
-                <Link to={"/Men"}>
                 <img src={men2} alt="" className="w-60 h-73" />
                 <h1 className="absolute text-2xl font-bold cursor-pointer bottom-5 left-20">
                   VENTO<span className="font-light">MEN</span>
                 </h1>
-                 </Link>
               </div>
               <div className="flex relative">
-                <Link to={"/Women"}>
                 <img src={dress1} alt="" className="w-60 h-73" />
                 <h1 className="absolute text-2xl cursor-pointer font-bold bottom-5 left-17">
                   VENTO<span className="font-light">DOLL</span>
                 </h1>
-                </Link>
               </div>
               <div className="flex relative">
-                 <Link to={"/Kids"}>
                 <img src={kids1} alt="" className="w-62 h-73" />
                 <h1 className="absolute text-2xl cursor-pointer font-bold bottom-5 left-21">
                   VENTO<span className="font-light">KIDS</span>
                 </h1>
-                </Link>
               </div>
               <div className="flex relative">
-                 <Link to={"/Curve"}>
                 <img src={image} alt="" className="w-63 h-73" />
                 <h1 className="absolute text-2xl cursor-pointer font-bold bottom-5 left-16">
                   VENTO<span className="font-light">CURVE</span>
                 </h1>
-                </Link>
               </div>
               <div className="flex relative">
-                 <Link to={"/Beauty"}>
                 <img src={beauty} alt="" className="w-57 h-73" />
                 <h1 className="absolute cursor-pointer text-2xl font-bold bottom-5 left-10">
                   VENTO<span className="font-light">BEAUTY</span>
                 </h1>
-                </Link>
               </div>
             </div>
           </div>
@@ -172,7 +164,7 @@ const Home = () => {
             <div className="flex mb-4">
               <h1 className="text-2xl font-bold ml-10">SHOP THE LATEST</h1>
             </div>
-            <div className="flex gap-2 mb-4 cursor-pointer items-center text-xs font-bold ml-10 ">
+            <div className="sm:flex-row  flex flex-col gap-2 mb-4 cursor-pointer items-center text-xs font-bold ml-10 ">
               <button className="flex rounded-3xl transition-all duration-150 border px-4 py-3 cursor-pointer hover:bg-black hover:text-white">
                 {" "}
                 <Sparkle size={17} />
@@ -194,7 +186,7 @@ const Home = () => {
           </div>
 
           <div className="flex"></div>
-          <div className="cursor-pointer gap-4 w-[80%] mx-auto grid grid-cols-4">
+          <div className="cursor-pointer gap-4 w-[80%] mx-auto grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {products.map((item, index) => (
               <Card
                 title={item.name}

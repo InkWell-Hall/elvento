@@ -9,7 +9,7 @@ const AdContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [favoriteItems, setFavoriteItems] = useState({});
   const [search, setSearch] = useState("");
-
+  const [userDeet, setUserDeet] = useState();
   const currency = "$";
   const [allAds, setAllAds] = useState([]);
   const token = localStorage.getItem("ACCESS_TOKEN");
@@ -197,8 +197,9 @@ const AdContextProvider = (props) => {
   const getAllUsers = async () => {
     try {
       const userID = localStorage.getItem("USER_ID");
-      const response = await apiClient.get(`auth/allUsers/${userID}`);
-      console.log(response);
+      const response = await apiClient.get(`auth/aUser/${userID}`);
+      console.log("user:", response);
+      setUserDeet(response.data.aUser);
     } catch (error) {}
   };
 
@@ -233,6 +234,8 @@ const AdContextProvider = (props) => {
     // setUserId,
     // getUserId,
     allAds,
+    userDeet,
+    setUserDeet,
   };
   return (
     <AdContext.Provider value={value}>{props.children}</AdContext.Provider>

@@ -1,9 +1,14 @@
 import { Bell, ChevronDown, Search } from "lucide-react";
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 
 const VendorNavbar = () => {
   const [show, setShow] = useState(true);
-
+  const navigate = useNavigate();
+  const logOut = () => {
+    localStorage.removeItem("ACCESS_TOKEN");
+    navigate("/login");
+  };
   return (
     <div>
       <nav className=" flex justify-between items-center bg-white  fixed w-282 right-0 vendnav h-15">
@@ -43,7 +48,12 @@ const VendorNavbar = () => {
           >
             <p className="hover:bg-black rounded px-2 py-2">Verify Account</p>
             <p className="hover:bg-black rounded px-2 ">Verify Account</p>
-            <p className="hover:bg-black rounded px-2 w-[100%]">Sign Out</p>
+            <p
+              className="hover:bg-black rounded px-2 w-[100%]"
+              onClick={logOut}
+            >
+              Sign Out
+            </p>
           </div>
         </div>
       </nav>

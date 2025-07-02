@@ -5,9 +5,32 @@ import ChartBox from "../components/ChartBox";
 import BarChartBox from "../components/BarChartBox";
 import PieChartBox from "../components/PieChartBox";
 import { Link } from "react-router";
+import { useContext, useEffect, useState } from "react";
+import { AdContext } from "../context/AdContext";
 
 const VendorDashboard = () => {
-  const name = "Adel";
+  // const name = "Adel";
+  const { userDeet } = useContext(AdContext);
+  const [vendorAd, setVendorAd] = useState([]);
+  const myAds = async () => {
+    try {
+      const response = await apiClient.get("/allProduct", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+        },
+      });
+      console.log(response.data.product); // Optional
+
+      setVendorAd(response.data); // ✅ update state here
+    } catch (error) {
+      console.error("Failed to fetch ads:", error);
+    }
+  };
+
+  useEffect(() => {
+    myAds();
+  }, []);
+  console.log("vendorad:", vendorAd);
   return (
     <div className="home flex min-h-screen overflow-x-hidden bg-[#EAEBFF]">
       <Sidebar />
@@ -15,13 +38,13 @@ const VendorDashboard = () => {
       {/* Main Content Area */}
       <div className="flex-1 md:ml-64 p-4">
         <h1 className="font-lead-font text-lead-text">
-          Welcome {name} to your Dasboard
+          Welcome {userDeet?.userName} to your Dasboard
         </h1>
         <div className="cards  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 mb-5">
           <Link to={"/vendor-ads"}>
             <Tile
               title={"Ads Running"}
-              value={45}
+              value={vendorAd?.length}
               icon={<Megaphone color="#4b6382" />}
             />
           </Link>

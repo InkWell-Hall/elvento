@@ -1,6 +1,13 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router"; // Make sure you're using react-router-dom
-import { LayoutDashboard, Plus, Settings, Store, User } from "lucide-react";
+import { NavLink, Link } from "react-router"; // Make sure you're using react-router-dom
+import {
+  LayoutDashboard,
+  // Link,
+  Plus,
+  Settings,
+  Store,
+  User,
+} from "lucide-react";
 import logo from "../assets/logowhite.png";
 
 const Sidebar = () => {
@@ -62,7 +69,9 @@ const Sidebar = () => {
       <div className="hidden md:block w-64 bg-[#0F123F] text-white h-screen fixed left-0 top-0 desk-side">
         <div className="px-4 text-2xl font-bold border-b border-white font-lead-font text-lead-text">
           {/* {title} */}
-          <img src={logo} alt="" className="w-50" />
+          <Link to={"/vendor-dashboard"}>
+            <img src={logo} alt="" className="w-50" />
+          </Link>
         </div>
 
         <nav className="flex flex-col p-4 space-y-2">

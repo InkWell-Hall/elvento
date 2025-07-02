@@ -99,6 +99,7 @@ export default function SignUpForm() {
       toast.success("Account Created Successfully");
       if (formData.role === "Vendor") {
         navigate("/vendor-dashboard");
+        window.location.reload();
       } else {
         navigate("/");
       }
@@ -135,7 +136,8 @@ export default function SignUpForm() {
       } else {
         navigate("/vendor-dashboard");
       }
-      toast.success("LoginSuccessfully");
+      toast.success("Login Successfull");
+      window.location.reload();
       setFormData({
         userName: "",
         email: "",
@@ -267,7 +269,6 @@ export default function SignUpForm() {
                   </div>
                 </div>
               )}
-
               {/* Dynamic role indicator for current form */}
               {currentView === "signup" && (
                 <div className="text-center">
@@ -284,7 +285,6 @@ export default function SignUpForm() {
                   </span>
                 </div>
               )}
-
               {/* Name field - always show for signup, different labels for buyer/seller */}
               {currentView === "signup" && (
                 <div>
@@ -335,7 +335,6 @@ export default function SignUpForm() {
                   )}
                 </div>
               )}
-
               {/* Phone number field - only show for sellers during signup */}
               {currentView === "signup" && (
                 <div>
@@ -367,7 +366,6 @@ export default function SignUpForm() {
                   </p>
                 </div>
               )}
-
               {/* Email field */}
               <div>
                 <input
@@ -387,7 +385,6 @@ export default function SignUpForm() {
                   <p className="text-red-500 text-sm mt-1">{errors.email}</p>
                 )}
               </div>
-
               {/* Password field */}
               <div className="relative">
                 <input
@@ -448,7 +445,6 @@ export default function SignUpForm() {
                   <p className="text-red-500 text-sm mt-1">{errors.password}</p>
                 )}
               </div>
-
               {/* ConfirmPassword field */}
               <div className="relative">
                 <input
@@ -509,7 +505,6 @@ export default function SignUpForm() {
                   <p className="text-red-500 text-sm mt-1">{errors.password}</p>
                 )}
               </div>
-
               {/* Action buttons */}
               <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0 mt-4">
                 <button
@@ -532,7 +527,11 @@ export default function SignUpForm() {
               </div>
 
               <div className="flex gap-2">
-                <input type="checkbox" onClick={() => setAccepted(true)} />{" "}
+                <input
+                  type="checkbox"
+                  checked={accepted}
+                  onChange={(e) => setAccepted(e.target.checked)}
+                />
                 <h1>
                   Accept{" "}
                   <a href="/term" className="text-blue-600">
@@ -541,10 +540,9 @@ export default function SignUpForm() {
                 </h1>
               </div>
 
-              {/* Submit button */}
               <button
                 onClick={currentView === "signup" ? handleSubmit : handleLogin}
-                disabled={isLoading}
+                disabled={isLoading || !accepted}
                 className={`w-full py-4 px-3 rounded-lg font-medium transition-colors mt-4 sm:mt-8 flex items-center justify-center ${
                   currentView === "signup" && formData.role === "Vendor"
                     ? "bg-white hover:bg-gray text-black disabled:bg-gray-400"
@@ -573,13 +571,13 @@ export default function SignUpForm() {
                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                       ></path>
                     </svg>
-                    {currentView && accepted === "signup"
+                    {currentView === "signup"
                       ? "Creating Account..."
                       : "Logging in..."}
                   </>
                 ) : (
                   <>
-                    {currentView && accepted === "signup"
+                    {currentView === "signup"
                       ? formData.role === "Vendor"
                         ? "🏪 Create Vendor Account"
                         : "🛒 Create Buyer Account"
@@ -587,7 +585,6 @@ export default function SignUpForm() {
                   </>
                 )}
               </button>
-
               {/* Role benefits info */}
               {/* {currentView === "signup" && (
               <div className="mt-6 p-4 bg-white bg-opacity-30 rounded-lg">

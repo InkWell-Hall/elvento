@@ -2,7 +2,13 @@
 import React from "react";
 
 const StatusTracker = ({ status }) => {
-  const steps = ["Order Placed", "Packing", "Out for Delivery", "Delivered"];
+  const steps = [
+    "Order Placed",
+    "Packing",
+    "Shipped",
+    "Out for Delivery",
+    "Delivered",
+  ];
   const currentIndex = steps.indexOf(status);
 
   return (

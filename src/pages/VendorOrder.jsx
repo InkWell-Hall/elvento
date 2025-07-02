@@ -11,7 +11,7 @@ import { AdContext } from "../context/AdContext";
 
 const VendorOrder = () => {
   const [orders, setOrders] = useState([]);
-  const { currency } = useContext(AdContext);
+  const { currency, allAds } = useContext(AdContext);
   const token = localStorage.getItem("ACCESS_TOKEN");
 
   const fetchAlOrders = async () => {
@@ -27,7 +27,7 @@ const VendorOrder = () => {
         },
       });
       if (response.data.success) {
-        setOrders(response.data.orders);
+        setOrders(response.data.orders.reverse());
         console.log(response.data);
       } else {
         toast.error(response.data.message);
@@ -83,13 +83,23 @@ const VendorOrder = () => {
               <img src={parcel} className="w-12" />
 
               <div>
-                {order.items.map((item, idx) => (
-                  <p key={idx} className="py-0.5">
-                    {item.name} x {item.quantity} <span>{item.size}</span>
-                    {idx !== order.items.length - 1 && ","}
-                  </p>
-                ))}
+                {order.items.map((itemObj, idx) => {
+                  const productIds = Object.keys(itemObj);
 
+                  return productIds.map((productId, subIdx) => {
+                    const sizeQty = itemObj[productId];
+                    return Object.entries(sizeQty).map(
+                      ([size, quantity], innerIdx) => (
+                        <p key={`${idx}-${subIdx}-${innerIdx}`}>
+                          {allAds.find((ad) => ad.id === productId)?.name ||
+                            `Product ID: ${productId}`}{" "}
+                          x {quantity}
+                          <span> Size: {size}</span>
+                        </p>
+                      )
+                    );
+                  });
+                })}
                 <p className="mt-3 mb-2 font-medium">
                   {order.address.firstName} {order.address.lastName}
                 </p>
