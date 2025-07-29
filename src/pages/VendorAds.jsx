@@ -18,7 +18,7 @@ const VendorAds = () => {
         },
       });
       console.log(response.data.product); // Optional
-      setVendorAd(response.data.product); // ✅ update state here
+      setVendorAd(response.data.product.reverse()); 
     } catch (error) {
       console.error("Failed to fetch ads:", error);
     }

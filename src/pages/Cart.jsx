@@ -12,7 +12,7 @@ import Title from "../components/Title";
 import Card from "../components/Card";
 
 const Cart = () => {
-  const { currency, cartItems, updateQuantity, getCartAmount, allAds } =
+  const { currency, cartItems, updateQuantity, getCartAmount } =
     useContext(AdContext);
 
   const [cartData, setCartData] = useState([]);
@@ -66,24 +66,6 @@ const Cart = () => {
     }
   };
 
-  // Process cart items into displayable format
-  // useEffect(() => {
-  //   const tempData = [];
-  //   for (const itemId in cartItems) {
-  //     for (const size in cartItems[itemId]) {
-  //       if (cartItems[itemId][size] > 0) {
-  //         tempData.push({
-  //           id: itemId,
-  //           size: size,
-  //           quantity: cartItems[itemId][size],
-  //         });
-  //       }
-  //     }
-  //   }
-  //   setCartData(tempData);
-  // }, [cartItems]);
-
-  // Debug logs
   useEffect(() => {
     console.log("Cart Items:", cartItems);
     console.log("Cart Data:", cartData);
