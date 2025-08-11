@@ -10,11 +10,27 @@ import {
 import tiktok from "../assets/tiktok.svg";
 import snapchat from "../assets/snapchat.svg";
 import pinterest from "../assets/pinterest.svg";
+import { apiClient } from "../api/client";
 
 export default function Footer() {
+  const getAllProducts = async () => {
+    try {
+      const response = await apiClient.get(
+        "the continuation of the url from backend",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("TOKEN")}`, //Do this if she added authorization for getting the products
+          },
+        }
+      );
+      console.log(response.data); //this here will show in the console you can then check the structure of the data grom the backend using that and know how to render it in ur UI
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <footer>
-      <div className="bg-black flex flex-row text-white justify-around gap-10 text-xs h-[50vh] p-6 mt-4">
+      <div className="bg-black flex flex-col  md:flex-row text-white justify-around gap-10 text-xs h-full p-6 mt-4">
         <div className="text-center mb-10 text-white  ">
           <h3 className="mb-2 font-bold">SHOP FASTER WITH THE APP</h3>
 
